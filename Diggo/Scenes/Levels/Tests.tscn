@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Parallax/Back1.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Characters/Diggo.tscn" type="PackedScene" id=3]
+
+[node name="Tests" type="Node2D"]
+
+[node name="Back1" parent="." instance=ExtResource( 1 )]
+offset = Vector2( 512, 0 )
+transform = Transform2D( 1, 0, 0, 1, 512, 0 )
+
+[node name="Diggo" parent="." instance=ExtResource( 3 )]
+scale = Vector2( 0.25, 0.25 )
+
+[node name="Camera2D" type="Camera2D" parent="Diggo"]
+scale = Vector2( 4, 4 )
+current = true
+zoom = Vector2( 2, 2 )
+smoothing_enabled = true
