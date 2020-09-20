@@ -4,6 +4,7 @@ export var MIN_SIZE = 8
 
 var temp = 0
 var Size = 32
+var spriteTexture = Texture
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,7 +17,30 @@ func createShape():
 	collision.set_shape(newCol)
 	collision.position = Vector2(Size,Size)
 
-func _on_BlockArea_body_entered(body):
+func setRegionTexture(pos):
+	var spriteArea = Rect2(pos, Vector2(Size*2,Size*2))
+	get_node("Sprite").set_region(true)
+	get_node("Sprite").set_texture(spriteTexture)
+	get_node("Sprite").set_region_rect(spriteArea)
+
+func isNewBlockColliding(blockPos, body):
+	var bodyRadius = body.getCollisionRadius()
+	var bodyMax = body.position + Vector2(bodyRadius,bodyRadius)
+	var bodyMin = body.position - Vector2(bodyRadius,bodyRadius)
+	if(blockPos >= bodyMin and blockPos <= bodyMax):
+		return true
+	elif((blockPos + Vector2(Size,Size)) >= bodyMin and (blockPos + Vector2(Size,Size)) <= bodyMax):
+		return true
+	elif(((blockPos.x + Size) >= bodyMin.x and (blockPos.x + Size) <= bodyMax.x) and 
+		((blockPos.y) >= bodyMin.y and (blockPos.y) <= bodyMax.y)):
+		return true
+	elif(((blockPos.x) >= bodyMin.x and (blockPos.x) <= bodyMax.x) and 
+		((blockPos.y + Size) >= bodyMin.y and (blockPos.y + Size) <= bodyMax.y)):
+		return true
+	else:
+		return false
+
+func createDivideBlocks(body):
 	var newPos = position
 	if(Size > MIN_SIZE):
 		for row in range(2):
@@ -26,3 +50,6 @@ func _on_BlockArea_body_entered(body):
 			newPos.x = position.x
 			newPos.y += Size
 	queue_free()
+
+func _on_BlockArea_body_entered(body):
+	createDivideBlocks(body)
