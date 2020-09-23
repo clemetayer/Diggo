@@ -15,5 +15,4 @@ current = true
 zoom = Vector2( 4, 4 )
 
 [node name="MouseCollision" parent="." instance=ExtResource( 3 )]
-position = Vector2( -1407.44, -269.026 )
 collision_mask = 2
