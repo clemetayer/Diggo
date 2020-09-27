@@ -1,6 +1,6 @@
 extends Area2D
 
-export var MIN_SIZE = 8
+export var MIN_SIZE = 4
 
 var temp = 0
 var Size = 32
@@ -11,11 +11,14 @@ func _ready():
 	createShape()
 
 func createShape():
-	var collision = get_node("CollisionShape2D")
+	var areaCollision = get_node("AreaCollision")
+	var solidCollision = get_node("BlockArea/SolidCollision")
 	var newCol = RectangleShape2D.new()
 	newCol.set_extents(Vector2(Size,Size))
-	collision.set_shape(newCol)
-	collision.position = Vector2(Size,Size)
+	areaCollision.set_shape(newCol)
+	areaCollision.position = Vector2(Size,Size)
+	solidCollision.set_shape(newCol)
+	solidCollision.position = Vector2(Size,Size)
 
 func setRegionTexture(pos):
 	var spriteArea = Rect2(pos, Vector2(Size*2,Size*2))
@@ -51,5 +54,6 @@ func createDivideBlocks(body):
 			newPos.y += Size
 	queue_free()
 
-func _on_BlockArea_body_entered(body):
-	createDivideBlocks(body)
+func _on_Area2D_area_entered(area):
+	if(area.is_in_group("Terraform")):
+		createDivideBlocks(area)

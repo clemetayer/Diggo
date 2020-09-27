@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-
 # Declare member variables here. Examples:
 # export global variables
 export var SPEED = 500
@@ -10,6 +9,7 @@ export var GRAVITY = 20
 export var BASE_GRAVITY = 500
 export var JUMP_POWER = -900
 export var FLOOR = Vector2(0,-1)
+export var DIG_RADIUS = 250
 
 var velocity = Vector2()
 var isFacingRight = true
@@ -60,9 +60,25 @@ func inputManager():
 			velocity.y = JUMP_POWER
 			playAnimation("Jump")
 			animationDone = false
+	if(Input.is_action_pressed("action")):
+		var digCollision = get_node("DigHitbox/DigCollision")
+		digCollision.set_disabled(false)
+		var mousePos = get_global_mouse_position()
+		var mouseDiggoVector = mousePos - position
+		var angle = atan(mouseDiggoVector.y/mouseDiggoVector.x)
+		if(mousePos.x >= position.x):
+			digCollision.position = Vector2(cos(angle)*DIG_RADIUS, sin(angle)*DIG_RADIUS)
+		else:
+			digCollision.position = Vector2(-cos(angle)*DIG_RADIUS, -sin(angle)*DIG_RADIUS)
+		var timer = get_node("DigTimeout")
+		if(timer.is_stopped()):
+			timer.start()
 
 func playAnimation(animation):
 	get_node("Animations").play(animation)
 
 func _on_AnimatedSprite_animation_finished():
 	animationDone = true
+
+func _on_DigTimeout_timeout():
+	get_node("DigHitbox/DigCollision").set_disabled(true)
