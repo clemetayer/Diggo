@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Area2D
 
 var blockArea = preload("res://Scenes/Utils/Blocks/BlockArea.tscn")
 

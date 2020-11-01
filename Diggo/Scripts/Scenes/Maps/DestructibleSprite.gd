@@ -1,11 +1,17 @@
 extends Node2D
 
-export var TILE_SIZE = 64
-export var MIN_SIZE = 8
-export(Texture) var SPRITE
+export var TILE_SIZE_POW = 6
+export var MIN_SIZE_POW = 2
+export var MIN_FPS = 15
+export var GOAL_FPS = 30
 
-var blockArea = preload("res://Scenes/Utils/Blocks/BlockArea.tscn")
+export(Texture) var SPRITE
+export(String) var BLOCK_PATH = "res://Scenes/Utils/Blocks/BlockArea.tscn"
+
+var stepFPS = (GOAL_FPS - MIN_FPS)/3
+var blockArea = load(BLOCK_PATH)
 var bitmap = BitMap
+var minSize = pow(2,MIN_SIZE_POW)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -13,6 +19,19 @@ func _ready():
 	bitmap = BitMap.new()
 	bitmap.create_from_image_alpha(SPRITE.get_data())
 	subdivideOriginalSprite()
+
+func _process(delta):
+		var avgFps = Performance.get_monitor(Performance.TIME_FPS)
+		if(avgFps > GOAL_FPS):
+			minSize = 4
+		elif((avgFps < GOAL_FPS) and (avgFps >= MIN_FPS + 2*stepFPS)):
+			minSize = 8
+		elif((avgFps < MIN_FPS + 2*stepFPS) and (avgFps >= MIN_FPS + stepFPS)):
+			minSize = 16
+		elif((avgFps < MIN_FPS + stepFPS) and (avgFps >= MIN_FPS)):
+			minSize = 32
+		else:
+			minSize = 64
 
 # Returns an array : ret[0] => is empty; ret[1] => is full
 func isTransparentOrFull(size, position):
@@ -27,7 +46,7 @@ func isTransparentOrFull(size, position):
 
 func subdivideBlock(Size, position):
 	var newPos = position
-	if(Size > MIN_SIZE):
+	if(Size > minSize):
 		for row in range(2):
 			for col in range(2):
 				var isTransparentFullArray = isTransparentOrFull(Size/2, newPos)
@@ -46,24 +65,24 @@ func subdivideOriginalSprite():
 	var yPos = 0
 	var xPosTexture = 0
 	var yPosTexture = 0
-	for row in range(spriteSize.y/TILE_SIZE):
-		for col in range(spriteSize.x/TILE_SIZE):
+	for row in range(spriteSize.y/pow(2,TILE_SIZE_POW)):
+		for col in range(spriteSize.x/pow(2,TILE_SIZE_POW)):
 			var area = blockArea.instance()
 			area.spriteTexture = SPRITE
 			area.position = Vector2(xPos,yPos)
-			var isTransparentFullArray = isTransparentOrFull(TILE_SIZE, Vector2(xPos,yPos))
+			var isTransparentFullArray = isTransparentOrFull(pow(2,TILE_SIZE_POW), Vector2(xPos,yPos))
 			if(not isTransparentFullArray[0]): # is not entirely transparent
 				if(not isTransparentFullArray[1]): # is not entirely full
-					subdivideBlock(TILE_SIZE, Vector2(xPos,yPos))
+					subdivideBlock(pow(2,TILE_SIZE_POW), Vector2(xPos,yPos))
 				else: # is entirely full
 					area.setRegionTexture(Vector2(xPosTexture,yPosTexture))
 					self.call_deferred("add_child",area)
-			xPos += TILE_SIZE
-			xPosTexture += TILE_SIZE
+			xPos += pow(2,TILE_SIZE_POW)
+			xPosTexture += pow(2,TILE_SIZE_POW)
 		xPos = 0
 		xPosTexture = 0
-		yPos += TILE_SIZE
-		yPosTexture += TILE_SIZE
+		yPos += pow(2,TILE_SIZE_POW)
+		yPosTexture += pow(2,TILE_SIZE_POW)
 
 func createNewBlock(Size, newPos):
 	var area = blockArea.instance()

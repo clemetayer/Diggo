@@ -5,7 +5,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 40.0
 
-[node name="MouseCollision" type="KinematicBody2D" groups=[
+[node name="MouseCollision" type="Area2D" groups=[
 "Terraform",
 ]]
 script = ExtResource( 1 )

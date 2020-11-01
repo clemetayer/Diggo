@@ -1,6 +1,4 @@
-extends Area2D
-
-export var MIN_SIZE = 4
+extends Area2D 
 
 var temp = 0
 var Size = 32
@@ -25,30 +23,50 @@ func setRegionTexture(pos):
 	get_node("Sprite").set_region(true)
 	get_node("Sprite").set_texture(spriteTexture)
 	get_node("Sprite").set_region_rect(spriteArea)
+	
+func recurCreate(Size, Pos, body):
+	if(isNewBlockColliding(Pos, Size, body)):
+		if(Size > get_parent().minSize):
+			var newPos = Pos
+			for row in range(2):
+				for col in range(2):
+					self.call_deferred("recurCreate", Size/2, newPos, body)
+					#recurCreate(Size/2, newPos, body)
+					newPos.x += Size
+				newPos.x = position.x
+				newPos.y += Size
+		else:
+			return
+	else:
+		get_parent().createNewBlock(Size, Pos)
 
-func isNewBlockColliding(blockPos, body):
+func isNewBlockColliding(blockPos, Size, body):
+	var globalBlockPos = blockPos + get_parent().position
 	var bodyRadius = body.getCollisionRadius()
 	var bodyMax = body.position + Vector2(bodyRadius,bodyRadius)
 	var bodyMin = body.position - Vector2(bodyRadius,bodyRadius)
-	if(blockPos >= bodyMin and blockPos <= bodyMax):
+	if(globalBlockPos >= bodyMin and globalBlockPos <= bodyMax):
 		return true
-	elif((blockPos + Vector2(Size,Size)) >= bodyMin and (blockPos + Vector2(Size,Size)) <= bodyMax):
+	elif((globalBlockPos + Vector2(Size,Size)) >= bodyMin and (globalBlockPos + Vector2(Size,Size)) <= bodyMax):
 		return true
-	elif(((blockPos.x + Size) >= bodyMin.x and (blockPos.x + Size) <= bodyMax.x) and 
-		((blockPos.y) >= bodyMin.y and (blockPos.y) <= bodyMax.y)):
+	elif(((globalBlockPos.x + Size) >= bodyMin.x and (globalBlockPos.x + Size) <= bodyMax.x) and 
+		((globalBlockPos.y) >= bodyMin.y and (globalBlockPos.y) <= bodyMax.y)):
 		return true
-	elif(((blockPos.x) >= bodyMin.x and (blockPos.x) <= bodyMax.x) and 
-		((blockPos.y + Size) >= bodyMin.y and (blockPos.y + Size) <= bodyMax.y)):
+	elif(((globalBlockPos.x) >= bodyMin.x and (globalBlockPos.x) <= bodyMax.x) and 
+		((globalBlockPos.y + Size) >= bodyMin.y and (globalBlockPos.y + Size) <= bodyMax.y)):
 		return true
 	else:
 		return false
 
 func createDivideBlocks(body):
 	var newPos = position
-	if(Size > MIN_SIZE):
+	if(Size > get_parent().minSize):
 		for row in range(2):
 			for col in range(2):
-				get_parent().createNewBlock(Size/2, newPos)
+				if(not isNewBlockColliding(newPos, Size, body)):
+					get_parent().createNewBlock(Size/2, newPos)
+				else:
+					recurCreate(Size/2, newPos, body)
 				newPos.x += Size
 			newPos.x = position.x
 			newPos.y += Size

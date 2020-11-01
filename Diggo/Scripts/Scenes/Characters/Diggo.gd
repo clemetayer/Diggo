@@ -27,66 +27,83 @@ func _process(delta):
 	inputManager()
 	move_and_slide(velocity,FLOOR)
 
+func dig():
+	set_scale(Vector2(0.25,0.25))
+	get_node("Animations").play("Digging")
+	var digCollision = get_node("DigHitbox/DigCollision")
+	var mousePos = get_global_mouse_position()
+	var mouseDiggoVector = mousePos - position
+	var angle = atan(mouseDiggoVector.y/mouseDiggoVector.x)
+	if(mousePos.x >= position.x):
+		set_rotation(angle)
+		velocity = Vector2(cos(angle)*DIG_SPEED, sin(angle)*DIG_SPEED)
+	else:
+		set_rotation(angle - PI)
+		velocity = Vector2(-cos(angle)*DIG_SPEED, -sin(angle)*DIG_SPEED)
+	digCollision.set_disabled(false)
+
+
+func checkTimerDig():
+	if(Input.is_action_pressed("action") and get_node("CheckDigTimer").is_stopped()):
+		get_node("CheckDigTimer").start()
+	elif(not Input.is_action_pressed("action")):
+		canDig = false
+		get_node("CheckDigTimer").stop()
+
+func applyGravity():
+	if(is_on_floor()):
+		velocity.y = BASE_GRAVITY
+	else:
+		velocity.y += GRAVITY
+
+func moveRight():
+	set_scale(Vector2(0.25,0.25))
+	if(is_on_floor()):
+		velocity.x = SPEED
+		velocity.y = BASE_GRAVITY
+		playAnimation("Run")
+	elif(velocity.x < MAX_SPEED):
+		velocity.x = velocity.x + SPEED_DELTA
+
+func moveLeft():
+	set_scale(Vector2(-0.25,0.25))
+	if(is_on_floor()):
+		velocity.x = -SPEED
+		velocity.y = BASE_GRAVITY
+		playAnimation("Run")
+	elif(velocity.x > -MAX_SPEED):
+		velocity.x = velocity.x - SPEED_DELTA
+
+func jump():
+	if(is_on_floor()):
+		velocity.y = JUMP_POWER
+		playAnimation("Jump")
+		animationDone = false
+
 func inputManager():
 	if(Input.is_action_pressed("action") and canDig):
 		if(canDig):
-			set_scale(Vector2(0.25,0.25))
-			get_node("Animations").play("Digging")
-			var digCollision = get_node("DigHitbox/DigCollision")
-			var mousePos = get_global_mouse_position()
-			var mouseDiggoVector = mousePos - position
-			var angle = atan(mouseDiggoVector.y/mouseDiggoVector.x)
-			if(mousePos.x >= position.x):
-				set_rotation(angle)
-				velocity = Vector2(cos(angle)*DIG_SPEED, sin(angle)*DIG_SPEED)
-			else:
-				set_rotation(angle - PI)
-				velocity = Vector2(-cos(angle)*DIG_SPEED, -sin(angle)*DIG_SPEED)
-			digCollision.set_disabled(false)
+			dig()
 	else:
 		get_node("DigHitbox/DigCollision").set_disabled(true)
-		if(Input.is_action_pressed("action") and get_node("CheckDigTimer").is_stopped()):
-			get_node("CheckDigTimer").start()
-		elif(not Input.is_action_pressed("action")):
-			canDig = false
-			get_node("CheckDigTimer").stop()
+		checkTimerDig()
 		set_rotation(0)
-		if(is_on_floor()):
-			velocity.y = BASE_GRAVITY
-		else:
-			velocity.y += GRAVITY
+		applyGravity()
 		if(Input.is_action_pressed("right")):
-			set_scale(Vector2(0.25,0.25))
-			if(is_on_floor()):
-				velocity.x = SPEED
-				velocity.y = BASE_GRAVITY
-				playAnimation("Run")
-			elif(velocity.x < MAX_SPEED):
-				velocity.x = velocity.x + SPEED_DELTA
+			moveRight()
 		elif(Input.is_action_pressed("left")):
-			set_scale(Vector2(-0.25,0.25))
-			if(is_on_floor()):
-				velocity.x = -SPEED
-				velocity.y = BASE_GRAVITY
-				playAnimation("Run")
-			elif(velocity.x > -MAX_SPEED):
-				velocity.x = velocity.x - SPEED_DELTA
+			moveLeft()
 		elif(is_on_floor()):
 			velocity.x = 0
-			velocity.y = BASE_GRAVITY
 			playAnimation("Idle")
 		else:
 			velocity.x /= AIR_FRICTION
 		if(Input.is_action_pressed("jump")):
-			if(is_on_floor()):
-				velocity.y = JUMP_POWER
-				playAnimation("Jump")
-				animationDone = false
+			jump()
 		scale.y = 0.25
 
 func playAnimation(animation):
 	get_node("Animations").play(animation)
-
 
 func _on_CheckDigTimer_timeout():
 	var AreasArray = get_node("DigTest").get_overlapping_areas()
