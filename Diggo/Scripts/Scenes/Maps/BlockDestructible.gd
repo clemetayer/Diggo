@@ -30,8 +30,7 @@ func recurCreate(Size, Pos, body):
 			var newPos = Pos
 			for row in range(2):
 				for col in range(2):
-					self.call_deferred("recurCreate", Size/2, newPos, body)
-					#recurCreate(Size/2, newPos, body)
+					recurCreate(Size/2, newPos, body)
 					newPos.x += Size
 				newPos.x = position.x
 				newPos.y += Size
@@ -43,20 +42,7 @@ func recurCreate(Size, Pos, body):
 func isNewBlockColliding(blockPos, Size, body):
 	var globalBlockPos = blockPos + get_parent().position
 	var bodyRadius = body.getCollisionRadius()
-	var bodyMax = body.position + Vector2(bodyRadius,bodyRadius)
-	var bodyMin = body.position - Vector2(bodyRadius,bodyRadius)
-	if(globalBlockPos >= bodyMin and globalBlockPos <= bodyMax):
-		return true
-	elif((globalBlockPos + Vector2(Size,Size)) >= bodyMin and (globalBlockPos + Vector2(Size,Size)) <= bodyMax):
-		return true
-	elif(((globalBlockPos.x + Size) >= bodyMin.x and (globalBlockPos.x + Size) <= bodyMax.x) and 
-		((globalBlockPos.y) >= bodyMin.y and (globalBlockPos.y) <= bodyMax.y)):
-		return true
-	elif(((globalBlockPos.x) >= bodyMin.x and (globalBlockPos.x) <= bodyMax.x) and 
-		((globalBlockPos.y + Size) >= bodyMin.y and (globalBlockPos.y + Size) <= bodyMax.y)):
-		return true
-	else:
-		return false
+	return((sqrt(pow((body.position.x - globalBlockPos.x), 2) + pow((body.position.y - globalBlockPos.y), 2))) < bodyRadius)
 
 func createDivideBlocks(body):
 	var newPos = position

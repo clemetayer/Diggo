@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Sprites/Animations/Characters/Diggo/Running/DiggoJumping0006.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Animations/Characters/Diggo/Running/DiggoJumping0007.png" type="Texture" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://Sprites/Animations/Characters/Diggo/Jumping/DiggoJumping0006.png" type="Texture" id=21]
 [ext_resource path="res://Sprites/Animations/Characters/Diggo/Jumping/DiggoJumping0007.png" type="Texture" id=22]
 [ext_resource path="res://Scripts/Scenes/Characters/Diggo.gd" type="Script" id=23]
+[ext_resource path="res://Scripts/Scenes/Characters/DigHitbox.gd" type="Script" id=24]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -74,6 +75,7 @@ shape = SubResource( 2 )
 "Terraform",
 ]]
 collision_mask = 2
+script = ExtResource( 24 )
 
 [node name="DigCollision" type="CollisionShape2D" parent="DigHitbox" groups=[
 "Terraform",
