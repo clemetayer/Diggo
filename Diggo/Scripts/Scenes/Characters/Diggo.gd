@@ -12,11 +12,14 @@ export var JUMP_POWER = -900
 export var AIR_FRICTION = 1.5
 export var FLOOR = Vector2(0,-1)
 export var DIG_RADIUS = 250
+export(NodePath) var PATH_FINDING
+export(NodePath) var PATH_LINE
 
 var velocity = Vector2()
 var isFacingRight = true
 var animationDone = true
 var canDig = false
+var keyPos = Vector2(1000,200)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,20 +30,30 @@ func _process(delta):
 	inputManager()
 	move_and_slide(velocity,FLOOR)
 
+func getPath():
+	if((PATH_FINDING != "") and (get_node(PATH_FINDING) is Navigation2D)):
+		if((PATH_LINE != "") and (get_node(PATH_LINE) is Line2D)):
+			get_node(PATH_LINE).points = get_node(PATH_FINDING).get_simple_path(position,keyPos)
+		else:
+			print("Error : Path line node not present or wrong type")
+	else:
+		print("Error : Path find node not present or wrong type")
+
 func dig():
 	set_scale(Vector2(0.25,0.25))
 	get_node("Animations").play("Digging")
 	var digCollision = get_node("DigHitbox/DigCollision")
 	var mousePos = get_global_mouse_position()
 	var mouseDiggoVector = mousePos - position
-	var angle = atan(mouseDiggoVector.y/mouseDiggoVector.x)
-	if(mousePos.x >= position.x):
-		set_rotation(angle)
-		velocity = Vector2(cos(angle)*DIG_SPEED, sin(angle)*DIG_SPEED)
-	else:
-		set_rotation(angle - PI)
-		velocity = Vector2(-cos(angle)*DIG_SPEED, -sin(angle)*DIG_SPEED)
-	digCollision.set_disabled(false)
+	if(mouseDiggoVector.x != 0):
+		var angle = atan(mouseDiggoVector.y/mouseDiggoVector.x)
+		if(mousePos.x >= position.x):
+			set_rotation(angle)
+			velocity = Vector2(cos(angle)*DIG_SPEED, sin(angle)*DIG_SPEED)
+		else:
+			set_rotation(angle - PI)
+			velocity = Vector2(-cos(angle)*DIG_SPEED, -sin(angle)*DIG_SPEED)
+		digCollision.set_disabled(false)
 
 
 func checkTimerDig():
@@ -100,6 +113,8 @@ func inputManager():
 			velocity.x /= AIR_FRICTION
 		if(Input.is_action_pressed("jump")):
 			jump()
+		if(Input.is_action_just_pressed("find_path")):
+			getPath()
 		scale.y = 0.25
 
 func playAnimation(animation):

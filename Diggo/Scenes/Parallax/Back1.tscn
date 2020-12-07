@@ -9,6 +9,8 @@
 [node name="Back1" type="ParallaxBackground"]
 
 [node name="SkyUp" type="ParallaxLayer" parent="."]
+z_index = -11
+motion_offset = Vector2( 500, 0 )
 motion_mirroring = Vector2( 2048, 0 )
 
 [node name="SkyUp" type="Sprite" parent="SkyUp"]
@@ -17,6 +19,8 @@ scale = Vector2( 2, 1 )
 texture = ExtResource( 5 )
 
 [node name="SkyDown" type="ParallaxLayer" parent="."]
+z_index = -12
+motion_offset = Vector2( 500, 0 )
 motion_mirroring = Vector2( 2048, 0 )
 
 [node name="SkyDown" type="Sprite" parent="SkyDown"]
@@ -25,6 +29,7 @@ scale = Vector2( 2, 1 )
 texture = ExtResource( 4 )
 
 [node name="SkyCenter" type="ParallaxLayer" parent="."]
+motion_offset = Vector2( 500, 0 )
 motion_mirroring = Vector2( 2048, 0 )
 
 [node name="SkyCenter" type="Sprite" parent="SkyCenter"]
@@ -33,6 +38,7 @@ texture = ExtResource( 1 )
 
 [node name="BigMountains" type="ParallaxLayer" parent="."]
 z_index = 1
+motion_offset = Vector2( 500, 0 )
 motion_mirroring = Vector2( 2048, 0 )
 
 [node name="BigMountains" type="Sprite" parent="BigMountains"]
@@ -41,6 +47,7 @@ texture = ExtResource( 3 )
 
 [node name="SmallMountains" type="ParallaxLayer" parent="."]
 motion_scale = Vector2( 0.94, 1 )
+motion_offset = Vector2( 500, 0 )
 motion_mirroring = Vector2( 2048, 0 )
 
 [node name="SmallMountains" type="Sprite" parent="SmallMountains"]

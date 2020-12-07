@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Sprites/Parallaxes/MountainDay/MidMountains.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Parallaxes/MountainDay/MountainsFront.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Parallaxes/MountainDay/MountainsBack.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Parallaxes/MountainDay/Sky.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Parallaxes/MountainDay/Clouds.png" type="Texture" id=5]
+
+[node name="DayMountains" type="ParallaxBackground"]
+scroll_ignore_camera_zoom = true
+
+[node name="Sky" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 1024, 0 )
+
+[node name="Sky" type="Sprite" parent="Sky"]
+scale = Vector2( 1, 1.17523 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="MountainsBack" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 1.001, 1 )
+motion_mirroring = Vector2( 1024, 0 )
+
+[node name="MountainsBack" type="Sprite" parent="MountainsBack"]
+scale = Vector2( 1, 1.17164 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Clouds" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 1.02, 1 )
+motion_mirroring = Vector2( 1024, 0 )
+
+[node name="Clouds" type="Sprite" parent="Clouds"]
+scale = Vector2( 1, 1.17536 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="MountainsMid" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 1.005, 1 )
+motion_mirroring = Vector2( 1024, 0 )
+
+[node name="MountainsMid" type="Sprite" parent="MountainsMid"]
+scale = Vector2( 1, 1.17505 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="MountainsFront" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 1.05, 1 )
+motion_mirroring = Vector2( 1024, 0 )
+
+[node name="MountainsFront" type="Sprite" parent="MountainsFront"]
+scale = Vector2( 1, 1.17745 )
+texture = ExtResource( 2 )
+centered = false

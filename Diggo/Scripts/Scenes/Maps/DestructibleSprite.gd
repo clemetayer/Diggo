@@ -1,9 +1,9 @@
 extends Node2D
 
-export var TILE_SIZE_POW = 6
-export var MIN_SIZE_POW = 2
-export var MIN_FPS = 15
-export var GOAL_FPS = 30
+export var TILE_SIZE_POW = 6 # Starting tile size (as a power of 2, i.e 2^6 = 64)
+export var MIN_SIZE_POW = 2 # Minimal tile size (as a power of 2, i.e 2^2 = 4)
+export var MIN_FPS = 15 # Minimal goal FPS
+export var GOAL_FPS = 30 # Desired average FPS
 
 export(Texture) var SPRITE
 export(String) var BLOCK_PATH = "res://Scenes/Utils/Blocks/BlockArea.tscn"
@@ -21,17 +21,21 @@ func _ready():
 	subdivideOriginalSprite()
 
 func _process(delta):
-		var avgFps = Performance.get_monitor(Performance.TIME_FPS)
-		if(avgFps > GOAL_FPS):
-			minSize = 4
-		elif((avgFps < GOAL_FPS) and (avgFps >= MIN_FPS + 2*stepFPS)):
-			minSize = 8
-		elif((avgFps < MIN_FPS + 2*stepFPS) and (avgFps >= MIN_FPS + stepFPS)):
-			minSize = 16
-		elif((avgFps < MIN_FPS + stepFPS) and (avgFps >= MIN_FPS)):
-			minSize = 32
-		else:
-			minSize = 64
+	checkFPS()
+
+# Check FPS, and changes the minimal block size if it is too low
+func checkFPS():
+	var avgFps = Performance.get_monitor(Performance.TIME_FPS)
+	if(avgFps > GOAL_FPS):
+		minSize = 4
+	elif((avgFps < GOAL_FPS) and (avgFps >= MIN_FPS + 2*stepFPS)):
+		minSize = 8
+	elif((avgFps < MIN_FPS + 2*stepFPS) and (avgFps >= MIN_FPS + stepFPS)):
+		minSize = 16
+	elif((avgFps < MIN_FPS + stepFPS) and (avgFps >= MIN_FPS)):
+		minSize = 32
+	else:
+		minSize = 64
 
 # Returns an array : ret[0] => is empty; ret[1] => is full
 func isTransparentOrFull(size, position):
@@ -44,6 +48,7 @@ func isTransparentOrFull(size, position):
 				retArray[1] = false
 	return retArray
 
+# Subdivides a block in 4, then check if each sublock is transparent or not
 func subdivideBlock(Size, position):
 	var newPos = position
 	if(Size > minSize):
@@ -54,11 +59,12 @@ func subdivideBlock(Size, position):
 					if(not isTransparentFullArray[1]): # is not entirely full
 						subdivideBlock(Size/2, newPos)
 					else: # is entirely full
-						createNewBlock(Size/2, newPos)
+						createNewBlockArea(Size/2, newPos)
 				newPos.x += Size/2
 			newPos.x = position.x
 			newPos.y += Size/2
 
+# First subdivision of the sprite
 func subdivideOriginalSprite():
 	var spriteSize = SPRITE.get_size()
 	var xPos = 0
@@ -84,7 +90,8 @@ func subdivideOriginalSprite():
 		yPos += pow(2,TILE_SIZE_POW)
 		yPosTexture += pow(2,TILE_SIZE_POW)
 
-func createNewBlock(Size, newPos):
+# Creates a new blockArea at position newPos, with size Size. Used in blockArea.tscn
+func createNewBlockArea(Size, newPos):
 	var area = blockArea.instance()
 	area.position = newPos
 	area.Size = Size
