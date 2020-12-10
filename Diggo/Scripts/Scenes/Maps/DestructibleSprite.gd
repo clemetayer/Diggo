@@ -9,13 +9,14 @@ export(Texture) var SPRITE
 export(String) var BLOCK_PATH = "res://Scenes/Utils/Blocks/BlockArea.tscn"
 
 var stepFPS = (GOAL_FPS - MIN_FPS)/3
-var blockArea = load(BLOCK_PATH)
+var blockArea
 var bitmap = BitMap
 var minSize = pow(2,MIN_SIZE_POW)
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	blockArea = load(BLOCK_PATH)
 	bitmap = BitMap.new()
 	bitmap.create_from_image_alpha(SPRITE.get_data())
 	subdivideOriginalSprite()

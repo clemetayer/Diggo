@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends RigidBody2D
 
 var temp = 0
 var Size = 32

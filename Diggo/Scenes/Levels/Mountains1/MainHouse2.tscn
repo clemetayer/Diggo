@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Sprites/DestructibleSprites/MountainScene1/BigSnow.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Tilemaps/SnowTilemap.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Scenes/Parallax/DayMountains.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Maps/DestructibleSprite.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Sprites/DestructibleSprites/MountainScene1/MediumSnow.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Parallaxes/MountainDay/SkyUp.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Sprites/Parallaxes/MountainDay/GroundMountain.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 100, 100, 12.8, 100, 15.2, 15.2, 100, 0 )
@@ -261,7 +263,7 @@ points = PoolVector2Array( 0, 100, 0, 0, 100, 100 )
 [node name="MainHouse2" type="Node2D"]
 
 [node name="DiggoKinematic" parent="." instance=ExtResource( 3 )]
-position = Vector2( 2277.98, 197.482 )
+position = Vector2( 5456.7, -248.255 )
 scale = Vector2( 0.25, 0.25 )
 
 [node name="Camera2D" type="Camera2D" parent="DiggoKinematic"]
@@ -290,3 +292,9 @@ SPRITE = ExtResource( 6 )
 [node name="DayMountains" parent="CanvasLayer" instance=ExtResource( 4 )]
 offset = Vector2( 0, -400 )
 transform = Transform2D( 1, 0, 0, 1, 0, -400 )
+
+[node name="SkyUp" parent="CanvasLayer" instance=ExtResource( 7 )]
+layer = -101
+
+[node name="GroundMountain" parent="CanvasLayer" instance=ExtResource( 8 )]
+layer = -101
