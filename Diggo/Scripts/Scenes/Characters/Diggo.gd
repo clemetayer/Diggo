@@ -70,7 +70,7 @@ func applyGravity():
 		velocity.y += GRAVITY
 
 func moveRight():
-	set_scale(Vector2(0.25,0.25))
+	isFacingRight = true
 	if(is_on_floor()):
 		velocity.x = SPEED
 		velocity.y = BASE_GRAVITY
@@ -79,7 +79,7 @@ func moveRight():
 		velocity.x = velocity.x + SPEED_DELTA
 
 func moveLeft():
-	set_scale(Vector2(-0.25,0.25))
+	isFacingRight = false
 	if(is_on_floor()):
 		velocity.x = -SPEED
 		velocity.y = BASE_GRAVITY
@@ -93,7 +93,27 @@ func jump():
 		playAnimation("Jump")
 		animationDone = false
 
+func setInteractButtons():
+	var collidingAreas = get_node("InteractArea").get_overlapping_areas()
+	for collidingArea in collidingAreas:
+		if(collidingArea.has_method("getButtons")):
+			var ButtonsArea = collidingArea.getButtons()
+			get_node("CircleSelect").BUTTONS = ButtonsArea
+			get_node("CircleSelect").refreshButtons()
+
+func setScaleNodes():
+	scale.y = 0.25
+	if(isFacingRight):
+		set_scale(Vector2(0.25,0.25))
+		get_node("CircleSelect").set_scale(Vector2(1,1))
+	else:
+		set_scale(Vector2(-0.25,0.25))
+		get_node("CircleSelect").set_scale(Vector2(-1,1))
+
 func inputManager():
+	setScaleNodes()
+	if(Input.is_action_just_pressed("interact")):
+		setInteractButtons()
 	if(Input.is_action_pressed("action") and canDig):
 		if(canDig):
 			dig()
@@ -115,7 +135,6 @@ func inputManager():
 			jump()
 		if(Input.is_action_just_pressed("find_path")):
 			getPath()
-		scale.y = 0.25
 
 func playAnimation(animation):
 	get_node("Animations").play(animation)
