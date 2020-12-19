@@ -21,7 +21,7 @@ func _ready():
 	bitmap.create_from_image_alpha(SPRITE.get_data())
 	subdivideOriginalSprite()
 
-func _process(delta):
+func _process(_delta):
 	checkFPS()
 
 # Check FPS, and changes the minimal block size if it is too low
@@ -53,8 +53,8 @@ func isTransparentOrFull(size, position):
 func subdivideBlock(Size, position):
 	var newPos = position
 	if(Size > minSize):
-		for row in range(2):
-			for col in range(2):
+		for _row in range(2):
+			for _col in range(2):
 				var isTransparentFullArray = isTransparentOrFull(Size/2, newPos)
 				if(not isTransparentFullArray[0]): # is not entirely transparent
 					if(not isTransparentFullArray[1]): # is not entirely full
@@ -72,8 +72,8 @@ func subdivideOriginalSprite():
 	var yPos = 0
 	var xPosTexture = 0
 	var yPosTexture = 0
-	for row in range(spriteSize.y/pow(2,TILE_SIZE_POW)):
-		for col in range(spriteSize.x/pow(2,TILE_SIZE_POW)):
+	for _row in range(spriteSize.y/pow(2,TILE_SIZE_POW)):
+		for _col in range(spriteSize.x/pow(2,TILE_SIZE_POW)):
 			var area = blockArea.instance()
 			area.spriteTexture = SPRITE
 			area.position = Vector2(xPos,yPos)

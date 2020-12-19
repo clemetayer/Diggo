@@ -28,23 +28,23 @@ func setRegionTexture(pos):
 
 # Function to subdivide a block, and check if each block is not colliding before creating
 # (to save resources)
-func recurCreate(Size, Pos, body):
-	if(isNewBlockColliding(Pos, Size, body)):
-		if(Size > get_parent().minSize):
+func recurCreate(curSize, Pos, body):
+	if(isNewBlockColliding(Pos, body)):
+		if(curSize > get_parent().minSize):
 			var newPos = Pos
-			for row in range(2):
-				for col in range(2):
-					recurCreate(Size/2, newPos, body)
-					newPos.x += Size
+			for _row in range(2):
+				for _col in range(2):
+					recurCreate(curSize/2, newPos, body)
+					newPos.x += curSize
 				newPos.x = position.x
-				newPos.y += Size
+				newPos.y += curSize
 		else:
 			return
 	else:
-		get_parent().createNewBlockArea(Size, Pos)
+		get_parent().createNewBlockArea(curSize, Pos)
 
 # Returns true if the collider (as a circleShape) is colliding with a block at position blockPos with size Size
-func isNewBlockColliding(blockPos, Size, body):
+func isNewBlockColliding(blockPos, body):
 	var globalBlockPos = blockPos + get_parent().position
 	var bodyRadius = body.getCollisionRadius()
 	return((sqrt(pow((body.position.x - globalBlockPos.x), 2) + pow((body.position.y - globalBlockPos.y), 2))) < bodyRadius)
@@ -53,9 +53,9 @@ func isNewBlockColliding(blockPos, Size, body):
 func createDivideBlocks(body):
 	var newPos = position
 	if(Size > get_parent().minSize):
-		for row in range(2):
-			for col in range(2):
-				if(not isNewBlockColliding(newPos, Size, body)):
+		for _row in range(2):
+			for _col in range(2):
+				if(not isNewBlockColliding(newPos, body)):
 					get_parent().createNewBlockArea(Size/2, newPos)
 				else:
 					recurCreate(Size/2, newPos, body)
