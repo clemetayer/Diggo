@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sprites/UI/Buttons/Icons/Save/SaveIcon.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/UI/Buttons/Icons/Save/SaveIconPressed.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/UI/Buttons/Icons/Save/SaveIconHover.png" type="Texture" id=3]
+
+[node name="SaveButton" type="TextureButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 5, 5 )
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,13 +1,19 @@
 extends Area2D
 
 var Buttons
+var saveButton
 
 func _ready():
-	var enterButton = load("res://Scenes/UI/Menus/CircleButtons/EnterButton.tscn")
-	var enterButtonInstance = enterButton.instance()
-	enterButtonInstance.SCENE_PATH = "res://Scenes/Levels/Mountains1/MainHouse2.tscn"
-	Buttons = [enterButtonInstance]
+	saveButton = load("res://Scenes/UI/Menus/CircleButtons/SaveButton.tscn")
+	var saveButtonInstance = saveButton.instance()
+	Buttons = [saveButtonInstance]
+
+func reloadButtonsArray(): # Note : Previous instances should have been freed by CircleSelect
+	Buttons = []
+	var saveButtonInstance = saveButton.instance()
+	Buttons = [saveButtonInstance]
 
 func getButtons():
+	reloadButtonsArray()
 	return Buttons
 
