@@ -18,6 +18,15 @@ _global_script_class_icons={
 config/name="Diggo"
 config/icon="res://icon.png"
 
+[autoload]
+
+SaveFile="*res://Scripts/Global/SaveSystem/SaveFile.gd"
+SwitchSceneWithParam="*res://Scripts/Global/SceneManagement/SwitchSceneWithParam.gd"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "Todo_Manager" )
+
 [input]
 
 right={

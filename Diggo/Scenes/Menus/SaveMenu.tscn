@@ -1,0 +1,221 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Other/Fonts/lemon/19919.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scripts/Menus/SaveMenu/SaveMenu.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Menus/SaveMenu/SaveButtonsScroll.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/Menus/SaveMenu/MainMenuHover.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Menus/SaveMenu/MainMenuPressed.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Menus/SaveMenu/MainMenu.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Menus/SaveMenu/BackButton.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Menus/SaveMenu/BackButtonHover.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Menus/SaveMenu/BackButtonPressed.png" type="Texture" id=9]
+[ext_resource path="res://Scripts/Menus/SaveMenu/SaveFileNamePopup.gd" type="Script" id=10]
+[ext_resource path="res://Scripts/Menus/SaveMenu/EraseSavePopup.gd" type="Script" id=11]
+[ext_resource path="res://Scripts/Menus/SaveMenu/OverwriteFilePopup.gd" type="Script" id=12]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 1 )
+
+[node name="SaveMenu" type="Node2D"]
+position = Vector2( 510, 300 )
+script = ExtResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -298.603
+margin_right = 512.0
+margin_bottom = 301.397
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveButtons" type="ScrollContainer" parent="."]
+margin_left = -396.025
+margin_top = -180.0
+margin_right = 403.975
+margin_bottom = 300.0
+rect_clip_content = false
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SavesVBox" type="VBoxContainer" parent="SaveButtons"]
+custom_constants/separation = 160
+
+[node name="SaveTextControl" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = -180.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="SaveTextControl"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -60.0
+margin_right = 512.0
+margin_bottom = 57.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveText" type="RichTextLabel" parent="SaveTextControl"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -150.0
+margin_right = 150.0
+margin_bottom = 100.0
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[wave amp=50 freq=2][color=blue][center]Select a save file [/center][/color][/wave]"
+text = "Select a save file "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Search" type="Control" parent="."]
+margin_left = 129.0
+margin_top = -265.0
+margin_right = 346.0
+margin_bottom = -220.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SearchText" type="RichTextLabel" parent="Search"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = -7.54706
+margin_top = -31.4621
+margin_right = 80.4529
+margin_bottom = 15.5379
+bbcode_enabled = true
+bbcode_text = "[wave amp=50 freq=2][color=lime][center] Search : [/center][/color][/wave]
+"
+text = " Search : 
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SearchInput" type="LineEdit" parent="Search"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -148.0
+margin_top = -21.5
+margin_right = 50.0
+margin_bottom = 2.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenuButton" type="TextureButton" parent="."]
+margin_left = -480.0
+margin_top = -280.0
+margin_right = -280.0
+margin_bottom = -180.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="TextureButton" parent="."]
+margin_left = -360.0
+margin_top = -280.0
+margin_right = -160.0
+margin_bottom = -180.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveFileNamePopup" type="ConfirmationDialog" parent="."]
+margin_right = 200.0
+margin_bottom = 70.0
+popup_exclusive = true
+window_title = "Name your save"
+dialog_text = "Enter a save file name ( 20 characters max):"
+dialog_autowrap = true
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveFileName" type="LineEdit" parent="SaveFileNamePopup"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -92.0
+margin_top = 39.0
+margin_right = 92.0
+margin_bottom = 63.0
+align = 1
+max_length = 20
+
+[node name="OverwriteFilePopup" type="ConfirmationDialog" parent="."]
+margin_right = 200.0
+margin_bottom = 70.0
+popup_exclusive = true
+window_title = "Name your save"
+dialog_text = "Enter a save file name ( 20 characters max):"
+dialog_autowrap = true
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveFileName" type="LineEdit" parent="OverwriteFilePopup"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -92.0
+margin_top = 39.0
+margin_right = 92.0
+margin_bottom = 63.0
+align = 1
+max_length = 20
+
+[node name="EraseSavePopup" type="ConfirmationDialog" parent="."]
+margin_right = 200.0
+margin_bottom = 70.0
+popup_exclusive = true
+window_title = "You sure ?"
+dialog_text = "Are you sure you want to "
+dialog_autowrap = true
+script = ExtResource( 11 )
+[connection signal="gui_input" from="Search" to="SaveButtons" method="_on_Search_gui_input"]
+[connection signal="text_changed" from="Search/SearchInput" to="SaveButtons" method="_on_SearchInput_text_changed"]
+[connection signal="pressed" from="MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="confirmed" from="SaveFileNamePopup" to="SaveFileNamePopup" method="_on_SaveFileNamePopup_confirmed"]
+[connection signal="reload_buttons" from="SaveFileNamePopup" to="." method="_on_SaveFileNamePopup_reload_buttons"]
+[connection signal="confirmed" from="OverwriteFilePopup" to="OverwriteFilePopup" method="_on_OverwriteFilePopup_confirmed"]
+[connection signal="reload_buttons" from="OverwriteFilePopup" to="." method="_on_OverwriteFilePopup_reload_buttons"]
+[connection signal="confirmed" from="EraseSavePopup" to="EraseSavePopup" method="_on_EraseSavePopup_confirmed"]
+[connection signal="confirmed" from="EraseSavePopup" to="." method="_on_EraseSavePopup_confirmed"]
