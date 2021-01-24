@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Other/Fonts/lemon/19919.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/Menus/SaveMenu/SaveMenu.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Scripts/Menus/SaveMenu/SaveFileNamePopup.gd" type="Script" id=10]
 [ext_resource path="res://Scripts/Menus/SaveMenu/EraseSavePopup.gd" type="Script" id=11]
 [ext_resource path="res://Scripts/Menus/SaveMenu/OverwriteFilePopup.gd" type="Script" id=12]
+[ext_resource path="res://Scenes/Menus/MainMenuSprites.tscn" type="PackedScene" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
@@ -24,19 +25,7 @@ script = ExtResource( 2 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -512.0
-margin_top = -298.603
-margin_right = 512.0
-margin_bottom = 301.397
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="MainMenuSprites" parent="." instance=ExtResource( 13 )]
 
 [node name="SaveButtons" type="ScrollContainer" parent="."]
 margin_left = -396.025
@@ -65,20 +54,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect2" type="ColorRect" parent="SaveTextControl"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -512.0
-margin_top = -60.0
-margin_right = 512.0
-margin_bottom = 57.0
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="SaveText" type="RichTextLabel" parent="SaveTextControl"]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -87,7 +62,7 @@ margin_right = 150.0
 margin_bottom = 100.0
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
-bbcode_text = "[wave amp=50 freq=2][color=blue][center]Select a save file [/center][/color][/wave]"
+bbcode_text = "[wave amp=50 freq=2][center]Select a save file [/center][/wave]"
 text = "Select a save file "
 __meta__ = {
 "_edit_use_anchors_": false
@@ -217,5 +192,5 @@ script = ExtResource( 11 )
 [connection signal="reload_buttons" from="SaveFileNamePopup" to="." method="_on_SaveFileNamePopup_reload_buttons"]
 [connection signal="confirmed" from="OverwriteFilePopup" to="OverwriteFilePopup" method="_on_OverwriteFilePopup_confirmed"]
 [connection signal="reload_buttons" from="OverwriteFilePopup" to="." method="_on_OverwriteFilePopup_reload_buttons"]
-[connection signal="confirmed" from="EraseSavePopup" to="EraseSavePopup" method="_on_EraseSavePopup_confirmed"]
 [connection signal="confirmed" from="EraseSavePopup" to="." method="_on_EraseSavePopup_confirmed"]
+[connection signal="confirmed" from="EraseSavePopup" to="EraseSavePopup" method="_on_EraseSavePopup_confirmed"]

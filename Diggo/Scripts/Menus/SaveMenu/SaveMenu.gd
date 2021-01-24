@@ -1,5 +1,7 @@
 extends Node2D
-#TODO : make the save menu prettier in general
+#TODO : comment stuff
+#FIXME : Somehow there are way too many savefiles shown when loading
+#FIXME : Find a solution to prevent the list of save to look weird when scrolling up
 
 export(int) var BUTTONS_OFFSET = 150
 export(bool) var IS_SAVE_MENU = false
@@ -19,6 +21,7 @@ func _ready():
 			saveIndex += 1
 	addInvisibleRect()
 
+# This scene takes one parameter "IsSaveMenu" to see if you should load or save on click
 func checkSceneParameters(): #TODO: show/hide go back button when needed
 	var isSaveMenuParam = SwitchSceneWithParam.get_param("isSaveMenu")
 	if(isSaveMenuParam != null):
@@ -53,7 +56,6 @@ func askDelete(button):
 	$EraseSavePopup.popup_centered_ratio(0.5)
 	$EraseSavePopup.button = button
 
-
 func overwriteSave(button):
 	$OverwriteFilePopup/SaveFileName.set_text(button.getSaveName())
 	$OverwriteFilePopup.button = button
@@ -62,8 +64,8 @@ func overwriteSave(button):
 func _on_BackButton_pressed():
 	SaveFile.loadCurrentSave(get_tree())
 
-func _on_MainMenuButton_pressed(): # TODO : create a main menu
-	pass # Replace with function body.
+func _on_MainMenuButton_pressed(): 
+	get_tree().change_scene("res://Scenes/Menus/MainMenu.tscn")
 
 func _on_SaveFileNamePopup_reload_buttons():
 	reloadButtons()

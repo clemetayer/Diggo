@@ -4,6 +4,9 @@ export(Array) var BUTTONS
 export(int) var RADIUS = 1000
 export(float) var START_ANGLE = -PI/2 - PI/15
 
+# TODO : Remove buttons when exiting the interact zone
+# TODO : Click on buttons on hover with specific angle
+
 func addButtonChildren():
 	if(BUTTONS.size() > 0):
 		var angleAdd = (2*PI)/BUTTONS.size()

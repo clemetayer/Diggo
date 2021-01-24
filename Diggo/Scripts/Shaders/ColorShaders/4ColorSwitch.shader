@@ -8,6 +8,8 @@ uniform vec4 color4 : hint_color;
 uniform float rate : hint_range(1.0,100.0);
 uniform float mix_amount : hint_range(0.0,1.0);
 
+//const float custom_cursor = 1.0;
+
 vec4 computeColorSlope(float cursor){
 	vec4 color_point;
 	if(cursor < 0.25){
@@ -31,6 +33,7 @@ vec4 computeColorSlope(float cursor){
 
 void fragment(){
 	float cursor = (0.5 * sin(TIME/rate)) + 0.5;
+//	float cursor = custom_cursor;
 	vec4 original_color = texture(TEXTURE, UV);
 	vec4 col = original_color;
 //	col = mix(original_color, computeColorSlope(cursor), mix_amount);
