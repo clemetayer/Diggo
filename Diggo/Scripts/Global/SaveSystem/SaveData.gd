@@ -1,9 +1,10 @@
 extends Node
+# TODO : re-organize functions so it's clearer
 
 var data = {}
 
 func loadData(parsedJsonData):
-	data = parsedJsonData
+	data = parsedJsonData.duplicate()
 
 func eraseFile():
 	data = {}
@@ -15,11 +16,7 @@ func newFile(saveName):
 			'locationName':'',
 			'locationPath':'res://Scenes/Levels/Mountains1/MainHouse2.tscn'
 		},
-		'totalTime':{
-			'hours':0,
-			'minutes':0,
-			'seconds':0
-		}
+		'totalTime': 0 # in unix timestamp (seconds)
 	}
 
 func changeName(name):
@@ -32,23 +29,14 @@ func loadSave(sceneTree):
 	sceneTree.change_scene(data.location.locationPath)
 
 func updateTime(diffTime):
-	if(data.totalTime.seconds + diffTime.second >= 60):
-		data.totalTime.minutes += 1
-		data.totalTime.seconds += diffTime.second - 60
-	else:
-		data.totalTime.seconds += diffTime.second
-	if(data.totalTime.minutes + diffTime.minute >= 60):
-		data.totalTime.hours += 1
-		data.totalTime.minutes += diffTime.minute - 60
-	else:
-		data.totalTime.minutes += diffTime.minute
-	data.totalTime.hours += diffTime.hour
+	data.totalTime += diffTime
 
 func isNewFile():
 	return (data.empty())
 
 func getCurrentTime():
-	var retStr = str(data.totalTime.hours) + " h " + str(data.totalTime.minutes) + " m " + str(data.totalTime.seconds) + " s "
+	var convertedTime = GlobalUtils.UnixTSToHMS(data.totalTime)
+	var retStr = str(convertedTime.hours) + " h " + str(convertedTime.minutes) + " m " + str(convertedTime.seconds) + " s "
 	return retStr
 
 func getLocation():

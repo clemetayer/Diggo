@@ -1,22 +1,23 @@
 extends Node2D
-#TODO : comment stuff
-#FIXME : Somehow there are way too many savefiles shown when loading
-#FIXME : Find a solution to prevent the list of save to look weird when scrolling up
 
 export(int) var BUTTONS_OFFSET = 150
 export(bool) var IS_SAVE_MENU = false
 
 var loadSaveButton = preload("res://Scenes/Menus/SaveFileButton.tscn")
+var newSaveButton = preload("res://Scenes/Menus/NewSaveButton.tscn")
 var saveButtons = []
-var buttonAmount = 3
 
 func _ready():
 	checkSceneParameters()
-	SaveFile.loadSaves()
+	if(not IS_SAVE_MENU):
+		$BackButton.hide()
 	var saves = SaveFile.getSaves()
 	var saveIndex = 0
+	if(IS_SAVE_MENU):
+		createNewSaveButton()
+		saveIndex += 1
 	for save in saves:
-		if(save != null): # drawback of the trick used to avoid an index update on save delete (check SaveFile.gd)
+		if(is_instance_valid(save)): # drawback of the trick used to avoid an index update on save delete (check SaveFile.gd)
 			createButton(save, saveIndex)
 			saveIndex += 1
 	addInvisibleRect()
@@ -33,23 +34,24 @@ func addInvisibleRect(): # In order to avoid an issue with the last button not b
 	rect.rect_size = Vector2(800,160)
 	$SaveButtons/SavesVBox.add_child(rect)
 
+func createNewSaveButton():
+	var button = newSaveButton.instance()
+	button.connect("new_file",self,"newFile")
+	$SaveButtons/SavesVBox.add_child(button)
+	$SaveButtons/SavesVBox.move_child(button,0)
+
 func createButton(save, index):
 	var button = loadSaveButton.instance()
 	button.save = save
-	button.index = index
-	button.IS_SAVE_MENU = IS_SAVE_MENU
+	button.IS_SAVE_BUTTON = IS_SAVE_MENU
 	button.showElements()
 	button.connect("overwrite_save",self,"overwriteSave")
-	button.connect("new_file",self,"newFile")
 	button.connect("ask_delete",self,"askDelete")
 	$SaveButtons/SavesVBox.add_child(button)
 	$SaveButtons/SavesVBox.move_child(button,index)
 
 func newFile():
 	$SaveFileNamePopup.popup_centered_ratio(0.5)
-
-func reloadButtons():
-	createButton(SaveFile.lastSave,1)
 
 func askDelete(button):
 	$EraseSavePopup.set_text("Are you really sure you want to delete " + button.getSaveName() + " ?")
@@ -66,9 +68,3 @@ func _on_BackButton_pressed():
 
 func _on_MainMenuButton_pressed(): 
 	get_tree().change_scene("res://Scenes/Menus/MainMenu.tscn")
-
-func _on_SaveFileNamePopup_reload_buttons():
-	reloadButtons()
-
-func _on_OverwriteFilePopup_reload_buttons():
-	reloadButtons()

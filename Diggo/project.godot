@@ -22,6 +22,8 @@ config/icon="res://icon.png"
 
 SaveFile="*res://Scripts/Global/SaveSystem/SaveFile.gd"
 SwitchSceneWithParam="*res://Scripts/Global/SceneManagement/SwitchSceneWithParam.gd"
+BBCodeGenerator="*res://Scripts/Global/Utils/BBCodeGenerator.gd"
+GlobalUtils="*res://Scripts/Global/Utils/GlobalUtils.gd"
 
 [editor_plugins]
 

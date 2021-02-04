@@ -32,6 +32,7 @@ margin_left = 1.1937
 margin_top = -10.6233
 margin_right = 1.39368
 margin_bottom = -17.6633
+mouse_filter = 2
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[wave amp=50 freq=2][color=yellow][center]New save[/center][/color][/wave]"

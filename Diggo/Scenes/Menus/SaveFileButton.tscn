@@ -1,38 +1,27 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Sprites/Menus/SaveMenu/SaveFileButton.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Menus/SaveMenu/SaveFileButtonHover.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Menus/SaveMenu/SaveFileButtonPressed.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Menus/SaveMenu/SaveFileButton.gd" type="Script" id=4]
 [ext_resource path="res://Other/Fonts/lemon/DynamicLemon.tres" type="DynamicFont" id=5]
-[ext_resource path="res://Other/Fonts/lemon/19919.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Sprites/Menus/SaveMenu/TrashCanHover.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/Menus/SaveMenu/TrashCan.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Menus/SaveMenu/TrashCanPressed.png" type="Texture" id=9]
 
-[sub_resource type="DynamicFont" id=1]
-size = 30
-font_data = ExtResource( 6 )
-
-[node name="SaveFileButton" type="Control"]
-rect_scale = Vector2( 0.6, 0.6 )
-script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ExistingFile" type="TextureButton" parent="."]
+[node name="ExistingFile" type="TextureButton"]
 margin_right = 800.0
 margin_bottom = 160.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 1 )
 texture_pressed = ExtResource( 3 )
 texture_hover = ExtResource( 2 )
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SaveFileName" type="RichTextLabel" parent="ExistingFile"]
+[node name="SaveFileName" type="RichTextLabel" parent="."]
 margin_right = 300.0
 margin_bottom = 100.0
 mouse_filter = 2
@@ -44,7 +33,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Time" type="RichTextLabel" parent="ExistingFile"]
+[node name="Time" type="RichTextLabel" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -100.0
@@ -58,7 +47,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Location" type="RichTextLabel" parent="ExistingFile"]
+[node name="Location" type="RichTextLabel" parent="."]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -74,7 +63,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DeleteButton" type="TextureButton" parent="ExistingFile"]
+[node name="DeleteButton" type="TextureButton" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -52.1135
@@ -89,35 +78,5 @@ texture_hover = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="NewFile" type="TextureButton" parent="."]
-margin_right = 800.0
-margin_bottom = 160.0
-mouse_default_cursor_shape = 2
-texture_normal = ExtResource( 1 )
-texture_pressed = ExtResource( 3 )
-texture_hover = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NewFile" type="RichTextLabel" parent="NewFile"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -150.0
-margin_top = -70.0
-margin_right = 150.0
-margin_bottom = 70.0
-mouse_filter = 2
-custom_fonts/normal_font = SubResource( 1 )
-bbcode_enabled = true
-bbcode_text = "[wave amp=50 freq=2][color=yellow][center]New save[/center][/color][/wave]"
-text = "New save"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-[connection signal="pressed" from="ExistingFile" to="." method="_on_ExistingFile_pressed"]
-[connection signal="pressed" from="ExistingFile/DeleteButton" to="." method="_on_DeleteButton_pressed"]
-[connection signal="pressed" from="NewFile" to="." method="_on_NewFile_pressed"]
+[connection signal="pressed" from="." to="." method="_on_ExistingFile_pressed"]
+[connection signal="pressed" from="DeleteButton" to="." method="_on_DeleteButton_pressed"]

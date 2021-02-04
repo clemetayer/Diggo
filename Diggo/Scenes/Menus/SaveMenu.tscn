@@ -32,14 +32,13 @@ margin_left = -396.025
 margin_top = -180.0
 margin_right = 403.975
 margin_bottom = 300.0
-rect_clip_content = false
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SavesVBox" type="VBoxContainer" parent="SaveButtons"]
-custom_constants/separation = 160
+custom_constants/separation = 0
 
 [node name="SaveTextControl" type="Control" parent="."]
 anchor_left = 0.5
@@ -189,8 +188,6 @@ script = ExtResource( 11 )
 [connection signal="pressed" from="MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="confirmed" from="SaveFileNamePopup" to="SaveFileNamePopup" method="_on_SaveFileNamePopup_confirmed"]
-[connection signal="reload_buttons" from="SaveFileNamePopup" to="." method="_on_SaveFileNamePopup_reload_buttons"]
 [connection signal="confirmed" from="OverwriteFilePopup" to="OverwriteFilePopup" method="_on_OverwriteFilePopup_confirmed"]
-[connection signal="reload_buttons" from="OverwriteFilePopup" to="." method="_on_OverwriteFilePopup_reload_buttons"]
-[connection signal="confirmed" from="EraseSavePopup" to="." method="_on_EraseSavePopup_confirmed"]
 [connection signal="confirmed" from="EraseSavePopup" to="EraseSavePopup" method="_on_EraseSavePopup_confirmed"]
+[connection signal="confirmed" from="EraseSavePopup" to="." method="_on_EraseSavePopup_confirmed"]
