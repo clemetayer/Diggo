@@ -1,15 +1,18 @@
 shader_type canvas_item;
 render_mode unshaded;
 
+// Mixes smoothly the material to the 4 color specified in parameter at a specific pace (rate)
+
 uniform vec4 color1 : hint_color;
 uniform vec4 color2 : hint_color;
 uniform vec4 color3 : hint_color;
 uniform vec4 color4 : hint_color;
 uniform float rate : hint_range(1.0,100.0);
-uniform float mix_amount : hint_range(0.0,1.0);
+uniform float mix_amount : hint_range(0.0,1.0); // mix amount if using mix function
 
-//const float custom_cursor = 1.0;
+//const float custom_cursor = 1.0; // To switch color without waiting for the time to come
 
+// returns the color point, depending on the cursor position (ex: cursor = 25% ==> color2, cursor = 32% ==> between color2 and color3)
 vec4 computeColorSlope(float cursor){
 	vec4 color_point;
 	if(cursor < 0.25){

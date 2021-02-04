@@ -1,5 +1,8 @@
 extends Node2D
 
+# Attempt at pathfinding using AStar
+# entire scene UNUSED?
+
 export var POINTS_DISTANCE = 64
 export var SCENE_SIZE = 4096
 

@@ -1,5 +1,8 @@
 extends Node2D
 
+# Just a test scene to see if it works
+# general scene UNUSED?
+
 export var TILE_SIZE = 64
 export var MIN_SIZE = 8
 

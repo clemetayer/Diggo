@@ -1,17 +1,27 @@
 extends Node2D
 
+# TODO : check with a sprite with odd size
+
+# Here is how it works
+# first, the sprite is converted to a bitmap, to detect the transparent and not transparent parts
+# then, one divide this sprite in max size blocks (2^TILE_SIZE_POW)
+# if this block is completely transparent, then one does not put a destructible block in it
+# else if this block is completely full, then one put a destructible block in it
+# else if it is not entirely full/transparent, one divide the block in 4, and redo the if-else section for each block
+
 export var TILE_SIZE_POW = 6 # Starting tile size (as a power of 2, i.e 2^6 = 64)
 export var MIN_SIZE_POW = 2 # Minimal tile size (as a power of 2, i.e 2^2 = 4)
 export var MIN_FPS = 15 # Minimal goal FPS
 export var GOAL_FPS = 30 # Desired average FPS
 
-export(Texture) var SPRITE
-export(String) var BLOCK_PATH = "res://Scenes/Utils/Blocks/BlockArea.tscn"
+export(Texture) var SPRITE # General texture of the destructible block (only non transparent part will have a Destructible block)
+export(String) var BLOCK_PATH = "res://Scenes/Utils/Blocks/BlockArea.tscn" # Path of an instance of BlockDestructible
+																		   # By default, it is a BlockArea, but you can also set it up to "BlockPysics" if you want to toast your CPU
 
-var stepFPS = (GOAL_FPS - MIN_FPS)/3
-var blockArea
-var bitmap = BitMap
-var minSize = pow(2,MIN_SIZE_POW)
+var stepFPS = (GOAL_FPS - MIN_FPS)/3 # Number of "steps" of FPS states (ex: 60-40-20)
+var blockArea # load of BLOCK_PATH
+var bitmap = BitMap # bitmap of the SPRITE
+var minSize = pow(2,MIN_SIZE_POW) # true value of minimal size (2^MIN_SIZE_POW)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -21,6 +31,7 @@ func _ready():
 	bitmap.create_from_image_alpha(SPRITE.get_data())
 	subdivideOriginalSprite()
 
+# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	checkFPS()
 

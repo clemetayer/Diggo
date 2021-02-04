@@ -1,8 +1,12 @@
 extends StaticBody2D
 
-var temp = 0
-var Size = 32
-var spriteTexture = Texture
+# So here it how it works
+# when a dig area is colliding with this block, 
+# if it is already at the minimum size, then it is destroy
+# otherwise, it is divided in 4 new blocks (one check if the new block will collide with the area or not before creating, to avoid it being painfully slow)
+
+var Size = 32 # current size of this destructible block
+var spriteTexture = Texture # texture of this block
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -64,6 +68,7 @@ func createDivideBlocks(body):
 			newPos.y += Size
 	queue_free()
 
+# when something that can dig is colliding with the block, subdivide it
 func _on_Area2D_area_entered(area):
 	if(area.is_in_group("Terraform")):
 		createDivideBlocks(area)

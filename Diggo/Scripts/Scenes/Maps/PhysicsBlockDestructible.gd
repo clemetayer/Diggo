@@ -64,6 +64,7 @@ func createDivideBlocks(body):
 			newPos.y += Size
 	queue_free()
 
+# Subdivides the block if a dig area entered
 func _on_Area2D_area_entered(area):
 	if(area.is_in_group("Terraform")):
 		createDivideBlocks(area)
