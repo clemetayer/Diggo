@@ -1,4 +1,4 @@
-extends TextureButton
+extends Button
 
 signal new_file() # signal for the save menu to create a new save
 

@@ -1,22 +1,637 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://Other/Fonts/lemon/19919.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/Menus/SaveMenu/SaveMenu.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/Menus/SaveMenu/SaveButtonsScroll.gd" type="Script" id=3]
-[ext_resource path="res://Sprites/Menus/SaveMenu/MainMenuHover.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Menus/SaveMenu/MainMenuPressed.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Menus/SaveMenu/MainMenu.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Menus/SaveMenu/BackButton.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Menus/SaveMenu/BackButtonHover.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Menus/SaveMenu/BackButtonPressed.png" type="Texture" id=9]
+[ext_resource path="res://Other/Themes/MenusTheme/PopupMenuSelectedItem.tres" type="StyleBox" id=4]
+[ext_resource path="res://Other/Themes/MenusTheme/PopupMenuBack.tres" type="StyleBox" id=5]
+[ext_resource path="res://Other/Themes/MenusTheme/Panel.tres" type="StyleBox" id=6]
+[ext_resource path="res://Other/Themes/MenusTheme/TabContainerBody.tres" type="StyleBox" id=7]
+[ext_resource path="res://Other/Themes/MenusTheme/FocusButton.tres" type="StyleBox" id=8]
+[ext_resource path="res://Other/Themes/MenusTheme/TabContainerFront.tres" type="StyleBox" id=9]
 [ext_resource path="res://Scripts/Menus/SaveMenu/SaveFileNamePopup.gd" type="Script" id=10]
 [ext_resource path="res://Scripts/Menus/SaveMenu/EraseSavePopup.gd" type="Script" id=11]
 [ext_resource path="res://Scripts/Menus/SaveMenu/OverwriteFilePopup.gd" type="Script" id=12]
 [ext_resource path="res://Scenes/Menus/MainMenuSprites.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Other/Themes/MenusThemes.tres" type="Theme" id=14]
+[ext_resource path="res://Other/Themes/MenusTheme/FocusLineEdit.tres" type="StyleBox" id=15]
+[ext_resource path="res://Other/Themes/MenusTheme/ProgressBarBG.tres" type="StyleBox" id=16]
+[ext_resource path="res://Other/Themes/MenusTheme/FocusLineMain.tres" type="StyleBox" id=17]
+[ext_resource path="res://Other/Themes/MenusTheme/ProgressBarFG.tres" type="StyleBox" id=18]
+[ext_resource path="res://Other/Themes/MenusTheme/TabContainerDisabled.tres" type="StyleBox" id=19]
+[ext_resource path="res://Other/Themes/MenusTheme/PressedButton.tres" type="StyleBox" id=20]
+[ext_resource path="res://Other/Themes/MenusTheme/MainButtonStyle.tres" type="StyleBox" id=21]
+[ext_resource path="res://Other/Themes/MenusTheme/DisabledButton.tres" type="StyleBox" id=22]
+[ext_resource path="res://Other/Themes/MenusTheme/HoverButton.tres" type="StyleBox" id=23]
+[ext_resource path="res://Other/Themes/MenusTheme/TabContainerBack.tres" type="StyleBox" id=24]
+[ext_resource path="res://Other/Themes/MenusTheme/SliderTheme.tres" type="StyleBox" id=25]
+[ext_resource path="res://Other/Themes/MenusTheme/Grabber.tres" type="StyleBox" id=26]
+[ext_resource path="res://Other/Themes/MenusTheme/HorizontalScrollBar.tres" type="StyleBox" id=27]
+[ext_resource path="res://Other/Themes/MenusTheme/HorizontalScrollGrabber.tres" type="StyleBox" id=28]
+[ext_resource path="res://Other/Themes/MenusTheme/VerticalScrollBar.tres" type="StyleBox" id=29]
+[ext_resource path="res://Other/Themes/MenusTheme/VerticalScrollGrabber.tres" type="StyleBox" id=30]
+[ext_resource path="res://Other/Themes/MenusTheme/VerticalGrabber.tres" type="StyleBox" id=31]
+[ext_resource path="res://Other/Themes/MenusTheme/VerticalSlider.tres" type="StyleBox" id=32]
+[ext_resource path="res://Other/Themes/MenusTheme/PopupMenuDisabled.tres" type="StyleBox" id=33]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="StyleBoxFlat" id=14]
+content_margin_right = 780.0
+content_margin_bottom = 150.0
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.388235, 0.388235, 0.388235, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color( 0, 0, 0, 0.184314 )
+shadow_size = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=13]
+content_margin_right = 780.0
+content_margin_bottom = 150.0
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.301961, 0.745098, 0.529412, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color( 0, 0, 0, 0.184314 )
+shadow_size = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=12]
+content_margin_right = 780.0
+content_margin_bottom = 150.0
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.262745, 0.784314, 0.317647, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color( 0, 0, 0, 0.184314 )
+shadow_size = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=11]
+content_margin_right = 780.0
+content_margin_bottom = 150.0
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.286275, 0.737255, 0.647059, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color( 0, 0, 0, 0.184314 )
+shadow_size = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=10]
+content_margin_right = 780.0
+content_margin_bottom = 150.0
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.215686, 0.498039, 0.882353, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color( 0, 0, 0, 0.184314 )
+shadow_size = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.47451, 0.47451, 0.47451, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color( 0, 0, 0, 0.203922 )
+shadow_size = 1
+anti_aliasing = false
+
+[sub_resource type="DynamicFont" id=2]
+size = 10
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=7]
+default_font = SubResource( 2 )
+Button/colors/font_color = Color( 0.133333, 0.854902, 0.54902, 1 )
+Button/colors/font_color_disabled = Color( 0.337255, 0.380392, 0.741176, 1 )
+Button/colors/font_color_hover = Color( 0.270588, 0.788235, 0.423529, 1 )
+Button/colors/font_color_pressed = Color( 0.258824, 0.878431, 0.309804, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = SubResource( 14 )
+Button/styles/focus = SubResource( 13 )
+Button/styles/hover = SubResource( 12 )
+Button/styles/normal = SubResource( 11 )
+Button/styles/pressed = SubResource( 10 )
+HScrollBar/icons/decrement = null
+HScrollBar/icons/decrement_highlight = null
+HScrollBar/icons/increment = null
+HScrollBar/icons/increment_highlight = null
+HScrollBar/styles/grabber = ExtResource( 28 )
+HScrollBar/styles/grabber_highlight = ExtResource( 28 )
+HScrollBar/styles/grabber_pressed = ExtResource( 28 )
+HScrollBar/styles/scroll = ExtResource( 27 )
+HScrollBar/styles/scroll_focus = ExtResource( 27 )
+HSlider/icons/grabber = null
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = null
+HSlider/icons/tick = null
+HSlider/styles/grabber_area = ExtResource( 26 )
+HSlider/styles/grabber_area_highlight = ExtResource( 26 )
+HSlider/styles/slider = ExtResource( 25 )
+LineEdit/colors/clear_button_color = Color( 1, 1, 1, 1 )
+LineEdit/colors/clear_button_color_pressed = Color( 1, 1, 1, 1 )
+LineEdit/colors/cursor_color = Color( 0.219608, 0.819608, 0.466667, 1 )
+LineEdit/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+LineEdit/colors/font_color_selected = Color( 0.568627, 0.568627, 0.568627, 1 )
+LineEdit/colors/font_color_uneditable = Color( 0.337255, 0.380392, 0.741176, 1 )
+LineEdit/colors/selection_color = Color( 0.286275, 0.286275, 0.286275, 1 )
+LineEdit/constants/minimum_spaces = 12
+LineEdit/fonts/font = null
+LineEdit/icons/clear = null
+LineEdit/styles/focus = ExtResource( 15 )
+LineEdit/styles/normal = ExtResource( 17 )
+LineEdit/styles/read_only = SubResource( 1 )
+Panel/styles/panel = ExtResource( 6 )
+PanelContainer/styles/panel = ExtResource( 6 )
+PopupDialog/styles/panel = ExtResource( 5 )
+PopupMenu/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+PopupMenu/colors/font_color_accel = Color( 0.7, 0.7, 0.7, 0.8 )
+PopupMenu/colors/font_color_disabled = Color( 0.4, 0.4, 0.4, 0.8 )
+PopupMenu/colors/font_color_hover = Color( 0.88, 0.88, 0.88, 1 )
+PopupMenu/constants/hseparation = 4
+PopupMenu/constants/vseparation = 4
+PopupMenu/fonts/font = null
+PopupMenu/icons/checked = null
+PopupMenu/icons/radio_checked = null
+PopupMenu/icons/radio_unchecked = null
+PopupMenu/icons/submenu = null
+PopupMenu/icons/unchecked = null
+PopupMenu/styles/hover = ExtResource( 4 )
+PopupMenu/styles/labeled_separator_left = null
+PopupMenu/styles/labeled_separator_right = null
+PopupMenu/styles/panel = ExtResource( 5 )
+PopupMenu/styles/panel_disabled = ExtResource( 33 )
+PopupMenu/styles/separator = null
+PopupPanel/styles/panel = ExtResource( 5 )
+ProgressBar/colors/font_color = Color( 1, 1, 1, 1 )
+ProgressBar/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+ProgressBar/fonts/font = null
+ProgressBar/styles/bg = ExtResource( 16 )
+ProgressBar/styles/fg = ExtResource( 18 )
+TabContainer/colors/font_color_bg = Color( 0.133333, 0.854902, 0.54902, 1 )
+TabContainer/colors/font_color_disabled = Color( 0.337255, 0.380392, 0.741176, 1 )
+TabContainer/colors/font_color_fg = Color( 0.258824, 0.878431, 0.309804, 1 )
+TabContainer/constants/hseparation = 4
+TabContainer/constants/label_valign_bg = 2
+TabContainer/constants/label_valign_fg = 0
+TabContainer/constants/side_margin = 8
+TabContainer/constants/top_margin = 24
+TabContainer/fonts/font = null
+TabContainer/icons/decrement = null
+TabContainer/icons/decrement_highlight = null
+TabContainer/icons/increment = null
+TabContainer/icons/increment_highlight = null
+TabContainer/icons/menu = null
+TabContainer/icons/menu_highlight = null
+TabContainer/styles/panel = ExtResource( 7 )
+TabContainer/styles/tab_bg = ExtResource( 24 )
+TabContainer/styles/tab_disabled = ExtResource( 19 )
+TabContainer/styles/tab_fg = ExtResource( 9 )
+TextEdit/colors/background_color = Color( 1, 1, 1, 0 )
+TextEdit/colors/bookmark_color = Color( 0.08, 0.49, 0.98, 1 )
+TextEdit/colors/brace_mismatch_color = Color( 1, 0.2, 0.2, 1 )
+TextEdit/colors/breakpoint_color = Color( 0.8, 0.8, 0.4, 0.2 )
+TextEdit/colors/caret_background_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/caret_color = Color( 0.88, 0.88, 0.88, 1 )
+TextEdit/colors/code_folding_color = Color( 0.8, 0.8, 0.8, 0.8 )
+TextEdit/colors/completion_background_color = Color( 0.286275, 0.286275, 0.286275, 1 )
+TextEdit/colors/completion_existing_color = Color( 0.87, 0.87, 0.87, 0.13 )
+TextEdit/colors/completion_font_color = Color( 0.67, 0.67, 0.67, 1 )
+TextEdit/colors/completion_scroll_color = Color( 1, 1, 1, 1 )
+TextEdit/colors/completion_selected_color = Color( 0.26, 0.26, 0.27, 1 )
+TextEdit/colors/current_line_color = Color( 0.25, 0.25, 0.26, 0.8 )
+TextEdit/colors/executing_line_color = Color( 0.2, 0.8, 0.2, 0.4 )
+TextEdit/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+TextEdit/colors/font_color_readonly = Color( 0.88, 0.88, 0.88, 0.5 )
+TextEdit/colors/font_color_selected = Color( 0.568627, 0.568627, 0.568627, 1 )
+TextEdit/colors/function_color = Color( 0.4, 0.64, 0.81, 1 )
+TextEdit/colors/line_number_color = Color( 0.67, 0.67, 0.67, 0.4 )
+TextEdit/colors/mark_color = Color( 1, 0.4, 0.4, 0.4 )
+TextEdit/colors/member_variable_color = Color( 0.9, 0.31, 0.35, 1 )
+TextEdit/colors/number_color = Color( 0.92, 0.58, 0.2, 1 )
+TextEdit/colors/safe_line_number_color = Color( 0.67, 0.78, 0.67, 0.6 )
+TextEdit/colors/selection_color = Color( 0.286275, 0.286275, 0.286275, 1 )
+TextEdit/colors/symbol_color = Color( 0.94, 0.94, 0.94, 1 )
+TextEdit/colors/word_highlighted_color = Color( 0.8, 0.9, 0.9, 0.15 )
+TextEdit/constants/completion_lines = 7
+TextEdit/constants/completion_max_width = 50
+TextEdit/constants/completion_scroll_width = 3
+TextEdit/constants/line_spacing = 4
+TextEdit/fonts/font = null
+TextEdit/icons/fold = null
+TextEdit/icons/folded = null
+TextEdit/icons/space = null
+TextEdit/icons/tab = null
+TextEdit/styles/completion = null
+TextEdit/styles/focus = ExtResource( 8 )
+TextEdit/styles/normal = ExtResource( 17 )
+TextEdit/styles/read_only = ExtResource( 22 )
+VScrollBar/icons/decrement = null
+VScrollBar/icons/decrement_highlight = null
+VScrollBar/icons/increment = null
+VScrollBar/icons/increment_highlight = null
+VScrollBar/styles/grabber = ExtResource( 30 )
+VScrollBar/styles/grabber_highlight = ExtResource( 30 )
+VScrollBar/styles/grabber_pressed = ExtResource( 30 )
+VScrollBar/styles/scroll = ExtResource( 29 )
+VScrollBar/styles/scroll_focus = ExtResource( 29 )
+VSlider/icons/grabber = null
+VSlider/icons/grabber_disabled = null
+VSlider/icons/grabber_highlight = null
+VSlider/icons/tick = null
+VSlider/styles/grabber_area = ExtResource( 31 )
+VSlider/styles/grabber_area_highlight = ExtResource( 31 )
+VSlider/styles/slider = ExtResource( 32 )
+WindowDialog/colors/title_color = Color( 1, 1, 1, 1 )
+WindowDialog/constants/close_h_ofs = 18
+WindowDialog/constants/close_v_ofs = 18
+WindowDialog/constants/scaleborder_size = 4
+WindowDialog/constants/title_height = 20
+WindowDialog/fonts/title_font = null
+WindowDialog/icons/close = null
+WindowDialog/icons/close_highlight = null
+WindowDialog/styles/panel = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=8]
 size = 20
 font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0, 0, 0, 0 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.47451, 0.47451, 0.47451, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color( 0, 0, 0, 0.203922 )
+shadow_size = 1
+anti_aliasing = false
+
+[sub_resource type="DynamicFont" id=3]
+size = 30
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
+Button/colors/font_color = Color( 0.133333, 0.854902, 0.54902, 1 )
+Button/colors/font_color_disabled = Color( 0.337255, 0.380392, 0.741176, 1 )
+Button/colors/font_color_hover = Color( 0.270588, 0.788235, 0.423529, 1 )
+Button/colors/font_color_pressed = Color( 0.258824, 0.878431, 0.309804, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = ExtResource( 22 )
+Button/styles/focus = ExtResource( 8 )
+Button/styles/hover = ExtResource( 23 )
+Button/styles/normal = ExtResource( 21 )
+Button/styles/pressed = ExtResource( 20 )
+HScrollBar/icons/decrement = null
+HScrollBar/icons/decrement_highlight = null
+HScrollBar/icons/increment = null
+HScrollBar/icons/increment_highlight = null
+HScrollBar/styles/grabber = ExtResource( 28 )
+HScrollBar/styles/grabber_highlight = ExtResource( 28 )
+HScrollBar/styles/grabber_pressed = ExtResource( 28 )
+HScrollBar/styles/scroll = ExtResource( 27 )
+HScrollBar/styles/scroll_focus = ExtResource( 27 )
+HSlider/icons/grabber = null
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = null
+HSlider/icons/tick = null
+HSlider/styles/grabber_area = ExtResource( 26 )
+HSlider/styles/grabber_area_highlight = ExtResource( 26 )
+HSlider/styles/slider = ExtResource( 25 )
+LineEdit/colors/clear_button_color = Color( 1, 1, 1, 1 )
+LineEdit/colors/clear_button_color_pressed = Color( 1, 1, 1, 1 )
+LineEdit/colors/cursor_color = Color( 0.219608, 0.819608, 0.466667, 1 )
+LineEdit/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+LineEdit/colors/font_color_selected = Color( 0.568627, 0.568627, 0.568627, 1 )
+LineEdit/colors/font_color_uneditable = Color( 0.337255, 0.380392, 0.741176, 1 )
+LineEdit/colors/selection_color = Color( 0.286275, 0.286275, 0.286275, 1 )
+LineEdit/constants/minimum_spaces = 12
+LineEdit/fonts/font = null
+LineEdit/icons/clear = null
+LineEdit/styles/focus = ExtResource( 15 )
+LineEdit/styles/normal = ExtResource( 17 )
+LineEdit/styles/read_only = SubResource( 9 )
+Panel/styles/panel = ExtResource( 6 )
+PanelContainer/styles/panel = ExtResource( 6 )
+PopupDialog/styles/panel = ExtResource( 5 )
+PopupMenu/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+PopupMenu/colors/font_color_accel = Color( 0.7, 0.7, 0.7, 0.8 )
+PopupMenu/colors/font_color_disabled = Color( 0.4, 0.4, 0.4, 0.8 )
+PopupMenu/colors/font_color_hover = Color( 0.88, 0.88, 0.88, 1 )
+PopupMenu/constants/hseparation = 4
+PopupMenu/constants/vseparation = 4
+PopupMenu/fonts/font = null
+PopupMenu/icons/checked = null
+PopupMenu/icons/radio_checked = null
+PopupMenu/icons/radio_unchecked = null
+PopupMenu/icons/submenu = null
+PopupMenu/icons/unchecked = null
+PopupMenu/styles/hover = ExtResource( 4 )
+PopupMenu/styles/labeled_separator_left = null
+PopupMenu/styles/labeled_separator_right = null
+PopupMenu/styles/panel = ExtResource( 5 )
+PopupMenu/styles/panel_disabled = ExtResource( 33 )
+PopupMenu/styles/separator = null
+PopupPanel/styles/panel = ExtResource( 5 )
+ProgressBar/colors/font_color = Color( 1, 1, 1, 1 )
+ProgressBar/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+ProgressBar/fonts/font = null
+ProgressBar/styles/bg = ExtResource( 16 )
+ProgressBar/styles/fg = ExtResource( 18 )
+TabContainer/colors/font_color_bg = Color( 0.133333, 0.854902, 0.54902, 1 )
+TabContainer/colors/font_color_disabled = Color( 0.337255, 0.380392, 0.741176, 1 )
+TabContainer/colors/font_color_fg = Color( 0.258824, 0.878431, 0.309804, 1 )
+TabContainer/constants/hseparation = 4
+TabContainer/constants/label_valign_bg = 2
+TabContainer/constants/label_valign_fg = 0
+TabContainer/constants/side_margin = 8
+TabContainer/constants/top_margin = 24
+TabContainer/fonts/font = null
+TabContainer/icons/decrement = null
+TabContainer/icons/decrement_highlight = null
+TabContainer/icons/increment = null
+TabContainer/icons/increment_highlight = null
+TabContainer/icons/menu = null
+TabContainer/icons/menu_highlight = null
+TabContainer/styles/panel = ExtResource( 7 )
+TabContainer/styles/tab_bg = ExtResource( 24 )
+TabContainer/styles/tab_disabled = ExtResource( 19 )
+TabContainer/styles/tab_fg = ExtResource( 9 )
+TextEdit/colors/background_color = Color( 1, 1, 1, 0 )
+TextEdit/colors/bookmark_color = Color( 0.08, 0.49, 0.98, 1 )
+TextEdit/colors/brace_mismatch_color = Color( 1, 0.2, 0.2, 1 )
+TextEdit/colors/breakpoint_color = Color( 0.8, 0.8, 0.4, 0.2 )
+TextEdit/colors/caret_background_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/caret_color = Color( 0.88, 0.88, 0.88, 1 )
+TextEdit/colors/code_folding_color = Color( 0.8, 0.8, 0.8, 0.8 )
+TextEdit/colors/completion_background_color = Color( 0.286275, 0.286275, 0.286275, 1 )
+TextEdit/colors/completion_existing_color = Color( 0.87, 0.87, 0.87, 0.13 )
+TextEdit/colors/completion_font_color = Color( 0.67, 0.67, 0.67, 1 )
+TextEdit/colors/completion_scroll_color = Color( 1, 1, 1, 1 )
+TextEdit/colors/completion_selected_color = Color( 0.26, 0.26, 0.27, 1 )
+TextEdit/colors/current_line_color = Color( 0.25, 0.25, 0.26, 0.8 )
+TextEdit/colors/executing_line_color = Color( 0.2, 0.8, 0.2, 0.4 )
+TextEdit/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+TextEdit/colors/font_color_readonly = Color( 0.88, 0.88, 0.88, 0.5 )
+TextEdit/colors/font_color_selected = Color( 0.568627, 0.568627, 0.568627, 1 )
+TextEdit/colors/function_color = Color( 0.4, 0.64, 0.81, 1 )
+TextEdit/colors/line_number_color = Color( 0.67, 0.67, 0.67, 0.4 )
+TextEdit/colors/mark_color = Color( 1, 0.4, 0.4, 0.4 )
+TextEdit/colors/member_variable_color = Color( 0.9, 0.31, 0.35, 1 )
+TextEdit/colors/number_color = Color( 0.92, 0.58, 0.2, 1 )
+TextEdit/colors/safe_line_number_color = Color( 0.67, 0.78, 0.67, 0.6 )
+TextEdit/colors/selection_color = Color( 0.286275, 0.286275, 0.286275, 1 )
+TextEdit/colors/symbol_color = Color( 0.94, 0.94, 0.94, 1 )
+TextEdit/colors/word_highlighted_color = Color( 0.8, 0.9, 0.9, 0.15 )
+TextEdit/constants/completion_lines = 7
+TextEdit/constants/completion_max_width = 50
+TextEdit/constants/completion_scroll_width = 3
+TextEdit/constants/line_spacing = 4
+TextEdit/fonts/font = null
+TextEdit/icons/fold = null
+TextEdit/icons/folded = null
+TextEdit/icons/space = null
+TextEdit/icons/tab = null
+TextEdit/styles/completion = null
+TextEdit/styles/focus = ExtResource( 8 )
+TextEdit/styles/normal = ExtResource( 17 )
+TextEdit/styles/read_only = ExtResource( 22 )
+VScrollBar/icons/decrement = null
+VScrollBar/icons/decrement_highlight = null
+VScrollBar/icons/increment = null
+VScrollBar/icons/increment_highlight = null
+VScrollBar/styles/grabber = ExtResource( 30 )
+VScrollBar/styles/grabber_highlight = ExtResource( 30 )
+VScrollBar/styles/grabber_pressed = ExtResource( 30 )
+VScrollBar/styles/scroll = ExtResource( 29 )
+VScrollBar/styles/scroll_focus = ExtResource( 29 )
+VSlider/icons/grabber = null
+VSlider/icons/grabber_disabled = null
+VSlider/icons/grabber_highlight = null
+VSlider/icons/tick = null
+VSlider/styles/grabber_area = ExtResource( 31 )
+VSlider/styles/grabber_area_highlight = ExtResource( 31 )
+VSlider/styles/slider = ExtResource( 32 )
+WindowDialog/colors/title_color = Color( 1, 1, 1, 1 )
+WindowDialog/constants/close_h_ofs = 18
+WindowDialog/constants/close_v_ofs = 18
+WindowDialog/constants/scaleborder_size = 4
+WindowDialog/constants/title_height = 20
+WindowDialog/fonts/title_font = null
+WindowDialog/icons/close = null
+WindowDialog/icons/close_highlight = null
+WindowDialog/styles/panel = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 30
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=6]
+default_font = SubResource( 5 )
+Button/colors/font_color = Color( 0.133333, 0.854902, 0.54902, 1 )
+Button/colors/font_color_disabled = Color( 0.337255, 0.380392, 0.741176, 1 )
+Button/colors/font_color_hover = Color( 0.270588, 0.788235, 0.423529, 1 )
+Button/colors/font_color_pressed = Color( 0.258824, 0.878431, 0.309804, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = ExtResource( 22 )
+Button/styles/focus = ExtResource( 8 )
+Button/styles/hover = ExtResource( 23 )
+Button/styles/normal = ExtResource( 21 )
+Button/styles/pressed = ExtResource( 20 )
+HScrollBar/icons/decrement = null
+HScrollBar/icons/decrement_highlight = null
+HScrollBar/icons/increment = null
+HScrollBar/icons/increment_highlight = null
+HScrollBar/styles/grabber = ExtResource( 28 )
+HScrollBar/styles/grabber_highlight = ExtResource( 28 )
+HScrollBar/styles/grabber_pressed = ExtResource( 28 )
+HScrollBar/styles/scroll = ExtResource( 27 )
+HScrollBar/styles/scroll_focus = ExtResource( 27 )
+HSlider/icons/grabber = null
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = null
+HSlider/icons/tick = null
+HSlider/styles/grabber_area = ExtResource( 26 )
+HSlider/styles/grabber_area_highlight = ExtResource( 26 )
+HSlider/styles/slider = ExtResource( 25 )
+LineEdit/colors/clear_button_color = Color( 1, 1, 1, 1 )
+LineEdit/colors/clear_button_color_pressed = Color( 1, 1, 1, 1 )
+LineEdit/colors/cursor_color = Color( 0.219608, 0.819608, 0.466667, 1 )
+LineEdit/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+LineEdit/colors/font_color_selected = Color( 0.568627, 0.568627, 0.568627, 1 )
+LineEdit/colors/font_color_uneditable = Color( 0.337255, 0.380392, 0.741176, 1 )
+LineEdit/colors/selection_color = Color( 0.286275, 0.286275, 0.286275, 1 )
+LineEdit/constants/minimum_spaces = 12
+LineEdit/fonts/font = null
+LineEdit/icons/clear = null
+LineEdit/styles/focus = ExtResource( 15 )
+LineEdit/styles/normal = ExtResource( 17 )
+LineEdit/styles/read_only = SubResource( 9 )
+Panel/styles/panel = ExtResource( 6 )
+PanelContainer/styles/panel = ExtResource( 6 )
+PopupDialog/styles/panel = ExtResource( 5 )
+PopupMenu/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+PopupMenu/colors/font_color_accel = Color( 0.7, 0.7, 0.7, 0.8 )
+PopupMenu/colors/font_color_disabled = Color( 0.4, 0.4, 0.4, 0.8 )
+PopupMenu/colors/font_color_hover = Color( 0.88, 0.88, 0.88, 1 )
+PopupMenu/constants/hseparation = 4
+PopupMenu/constants/vseparation = 4
+PopupMenu/fonts/font = null
+PopupMenu/icons/checked = null
+PopupMenu/icons/radio_checked = null
+PopupMenu/icons/radio_unchecked = null
+PopupMenu/icons/submenu = null
+PopupMenu/icons/unchecked = null
+PopupMenu/styles/hover = ExtResource( 4 )
+PopupMenu/styles/labeled_separator_left = null
+PopupMenu/styles/labeled_separator_right = null
+PopupMenu/styles/panel = ExtResource( 5 )
+PopupMenu/styles/panel_disabled = ExtResource( 33 )
+PopupMenu/styles/separator = null
+PopupPanel/styles/panel = ExtResource( 5 )
+ProgressBar/colors/font_color = Color( 1, 1, 1, 1 )
+ProgressBar/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+ProgressBar/fonts/font = null
+ProgressBar/styles/bg = ExtResource( 16 )
+ProgressBar/styles/fg = ExtResource( 18 )
+TabContainer/colors/font_color_bg = Color( 0.133333, 0.854902, 0.54902, 1 )
+TabContainer/colors/font_color_disabled = Color( 0.337255, 0.380392, 0.741176, 1 )
+TabContainer/colors/font_color_fg = Color( 0.258824, 0.878431, 0.309804, 1 )
+TabContainer/constants/hseparation = 4
+TabContainer/constants/label_valign_bg = 2
+TabContainer/constants/label_valign_fg = 0
+TabContainer/constants/side_margin = 8
+TabContainer/constants/top_margin = 24
+TabContainer/fonts/font = null
+TabContainer/icons/decrement = null
+TabContainer/icons/decrement_highlight = null
+TabContainer/icons/increment = null
+TabContainer/icons/increment_highlight = null
+TabContainer/icons/menu = null
+TabContainer/icons/menu_highlight = null
+TabContainer/styles/panel = ExtResource( 7 )
+TabContainer/styles/tab_bg = ExtResource( 24 )
+TabContainer/styles/tab_disabled = ExtResource( 19 )
+TabContainer/styles/tab_fg = ExtResource( 9 )
+TextEdit/colors/background_color = Color( 1, 1, 1, 0 )
+TextEdit/colors/bookmark_color = Color( 0.08, 0.49, 0.98, 1 )
+TextEdit/colors/brace_mismatch_color = Color( 1, 0.2, 0.2, 1 )
+TextEdit/colors/breakpoint_color = Color( 0.8, 0.8, 0.4, 0.2 )
+TextEdit/colors/caret_background_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/caret_color = Color( 0.88, 0.88, 0.88, 1 )
+TextEdit/colors/code_folding_color = Color( 0.8, 0.8, 0.8, 0.8 )
+TextEdit/colors/completion_background_color = Color( 0.286275, 0.286275, 0.286275, 1 )
+TextEdit/colors/completion_existing_color = Color( 0.87, 0.87, 0.87, 0.13 )
+TextEdit/colors/completion_font_color = Color( 0.67, 0.67, 0.67, 1 )
+TextEdit/colors/completion_scroll_color = Color( 1, 1, 1, 1 )
+TextEdit/colors/completion_selected_color = Color( 0.26, 0.26, 0.27, 1 )
+TextEdit/colors/current_line_color = Color( 0.25, 0.25, 0.26, 0.8 )
+TextEdit/colors/executing_line_color = Color( 0.2, 0.8, 0.2, 0.4 )
+TextEdit/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+TextEdit/colors/font_color_readonly = Color( 0.88, 0.88, 0.88, 0.5 )
+TextEdit/colors/font_color_selected = Color( 0.568627, 0.568627, 0.568627, 1 )
+TextEdit/colors/function_color = Color( 0.4, 0.64, 0.81, 1 )
+TextEdit/colors/line_number_color = Color( 0.67, 0.67, 0.67, 0.4 )
+TextEdit/colors/mark_color = Color( 1, 0.4, 0.4, 0.4 )
+TextEdit/colors/member_variable_color = Color( 0.9, 0.31, 0.35, 1 )
+TextEdit/colors/number_color = Color( 0.92, 0.58, 0.2, 1 )
+TextEdit/colors/safe_line_number_color = Color( 0.67, 0.78, 0.67, 0.6 )
+TextEdit/colors/selection_color = Color( 0.286275, 0.286275, 0.286275, 1 )
+TextEdit/colors/symbol_color = Color( 0.94, 0.94, 0.94, 1 )
+TextEdit/colors/word_highlighted_color = Color( 0.8, 0.9, 0.9, 0.15 )
+TextEdit/constants/completion_lines = 7
+TextEdit/constants/completion_max_width = 50
+TextEdit/constants/completion_scroll_width = 3
+TextEdit/constants/line_spacing = 4
+TextEdit/fonts/font = null
+TextEdit/icons/fold = null
+TextEdit/icons/folded = null
+TextEdit/icons/space = null
+TextEdit/icons/tab = null
+TextEdit/styles/completion = null
+TextEdit/styles/focus = ExtResource( 8 )
+TextEdit/styles/normal = ExtResource( 17 )
+TextEdit/styles/read_only = ExtResource( 22 )
+VScrollBar/icons/decrement = null
+VScrollBar/icons/decrement_highlight = null
+VScrollBar/icons/increment = null
+VScrollBar/icons/increment_highlight = null
+VScrollBar/styles/grabber = ExtResource( 30 )
+VScrollBar/styles/grabber_highlight = ExtResource( 30 )
+VScrollBar/styles/grabber_pressed = ExtResource( 30 )
+VScrollBar/styles/scroll = ExtResource( 29 )
+VScrollBar/styles/scroll_focus = ExtResource( 29 )
+VSlider/icons/grabber = null
+VSlider/icons/grabber_disabled = null
+VSlider/icons/grabber_highlight = null
+VSlider/icons/tick = null
+VSlider/styles/grabber_area = ExtResource( 31 )
+VSlider/styles/grabber_area_highlight = ExtResource( 31 )
+VSlider/styles/slider = ExtResource( 32 )
+WindowDialog/colors/title_color = Color( 1, 1, 1, 1 )
+WindowDialog/constants/close_h_ofs = 18
+WindowDialog/constants/close_v_ofs = 18
+WindowDialog/constants/scaleborder_size = 4
+WindowDialog/constants/title_height = 20
+WindowDialog/fonts/title_font = null
+WindowDialog/icons/close = null
+WindowDialog/icons/close_highlight = null
+WindowDialog/styles/panel = ExtResource( 6 )
 
 [node name="SaveMenu" type="Node2D"]
 position = Vector2( 510, 300 )
@@ -32,6 +647,7 @@ margin_left = -396.025
 margin_top = -180.0
 margin_right = 403.975
 margin_bottom = 300.0
+theme = SubResource( 7 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -59,7 +675,7 @@ anchor_right = 0.5
 margin_left = -150.0
 margin_right = 150.0
 margin_bottom = 100.0
-custom_fonts/normal_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 8 )
 bbcode_enabled = true
 bbcode_text = "[wave amp=50 freq=2][center]Select a save file [/center][/wave]"
 text = "Select a save file "
@@ -101,32 +717,33 @@ margin_left = -148.0
 margin_top = -21.5
 margin_right = 50.0
 margin_bottom = 2.5
+theme = ExtResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MainMenuButton" type="TextureButton" parent="."]
-margin_left = -480.0
+[node name="MainMenuButton" type="Button" parent="."]
+margin_left = -478.811
 margin_top = -280.0
-margin_right = -280.0
+margin_right = -258.811
 margin_bottom = -180.0
 rect_scale = Vector2( 0.5, 0.5 )
-texture_normal = ExtResource( 6 )
-texture_pressed = ExtResource( 5 )
-texture_hover = ExtResource( 4 )
+mouse_default_cursor_shape = 2
+theme = SubResource( 4 )
+text = "Main menu"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BackButton" type="TextureButton" parent="."]
+[node name="BackButton" type="Button" parent="."]
 margin_left = -360.0
 margin_top = -280.0
-margin_right = -160.0
+margin_right = -140.0
 margin_bottom = -180.0
 rect_scale = Vector2( 0.5, 0.5 )
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 9 )
-texture_hover = ExtResource( 8 )
+mouse_default_cursor_shape = 2
+theme = SubResource( 6 )
+text = "Return"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -134,8 +751,9 @@ __meta__ = {
 [node name="SaveFileNamePopup" type="ConfirmationDialog" parent="."]
 margin_right = 200.0
 margin_bottom = 70.0
+theme = ExtResource( 14 )
 popup_exclusive = true
-window_title = "Name your save"
+window_title = "Please name your save"
 dialog_text = "Enter a save file name ( 20 characters max):"
 dialog_autowrap = true
 script = ExtResource( 10 )
@@ -149,15 +767,16 @@ anchor_right = 0.5
 margin_left = -92.0
 margin_top = 39.0
 margin_right = 92.0
-margin_bottom = 63.0
+margin_bottom = 55.0
 align = 1
 max_length = 20
 
 [node name="OverwriteFilePopup" type="ConfirmationDialog" parent="."]
 margin_right = 200.0
 margin_bottom = 70.0
+theme = ExtResource( 14 )
 popup_exclusive = true
-window_title = "Name your save"
+window_title = "Please name your save"
 dialog_text = "Enter a save file name ( 20 characters max):"
 dialog_autowrap = true
 script = ExtResource( 12 )
@@ -171,15 +790,16 @@ anchor_right = 0.5
 margin_left = -92.0
 margin_top = 39.0
 margin_right = 92.0
-margin_bottom = 63.0
+margin_bottom = 55.0
 align = 1
 max_length = 20
 
 [node name="EraseSavePopup" type="ConfirmationDialog" parent="."]
 margin_right = 200.0
 margin_bottom = 70.0
+theme = ExtResource( 14 )
 popup_exclusive = true
-window_title = "You sure ?"
+window_title = "Are you sure ?"
 dialog_text = "Are you sure you want to "
 dialog_autowrap = true
 script = ExtResource( 11 )

@@ -1,4 +1,4 @@
-extends TextureButton
+extends Button
 
 export(bool) var IS_SAVE_BUTTON = true # true if it is a save button (false if load)
 

@@ -56,13 +56,13 @@ func createButton(save, index):
 # shows the SaveFileName popup
 # when the signal "new_file" is received
 func newFile():
-	$SaveFileNamePopup.popup_centered_ratio(0.5)
+	$SaveFileNamePopup.popup_centered_ratio(0.2)
 
 # shows the EraseSave popup
 # when the signal "ask_delete" is received
 func askDelete(button):
 	$EraseSavePopup.set_text("Are you really sure you want to delete " + button.getSaveName() + " ?")
-	$EraseSavePopup.popup_centered_ratio(0.5)
+	$EraseSavePopup.popup_centered_ratio(0.2)
 	$EraseSavePopup.button = button
 
 # shows the OverwriteFile popup
@@ -70,7 +70,7 @@ func askDelete(button):
 func overwriteSave(button):
 	$OverwriteFilePopup/SaveFileName.set_text(button.getSaveName())
 	$OverwriteFilePopup.button = button
-	$OverwriteFilePopup.popup_centered_ratio(0.5)
+	$OverwriteFilePopup.popup_centered_ratio(0.2)
 
 # loads the current save loaded when pressing the "Go back" button
 func _on_BackButton_pressed():
