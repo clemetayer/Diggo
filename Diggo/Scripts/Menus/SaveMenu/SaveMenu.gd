@@ -72,8 +72,8 @@ func overwriteSave(button):
 	$OverwriteFilePopup.button = button
 	$OverwriteFilePopup.popup_centered_ratio(0.2)
 
-# loads the current save loaded when pressing the "Go back" button
-func _on_BackButton_pressed():
+# loads the current save loaded when pressing the "Return" button
+func _on_ReturnButton_pressed():
 	SaveFile.loadCurrentSave(get_tree())
 
 # returns to the main menu when pressing the main menu button
