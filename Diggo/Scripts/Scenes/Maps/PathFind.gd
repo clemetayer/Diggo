@@ -16,7 +16,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if(Input.is_action_just_pressed("find_path")):
+	if(Input.is_action_just_pressed("find path")):
 		var path = astar.get_point_path(astar.get_closest_point(get_global_mouse_position()), astar.get_closest_point(get_node("TargetObject").position))
 		get_node("Line2D").points = path
 #		print(path)

@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+
+signal change_key(instance)
+
+export(String) var COMMAND
+export(int) var KEY
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	refreshData()
+
+func refreshData():
+	$KeyCommandContainer/Command.set_text(COMMAND + \" : \")
+	$KeyCommandContainer/Key.set_text(OS.get_scancode_string(KEY))
+
+# On key button pressed, show popup to change key
+func _on_Key_pressed():
+	emit_signal(\"change_key\",self)
+"
+
+[node name="KeyCommand" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyCommandContainer" type="HBoxContainer" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Command" type="Label" parent="KeyCommandContainer"]
+margin_top = 13.0
+margin_bottom = 27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="ToolButton" parent="KeyCommandContainer"]
+margin_left = 4.0
+margin_right = 16.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="KeyCommandContainer/Key" to="." method="_on_Key_pressed"]

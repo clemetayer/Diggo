@@ -1,9 +1,11 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scenes/Menus/MainMenuSprites.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Menus/MainMenuButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Menus/ReturnButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/Menus/OptionMenu/OptionsMenu.tres.gd" type="Script" id=4]
 [ext_resource path="res://Other/Themes/MenusThemes.tres" type="Theme" id=5]
+[ext_resource path="res://Scripts/Menus/Other/KeyChangePopup.gd" type="Script" id=7]
 [ext_resource path="res://Other/Fonts/lemon/19919.ttf" type="DynamicFontData" id=11]
 
 [sub_resource type="DynamicFont" id=1]
@@ -137,6 +139,7 @@ font_data = ExtResource( 11 )
 default_font = SubResource( 12 )
 
 [node name="OptionsMenu" type="Node2D"]
+script = ExtResource( 4 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -225,8 +228,8 @@ margin_bottom = 460.0
 
 [node name="ControlsOptions" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsScroll"]
 margin_right = 217.0
-margin_bottom = 67.0
-custom_constants/separation = 15
+margin_bottom = 31.0
+custom_constants/separation = 30
 
 [node name="PresetsHBox" type="HBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsScroll/ControlsOptions"]
 margin_right = 217.0
@@ -248,22 +251,6 @@ margin_left = 104.0
 margin_right = 217.0
 margin_bottom = 31.0
 text = "Save preset"
-
-[node name="KeyExample" type="HBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsScroll/ControlsOptions"]
-margin_top = 46.0
-margin_right = 217.0
-margin_bottom = 67.0
-
-[node name="Forward" type="Label" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsScroll/ControlsOptions/KeyExample"]
-margin_right = 87.0
-margin_bottom = 21.0
-text = "Forward : "
-
-[node name="ToolButton" type="ToolButton" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsScroll/ControlsOptions/KeyExample"]
-margin_left = 91.0
-margin_right = 100.0
-margin_bottom = 21.0
-text = "z"
 
 [node name="Audio" type="Button" parent="MarginContainer/HBoxContainer/TabContainer"]
 visible = false
@@ -402,3 +389,19 @@ margin_bottom = 31.0
 text = "Full screen"
 items = [ "Full screen", null, false, 0, null, "Window", null, false, 1, null, "No border", null, false, 2, null ]
 selected = 0
+
+[node name="KeyChangePopup" type="ConfirmationDialog" parent="MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1004.0
+margin_bottom = 580.0
+window_title = "Enter a new key"
+script = ExtResource( 7 )
+
+[node name="KeyChangeText" type="RichTextLabel" parent="MarginContainer/KeyChangePopup"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 976.0
+margin_bottom = 520.0
+bbcode_enabled = true
+[connection signal="confirmed" from="MarginContainer/KeyChangePopup" to="MarginContainer/KeyChangePopup" method="_on_KeyChangePopup_confirmed"]

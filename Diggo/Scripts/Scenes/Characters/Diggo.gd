@@ -141,7 +141,7 @@ func inputManager():
 			velocity.x /= AIR_FRICTION
 		if(Input.is_action_pressed("jump")):
 			jump()
-		if(Input.is_action_just_pressed("find_path")):
+		if(Input.is_action_just_pressed("find path")):
 			getPath()
 
 # plays the animation for diggo specified by the string in parameter

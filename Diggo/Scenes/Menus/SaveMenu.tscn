@@ -33,11 +33,11 @@
 [ext_resource path="res://Other/Themes/MenusTheme/PopupMenuDisabled.tres" type="StyleBox" id=33]
 [ext_resource path="res://Scenes/Menus/MainMenuButton.tscn" type="PackedScene" id=34]
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=1]
 size = 20
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=2]
 content_margin_right = 780.0
 content_margin_bottom = 150.0
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -54,7 +54,7 @@ shadow_color = Color( 0, 0, 0, 0.184314 )
 shadow_size = 1
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=3]
 content_margin_right = 780.0
 content_margin_bottom = 150.0
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -71,7 +71,7 @@ shadow_color = Color( 0, 0, 0, 0.184314 )
 shadow_size = 1
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=4]
 content_margin_right = 780.0
 content_margin_bottom = 150.0
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -88,7 +88,7 @@ shadow_color = Color( 0, 0, 0, 0.184314 )
 shadow_size = 1
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=5]
 content_margin_right = 780.0
 content_margin_bottom = 150.0
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -105,7 +105,7 @@ shadow_color = Color( 0, 0, 0, 0.184314 )
 shadow_size = 1
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=6]
 content_margin_right = 780.0
 content_margin_bottom = 150.0
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -122,7 +122,7 @@ shadow_color = Color( 0, 0, 0, 0.184314 )
 shadow_size = 1
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0, 0, 0, 0 )
 border_width_left = 1
 border_width_top = 1
@@ -137,26 +137,26 @@ shadow_color = Color( 0, 0, 0, 0.203922 )
 shadow_size = 1
 anti_aliasing = false
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=8]
 size = 10
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="Theme" id=8]
-default_font = SubResource( 7 )
+[sub_resource type="Theme" id=9]
+default_font = SubResource( 8 )
 Button/colors/font_color = Color( 0.133333, 0.854902, 0.54902, 1 )
 Button/colors/font_color_disabled = Color( 0.337255, 0.380392, 0.741176, 1 )
 Button/colors/font_color_hover = Color( 0.270588, 0.788235, 0.423529, 1 )
 Button/colors/font_color_pressed = Color( 0.258824, 0.878431, 0.309804, 1 )
 Button/constants/hseparation = 2
 Button/fonts/font = null
-Button/styles/disabled = SubResource( 1 )
-Button/styles/focus = SubResource( 2 )
-Button/styles/hover = SubResource( 3 )
-Button/styles/normal = SubResource( 4 )
-Button/styles/pressed = SubResource( 5 )
+Button/styles/disabled = SubResource( 2 )
+Button/styles/focus = SubResource( 3 )
+Button/styles/hover = SubResource( 4 )
+Button/styles/normal = SubResource( 5 )
+Button/styles/pressed = SubResource( 6 )
 HScrollBar/icons/decrement = null
 HScrollBar/icons/decrement_highlight = null
 HScrollBar/icons/increment = null
@@ -185,7 +185,7 @@ LineEdit/fonts/font = null
 LineEdit/icons/clear = null
 LineEdit/styles/focus = ExtResource( 15 )
 LineEdit/styles/normal = ExtResource( 17 )
-LineEdit/styles/read_only = SubResource( 6 )
+LineEdit/styles/read_only = SubResource( 7 )
 Panel/styles/panel = ExtResource( 6 )
 PanelContainer/styles/panel = ExtResource( 6 )
 PopupDialog/styles/panel = ExtResource( 5 )
@@ -362,7 +362,7 @@ margin_bottom = 80.0
 rect_min_size = Vector2( 200, 80 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/normal_font = SubResource( 9 )
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[wave amp=50 freq=2][center]Select a save file [/center][/wave]"
 text = "Select a save file "
@@ -383,9 +383,9 @@ margin_right = 80.0
 margin_bottom = 80.0
 
 [node name="SearchText" type="RichTextLabel" parent="Window/Elements/Banner/SearchContainer/SearchCenter"]
-margin_top = 14.0
+margin_top = 15.0
 margin_right = 80.0
-margin_bottom = 64.0
+margin_bottom = 65.0
 rect_min_size = Vector2( 80, 50 )
 rect_clip_content = false
 size_flags_horizontal = 0
@@ -422,7 +422,7 @@ margin_right = 984.0
 margin_bottom = 560.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = SubResource( 8 )
+theme = SubResource( 9 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -501,5 +501,5 @@ script = ExtResource( 11 )
 [connection signal="text_changed" from="Window/Elements/Banner/SearchContainer/InputCenter/SearchInput" to="Window/Elements/SaveButtons" method="_on_SearchInput_text_changed"]
 [connection signal="confirmed" from="SaveFileNamePopup" to="SaveFileNamePopup" method="_on_SaveFileNamePopup_confirmed"]
 [connection signal="confirmed" from="OverwriteFilePopup" to="OverwriteFilePopup" method="_on_OverwriteFilePopup_confirmed"]
-[connection signal="confirmed" from="EraseSavePopup" to="EraseSavePopup" method="_on_EraseSavePopup_confirmed"]
 [connection signal="confirmed" from="EraseSavePopup" to="." method="_on_EraseSavePopup_confirmed"]
+[connection signal="confirmed" from="EraseSavePopup" to="EraseSavePopup" method="_on_EraseSavePopup_confirmed"]
