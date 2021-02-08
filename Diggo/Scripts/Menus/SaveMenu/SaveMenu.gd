@@ -9,7 +9,7 @@ var newSaveButton = preload("res://Scenes/Menus/NewSaveButton.tscn") # load of t
 func _ready():
 	checkSceneParameters()
 	if(not IS_SAVE_MENU): # disable the "Go back button"
-		$BackButton.hide()
+		$Window/Elements/Banner/MainRetButtons/ReturnButton.hide()
 	var saves = SaveFile.getSaves()
 	var saveIndex = 0
 	if(IS_SAVE_MENU):
@@ -33,14 +33,14 @@ func addInvisibleRect():
 	var rect = ColorRect.new()
 	rect.color = Color(0,0,0,0)
 	rect.rect_size = Vector2(800,160)
-	$SaveButtons/SavesVBox.add_child(rect)
+	$Window/Elements/SaveButtons/CenterSaves/SavesVBox.add_child(rect)
 
 # creates a "New save" button and adds it to the list of saves button at first place
 func createNewSaveButton():
 	var button = newSaveButton.instance()
 	button.connect("new_file",self,"newFile")
-	$SaveButtons/SavesVBox.add_child(button)
-	$SaveButtons/SavesVBox.move_child(button,0)
+	$Window/Elements/SaveButtons/CenterSaves/SavesVBox.add_child(button)
+	$Window/Elements/SaveButtons/CenterSaves/SavesVBox.move_child(button,0)
 
 # creates a button corresponding to the save and adds it to the list of saves button at place index
 func createButton(save, index):
@@ -50,8 +50,8 @@ func createButton(save, index):
 	button.showElements()
 	button.connect("overwrite_save",self,"overwriteSave")
 	button.connect("ask_delete",self,"askDelete")
-	$SaveButtons/SavesVBox.add_child(button)
-	$SaveButtons/SavesVBox.move_child(button,index)
+	$Window/Elements/SaveButtons/CenterSaves/SavesVBox.add_child(button)
+	$Window/Elements/SaveButtons/CenterSaves/SavesVBox.move_child(button,index)
 
 # shows the SaveFileName popup
 # when the signal "new_file" is received

@@ -2,7 +2,7 @@ extends ScrollContainer
 
 # filters the save buttons with text
 func filterSavesInput(text):
-	for node in $SavesVBox.get_children():
+	for node in $CenterSaves/SavesVBox.get_children():
 		if(node.has_method("matchesText")):
 			if(node.matchesText(text)):
 				node.show()

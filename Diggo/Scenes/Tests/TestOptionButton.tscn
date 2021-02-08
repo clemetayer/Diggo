@@ -1,0 +1,16 @@
+[gd_scene format=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="OptionButton" type="OptionButton" parent="."]
+margin_right = 56.0
+margin_bottom = 20.0
+text = "halp"
+items = [ "halp", null, false, 0, null, "halp2", null, false, 1, null, "halp3", null, false, 2, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
