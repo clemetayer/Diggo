@@ -14,7 +14,7 @@ func _ready():
 
 func refreshData():
 	$KeyCommandContainer/Command.set_text(COMMAND + \" : \")
-	$KeyCommandContainer/Key.set_text(OS.get_scancode_string(KEY))
+	$KeyCommandContainer/Key.set_text(GlobalUtils.getInputAsString(KEY))
 
 # On key button pressed, show popup to change key
 func _on_Key_pressed():
@@ -47,6 +47,7 @@ __meta__ = {
 margin_left = 4.0
 margin_right = 16.0
 margin_bottom = 40.0
+mouse_default_cursor_shape = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -142,19 +142,15 @@ default_font = SubResource( 12 )
 script = ExtResource( 4 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 512, 300 )
 current = true
 
 [node name="MainMenuSprites" parent="." instance=ExtResource( 1 )]
+position = Vector2( 512, 300 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -512.0
-margin_top = -300.0
-margin_right = 512.0
-margin_bottom = 300.0
+margin_right = 1024.58
+margin_bottom = 600.995
 theme = ExtResource( 5 )
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
@@ -220,37 +216,57 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ControlsScroll" type="ScrollContainer" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin"]
+[node name="ControlsOptions" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 757.0
-margin_bottom = 460.0
+margin_right = 825.0
+margin_bottom = 516.0
+custom_constants/separation = 15
 
-[node name="ControlsOptions" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsScroll"]
-margin_right = 217.0
+[node name="PresetsCenter" type="CenterContainer" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions"]
+margin_right = 815.0
 margin_bottom = 31.0
-custom_constants/separation = 30
 
-[node name="PresetsHBox" type="HBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsScroll/ControlsOptions"]
-margin_right = 217.0
+[node name="PresetsHBox" type="HBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter"]
+margin_left = 303.0
+margin_right = 511.0
 margin_bottom = 31.0
 custom_constants/separation = 15
 
-[node name="PresetsButton" type="OptionButton" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsScroll/ControlsOptions/PresetsHBox"]
-margin_right = 89.0
+[node name="PresetsButton" type="OptionButton" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox"]
+margin_right = 80.0
 margin_bottom = 31.0
-text = "Preset1"
-items = [ "Preset1", null, false, 0, false, "Preset2", null, false, 0, false, "Preset3", null, false, 0, false, "Preset4", null, false, 0, false ]
-selected = 0
+text = "Preset"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SavePresetButton" type="Button" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsScroll/ControlsOptions/PresetsHBox"]
-margin_left = 104.0
-margin_right = 217.0
+[node name="SavePresetButton" type="Button" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox"]
+margin_left = 95.0
+margin_right = 208.0
 margin_bottom = 31.0
 text = "Save preset"
+
+[node name="KeysMargin" type="MarginContainer" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions"]
+margin_top = 46.0
+margin_right = 815.0
+margin_bottom = 506.0
+rect_min_size = Vector2( 815, 460 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 40
+custom_constants/margin_top = 40
+custom_constants/margin_left = 40
+custom_constants/margin_bottom = 40
+
+[node name="KeysScroll" type="ScrollContainer" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/KeysMargin"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 775.0
+margin_bottom = 420.0
+
+[node name="KeysContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/KeysMargin/KeysScroll"]
+custom_constants/separation = 30
 
 [node name="Audio" type="Button" parent="MarginContainer/HBoxContainer/TabContainer"]
 visible = false
@@ -386,8 +402,8 @@ text = "Window setting  : "
 margin_left = 159.0
 margin_right = 279.0
 margin_bottom = 31.0
-text = "Full screen"
-items = [ "Full screen", null, false, 0, null, "Window", null, false, 1, null, "No border", null, false, 2, null ]
+text = "Windowed"
+items = [ "Windowed", null, false, 0, null, "Full screen", null, false, 1, null, "No border", null, false, 2, null ]
 selected = 0
 
 [node name="KeyChangePopup" type="ConfirmationDialog" parent="MarginContainer"]
@@ -395,13 +411,81 @@ margin_left = 20.0
 margin_top = 20.0
 margin_right = 1004.0
 margin_bottom = 580.0
+popup_exclusive = true
 window_title = "Enter a new key"
 script = ExtResource( 7 )
 
-[node name="KeyChangeText" type="RichTextLabel" parent="MarginContainer/KeyChangePopup"]
+[node name="MouseButtonsPopup" type="PopupMenu" parent="MarginContainer/KeyChangePopup"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 976.0
 margin_bottom = 520.0
+items = [ "LeftClick", null, 0, false, false, 0, 0, null, "", false, "RightClick", null, 0, false, false, 1, 0, null, "", false, "MiddleClick", null, 0, false, false, 2, 0, null, "", false, "ExtraButton1", null, 0, false, false, 3, 0, null, "", false, "ExtraButton2", null, 0, false, false, 4, 0, null, "", false, "MouseWheelUp", null, 0, false, false, 5, 0, null, "", false, "MouseWheelDown", null, 0, false, false, 6, 0, null, "", false, "MouseWheelRight", null, 0, false, false, 7, 0, null, "", false, "MouseWheelLeft", null, 0, false, false, 8, 0, null, "", false ]
+hide_on_state_item_selection = true
+
+[node name="KeyChangeCenter" type="CenterContainer" parent="MarginContainer/KeyChangePopup"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 976.0
+margin_bottom = 520.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyChangeVBox" type="VBoxContainer" parent="MarginContainer/KeyChangePopup/KeyChangeCenter"]
+margin_left = 399.0
+margin_top = 209.0
+margin_right = 569.0
+margin_bottom = 302.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyChangeText" type="RichTextLabel" parent="MarginContainer/KeyChangePopup/KeyChangeCenter/KeyChangeVBox"]
+margin_right = 170.0
+margin_bottom = 65.0
+rect_min_size = Vector2( 170, 65 )
 bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MouseJoystickCenter" type="CenterContainer" parent="MarginContainer/KeyChangePopup/KeyChangeCenter/KeyChangeVBox"]
+margin_top = 69.0
+margin_right = 170.0
+margin_bottom = 93.0
+
+[node name="MouseJoystickButtons" type="HBoxContainer" parent="MarginContainer/KeyChangePopup/KeyChangeCenter/KeyChangeVBox/MouseJoystickCenter"]
+margin_left = 61.0
+margin_right = 109.0
+margin_bottom = 24.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MouseButton" type="Button" parent="MarginContainer/KeyChangePopup/KeyChangeCenter/KeyChangeVBox/MouseJoystickCenter/MouseJoystickButtons"]
+margin_right = 48.0
+margin_bottom = 24.0
+text = "Mouse"
+
+[node name="SavePresetPopup" type="ConfirmationDialog" parent="MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1004.0
+margin_bottom = 580.0
+window_title = "Enter a preset name"
+dialog_text = "Enter a preset name : "
+
+[node name="PresetEdit" type="LineEdit" parent="MarginContainer/SavePresetPopup"]
+margin_left = 8.0
+margin_top = 22.0
+margin_right = 976.0
+margin_bottom = 520.0
+[connection signal="item_selected" from="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/PresetsButton" to="." method="_on_PresetsButton_item_selected"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/SavePresetButton" to="." method="_on_SavePresetButton_pressed"]
+[connection signal="item_selected" from="MarginContainer/HBoxContainer/TabContainer/Video/VideoMargin/VideoOptions/WindowType/WindowTypeOption" to="." method="_on_WindowTypeOption_item_selected"]
 [connection signal="confirmed" from="MarginContainer/KeyChangePopup" to="MarginContainer/KeyChangePopup" method="_on_KeyChangePopup_confirmed"]
+[connection signal="key_changed" from="MarginContainer/KeyChangePopup" to="." method="_on_KeyChangePopup_key_changed"]
+[connection signal="index_pressed" from="MarginContainer/KeyChangePopup/MouseButtonsPopup" to="MarginContainer/KeyChangePopup" method="_on_MouseButtonsPopup_index_pressed"]
+[connection signal="pressed" from="MarginContainer/KeyChangePopup/KeyChangeCenter/KeyChangeVBox/MouseJoystickCenter/MouseJoystickButtons/MouseButton" to="MarginContainer/KeyChangePopup" method="_on_MouseButton_pressed"]
+[connection signal="confirmed" from="MarginContainer/SavePresetPopup" to="." method="_on_SavePresetPopup_confirmed"]

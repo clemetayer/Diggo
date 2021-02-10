@@ -1,8 +1,6 @@
 extends ConfirmationDialog
 
-# FIXME : options des boutons de la souris non affichés
-# TODO : mettre un margin container pour contenir les touches (pour que ça soit plus centré)
-# FIXME : le popup ne spawn pas au bon endroit
+signal key_changed(command,key)
 
 export var currentCode = 0 # last key pressed as an int
 
@@ -15,22 +13,30 @@ func _input(event):
 			if event.scancode != currentCode : # to avoid updating the text at each key update
 				currentCode = event.scancode
 				setText()
-		elif event is InputEventMouseButton: # Mouse input
-			if event.button_mask != currentCode : # idem
-				currentCode = event.button_mask
-				setText()
 
 # sets the text in popup with COMMAND/KEY
 func setText():
-	$KeyChangeText.set_bbcode(
+	$KeyChangeCenter/KeyChangeVBox/KeyChangeText.set_bbcode(
 		BBCodeGenerator.BBCodeCenter(
 			"Enter a new key for action : " + 
 			BBCodeGenerator.BBCodeColor(keyCommandInstance.COMMAND, "cyan") + 
 			"\n\n" + 
-			BBCodeGenerator.BBCodeColor(OS.get_scancode_string(currentCode), "yellow")
+			BBCodeGenerator.BBCodeColor(GlobalUtils.getInputAsString(currentCode), "yellow")
 		)
 	) 
 
+# When key change done change key
 func _on_KeyChangePopup_confirmed():
 	keyCommandInstance.KEY = currentCode
 	keyCommandInstance.refreshData()
+	emit_signal("key_changed",keyCommandInstance.COMMAND,keyCommandInstance.KEY)
+
+# When button "Mouse" pressed, show popup with various mouse buttons
+func _on_MouseButton_pressed():
+	$MouseButtonsPopup.popup_centered_ratio(0.3)
+
+# When mouse key selected, update the key
+func _on_MouseButtonsPopup_index_pressed(index):
+	var mouseButtonText = $MouseButtonsPopup.get_item_text(index)
+	currentCode = GlobalUtils.MouseInputEnum[mouseButtonText] # IDEA : put mouse input enum in GlobalParameters ?
+	setText()

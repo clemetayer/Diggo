@@ -24,6 +24,12 @@ SaveFile="*res://Scripts/Global/SaveSystem/SaveFile.gd"
 SwitchSceneWithParam="*res://Scripts/Global/SceneManagement/SwitchSceneWithParam.gd"
 BBCodeGenerator="*res://Scripts/Global/Utils/BBCodeGenerator.gd"
 GlobalUtils="*res://Scripts/Global/Utils/GlobalUtils.gd"
+GlobalParameters="*res://Scripts/Global/Parameters/GlobalParameters.gd"
+
+[display]
+
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [editor_plugins]
 
