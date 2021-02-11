@@ -403,7 +403,7 @@ margin_left = 159.0
 margin_right = 279.0
 margin_bottom = 31.0
 text = "Windowed"
-items = [ "Windowed", null, false, 0, null, "Full screen", null, false, 1, null, "No border", null, false, 2, null ]
+items = [ "Windowed", null, false, 0, null, "Full screen", null, false, 1, null ]
 selected = 0
 
 [node name="KeyChangePopup" type="ConfirmationDialog" parent="MarginContainer"]
@@ -481,8 +481,13 @@ margin_left = 8.0
 margin_top = 22.0
 margin_right = 976.0
 margin_bottom = 520.0
+[connection signal="pressed" from="MarginContainer/HBoxContainer/MenusButtons/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/MenusButtons/ReturnButton" to="." method="_on_ReturnButton_pressed"]
 [connection signal="item_selected" from="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/PresetsButton" to="." method="_on_PresetsButton_item_selected"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/SavePresetButton" to="." method="_on_SavePresetButton_pressed"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginMasterSlider/MasterSlider" to="." method="_on_MasterSlider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginMusicSlider/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginFXSlider/FXSlider" to="." method="_on_FXSlider_value_changed"]
 [connection signal="item_selected" from="MarginContainer/HBoxContainer/TabContainer/Video/VideoMargin/VideoOptions/WindowType/WindowTypeOption" to="." method="_on_WindowTypeOption_item_selected"]
 [connection signal="confirmed" from="MarginContainer/KeyChangePopup" to="MarginContainer/KeyChangePopup" method="_on_KeyChangePopup_confirmed"]
 [connection signal="key_changed" from="MarginContainer/KeyChangePopup" to="." method="_on_KeyChangePopup_key_changed"]

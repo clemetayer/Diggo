@@ -52,3 +52,10 @@ func UnixTSToHMS(timestamp):
 		"minutes":minutes,
 		"seconds":seconds
 	}
+
+##### Node management #####
+# removes all the children of node
+func removeAllChildren(node):
+	for child in node.get_children():
+		node.remove_child(child)
+		child.queue_free()

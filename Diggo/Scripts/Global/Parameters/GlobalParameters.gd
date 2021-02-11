@@ -36,7 +36,7 @@ func _ready():
 	loadCommandsPresetsNames()
 	loadParameters()
 	loadPresetWithName(getCommandsPreset())
-	
+	setScreenParameters()
 
 # saves the current commands preset at COMMANDS_SAVE_PATH/<presetName>.json
 func saveCommandsPreset(presetName):
@@ -119,6 +119,10 @@ func loadParameters():
 func getPresets():
 	return commandPresets
 
+# returns the index in the array of the current preset parameter
+func getCurrentPresetIndex():
+	return commandPresets.find(parameters.commandsPreset)
+
 # getters/setters for commands object
 ## every command
 func getCommands():
@@ -136,8 +140,9 @@ func setCommand(command,key):
 func getCommandsPreset():
 	return parameters.commandsPreset
 
-func setCommandsPreset(presetName):
-	parameters.commandsPreset = presetName
+func setCommandsPreset(index):
+	parameters.commandsPreset = commandPresets[index]
+	loadPresetWithName(commandPresets[index])
 
 ## master sound volume
 func getSoundMaster():
@@ -166,3 +171,12 @@ func getScreenMode():
 
 func setScreenMode(mode):
 	parameters.screenMode = mode
+	setScreenParameters()
+
+# sets the screen mode specified to the one in parameters
+func setScreenParameters():
+	match int(parameters.screenMode):
+		screenModes.FULL_SCREEN:
+			OS.window_fullscreen = true
+		screenModes.WINDOWED:
+			OS.window_fullscreen = false

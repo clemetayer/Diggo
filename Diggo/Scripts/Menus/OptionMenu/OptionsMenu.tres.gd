@@ -3,14 +3,37 @@ extends Node2D
 export (String,FILE) var KEY_COMMAND = "res://Scenes/Menus/KeyCommand.tscn"
 
 # TODO : After managing presets, check that every command is implemented before updating with preset (or put "UNASSIGNED_KEY" ?)
+# TODO : Actually change the keys at start/when modifying the keys
+# TODO : Remove the ".json" at the end of the presets
 
 var keyCommandLoad # instance of key command scene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	addPresets()
 	keyCommandLoad = load(KEY_COMMAND)
+	addPresets()
 	addKeys()
+	loadControlsPreset()
+	loadAudioLevels()
+	loadVideoParameters()
+
+# sets the option button to the preset specified in parameters
+func loadControlsPreset():
+	$MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/PresetsButton.select(GlobalParameters.getCurrentPresetIndex())
+
+# selects the video parameter defined in GlobalParameters
+func loadVideoParameters():
+	match(int(GlobalParameters.getScreenMode())):
+		GlobalParameters.screenModes.FULL_SCREEN:
+			$MarginContainer/HBoxContainer/TabContainer/Video/VideoMargin/VideoOptions/WindowType/WindowTypeOption.select(1)
+		GlobalParameters.screenModes.WINDOWED:
+			$MarginContainer/HBoxContainer/TabContainer/Video/VideoMargin/VideoOptions/WindowType/WindowTypeOption.select(0)
+
+# loads the audio levels from parameters
+func loadAudioLevels():
+	$MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginMasterSlider/MasterSlider.value = GlobalParameters.getSoundMaster()
+	$MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginMusicSlider/MusicSlider.value = GlobalParameters.getSoundMusic()
+	$MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginFXSlider/FXSlider.value = GlobalParameters.getSoundFX()
 
 # adds the preset names in PresetsButton
 func addPresets():
@@ -23,6 +46,10 @@ func addKeys():
 	var commands = GlobalParameters.getCommands()
 	for command in commands.keys():
 		addKey(command,commands[command])
+
+# removes all the keys
+func resetKeys():
+	GlobalUtils.removeAllChildren($MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/KeysMargin/KeysScroll/KeysContainer)
 
 # adds the key with command in controls panel
 func addKey(command,key):
@@ -48,12 +75,9 @@ func _on_KeyChangePopup_key_changed(command, key):
 func _on_WindowTypeOption_item_selected(index):
 	match(index):
 		0: # windowed
-			OS.window_fullscreen = false
-			GlobalParameters.setScreenMode(GlobalParameters.screenModes.FULL_SCREEN)
-		1: # full sreen
-			OS.window_fullscreen = true
 			GlobalParameters.setScreenMode(GlobalParameters.screenModes.WINDOWED)
-		
+		1: # full sreen
+			GlobalParameters.setScreenMode(GlobalParameters.screenModes.FULL_SCREEN)
 
 # shows the save preset popup
 func _on_SavePresetButton_pressed():
@@ -67,6 +91,28 @@ func _on_SavePresetPopup_confirmed():
 	var index = $MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/PresetsButton.get_item_count()-1
 	$MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/PresetsButton.select(index)
 
-# TODO : implement change of preset here
+# select the preset
 func _on_PresetsButton_item_selected(index):
-	pass
+	GlobalParameters.setCommandsPreset(index)
+	resetKeys()
+	addKeys()
+
+# when master value changed, changes it in global parameters
+func _on_MasterSlider_value_changed(value):
+	GlobalParameters.setSoundMaster(value)
+
+# when music value changed, changes it in global parameters
+func _on_MusicSlider_value_changed(value):
+	GlobalParameters.setSoundMusic(value)
+
+# TODO : play FX sound when changed
+# when FX value changed, changes it in global parameters
+func _on_FXSlider_value_changed(value):
+	GlobalParameters.setSoundFX(value)
+
+# saves the current parameters 
+func _on_MainMenuButton_pressed():
+	GlobalParameters.saveParameters()
+
+func _on_ReturnButton_pressed():
+	GlobalParameters.saveParameters()
