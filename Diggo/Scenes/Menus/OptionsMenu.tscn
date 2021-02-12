@@ -337,6 +337,7 @@ custom_constants/margin_right = 300
 [node name="MasterSlider" type="HSlider" parent="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginMasterSlider"]
 margin_right = 295.0
 margin_bottom = 16.0
+value = 100.0
 rounded = true
 
 [node name="MarginMusicSlider" type="MarginContainer" parent="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders"]
@@ -348,6 +349,7 @@ custom_constants/margin_right = 300
 [node name="MusicSlider" type="HSlider" parent="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginMusicSlider"]
 margin_right = 295.0
 margin_bottom = 16.0
+value = 100.0
 rounded = true
 
 [node name="MarginFXSlider" type="MarginContainer" parent="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders"]
@@ -359,6 +361,7 @@ custom_constants/margin_right = 300
 [node name="FXSlider" type="HSlider" parent="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginFXSlider"]
 margin_right = 295.0
 margin_bottom = 16.0
+value = 100.0
 rounded = true
 
 [node name="Video" type="Button" parent="MarginContainer/HBoxContainer/TabContainer"]

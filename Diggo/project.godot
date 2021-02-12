@@ -25,6 +25,7 @@ SwitchSceneWithParam="*res://Scripts/Global/SceneManagement/SwitchSceneWithParam
 BBCodeGenerator="*res://Scripts/Global/Utils/BBCodeGenerator.gd"
 GlobalUtils="*res://Scripts/Global/Utils/GlobalUtils.gd"
 GlobalParameters="*res://Scripts/Global/Parameters/GlobalParameters.gd"
+SoundManager="*res://Scenes/Sound/SoundManager.tscn"
 
 [display]
 
