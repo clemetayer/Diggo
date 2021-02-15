@@ -5,6 +5,7 @@ extends Node
 # TODO : use setget for getters/setters
 # TODO : Replace basic classes with class_name
 # TODO : check potential memory leaks
+# TODO : create unit tests
 
 ## General necessary Todos 
 # TODO : put a script on main menu button/go back (possibly at the same time as changing theme of menu(s))
