@@ -14,15 +14,14 @@ var fadeIn # true if it is a fade in (false if fade out)
 
 func startTimer():
 	fadeIn = (endValue >= startValue)
-	print("fadeIn = ", fadeIn)
 	AudioServer.get_bus_effect(audioBusIndex, effectIndex).cutoff_hz = startValue
 	start(timeStep)
 
 func _on_FilterTimer_timeout():
 	var filter = AudioServer.get_bus_effect(audioBusIndex, effectIndex)
-	if(filter.cutoff_hz >= endValue and fadeIn): # filter reached end value
+	if(timeElapsed >= filterTime and fadeIn): # filter reached end value
 		queue_free()
-	elif(filter.cutoff_hz <= endValue and not fadeIn):
+	elif(timeElapsed >= filterTime and not fadeIn):
 		emit_signal("fade_out_done")
 		queue_free()
 	else:

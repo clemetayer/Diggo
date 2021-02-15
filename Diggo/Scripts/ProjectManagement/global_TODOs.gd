@@ -1,7 +1,12 @@
 extends Node
 
+## General refactoring for cleaner code
 # TODO : put $ instead of get_node
 # TODO : use setget for getters/setters
 # TODO : Replace basic classes with class_name
-# TODO : put a script on main menu button/go back (possibly at the same time as changing theme of menu(s))
 # TODO : check potential memory leaks
+
+## General necessary Todos 
+# TODO : put a script on main menu button/go back (possibly at the same time as changing theme of menu(s))
+# TODO : create a loading screen
+# TODO : put the music change in a loading screen

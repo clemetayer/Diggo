@@ -53,6 +53,5 @@ func _on_ExistingFile_pressed():
 	if(IS_SAVE_BUTTON):
 		emit_signal("overwrite_save", self)
 	else:
-		SoundManager.rmBGMWithFilter()
 		SaveFile.currentData.loadData(save.data)
 		save.loadSave(get_tree())

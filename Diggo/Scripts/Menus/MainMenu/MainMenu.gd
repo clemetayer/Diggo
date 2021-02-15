@@ -7,7 +7,7 @@ export(String,FILE) var MENU_MUSIC = "res://Scenes/Sound/BGM/TitleThemeStreamPla
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	SoundManager.addBGMWithFilter(MENU_MUSIC,16)
+	SoundManager.playBGMWithFilter(MENU_MUSIC,2,8)
 
 # launches the intro scene when "New game" pressed
 func _on_NewGameButton_pressed():
