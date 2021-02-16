@@ -1,6 +1,8 @@
 extends Node2D
 
 export (String,FILE) var KEY_COMMAND = "res://Scenes/Menus/KeyCommand.tscn"
+export (String,FILE) var MAIN_MENU = "res://Scenes/Menus/MainMenu.tscn"
+export (bool) var IS_FROM_PAUSE = false
 
 # TODO : After managing presets, check that every command is implemented before updating with preset (or put "UNASSIGNED_KEY" ?)
 # TODO : Actually change the keys at start/when modifying the keys
@@ -16,6 +18,10 @@ func _ready():
 	loadControlsPreset()
 	loadAudioLevels()
 	loadVideoParameters()
+	if(not IS_FROM_PAUSE):
+		$MarginContainer/HBoxContainer/MenusButtons/ReturnButton.visible = false
+	else:
+		$Camera2D.current = false
 
 # sets the option button to the preset specified in parameters
 func loadControlsPreset():
@@ -113,6 +119,17 @@ func _on_FXSlider_value_changed(value):
 # saves the current parameters 
 func _on_MainMenuButton_pressed():
 	GlobalParameters.saveParameters()
+	if(IS_FROM_PAUSE):
+		$MarginContainer/AcceptMainMenu.popup_centered_ratio(0.25)
+	else:
+		get_tree().change_scene(MAIN_MENU)
 
+# hides self (that should normally be in the pause menu in that case)
 func _on_ReturnButton_pressed():
 	GlobalParameters.saveParameters()
+	visible = false
+
+# saves the parameters, unpauses, and goes back to main menu 
+func _on_AcceptMainMenu_confirmed():
+	get_tree().paused = false
+	get_tree().change_scene(MAIN_MENU)

@@ -1,0 +1,109 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Other/Themes/MenusThemes.tres" type="Theme" id=1]
+[ext_resource path="res://Other/Fonts/lemon/19919.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scripts/Menus/PauseMenu/PauseMenu.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Menus/OptionsMenu.tscn" type="PackedScene" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 2 )
+
+[node name="PauseMenu" type="Control"]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 1024, 600 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0, 0, 0, 0.423529 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+margin_right = 133.0
+margin_bottom = 88.0
+popup_exclusive = true
+window_title = "Quit ?"
+dialog_text = "Are you sure you want to quit ? (All changes since last save will be lost !)"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 1024, 600 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 437.0
+margin_top = 149.0
+margin_right = 587.0
+margin_bottom = 450.0
+custom_constants/separation = 30
+
+[node name="PauseTextCenter" type="CenterContainer" parent="CenterContainer/ButtonsContainer"]
+margin_right = 150.0
+margin_bottom = 100.0
+
+[node name="PauseText" type="RichTextLabel" parent="CenterContainer/ButtonsContainer/PauseTextCenter"]
+margin_right = 150.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 150, 100 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[wave amp=50 freq=2][color=#8450E6][center]Pause[/center][/color][/wave]"
+text = "Pause"
+
+[node name="ResumeCenter" type="CenterContainer" parent="CenterContainer/ButtonsContainer"]
+margin_top = 130.0
+margin_right = 150.0
+margin_bottom = 167.0
+
+[node name="ReturnButton" type="Button" parent="CenterContainer/ButtonsContainer/ResumeCenter"]
+margin_left = 30.0
+margin_right = 119.0
+margin_bottom = 37.0
+text = "Return"
+
+[node name="OptionsCenter" type="CenterContainer" parent="CenterContainer/ButtonsContainer"]
+margin_top = 197.0
+margin_right = 150.0
+margin_bottom = 234.0
+
+[node name="OptionsButton" type="Button" parent="CenterContainer/ButtonsContainer/OptionsCenter"]
+margin_left = 25.0
+margin_right = 125.0
+margin_bottom = 37.0
+text = "Options"
+
+[node name="MainMenuCenter" type="CenterContainer" parent="CenterContainer/ButtonsContainer"]
+margin_top = 264.0
+margin_right = 150.0
+margin_bottom = 301.0
+
+[node name="MainMenuButton" type="Button" parent="CenterContainer/ButtonsContainer/MainMenuCenter"]
+margin_left = 4.0
+margin_right = 145.0
+margin_bottom = 37.0
+text = "Main menu"
+
+[node name="OptionsMenu" parent="." instance=ExtResource( 4 )]
+pause_mode = 2
+visible = false
+IS_FROM_PAUSE = true
+[connection signal="confirmed" from="AcceptDialog" to="." method="_on_AcceptDialog_confirmed"]
+[connection signal="pressed" from="CenterContainer/ButtonsContainer/ResumeCenter/ReturnButton" to="." method="_on_ReturnButton_pressed"]
+[connection signal="pressed" from="CenterContainer/ButtonsContainer/OptionsCenter/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="CenterContainer/ButtonsContainer/MainMenuCenter/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]

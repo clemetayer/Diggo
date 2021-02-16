@@ -33,6 +33,7 @@ func getInputAsString(code) -> String:
 ##### DATE - TIME functions #####
 # waits for a specific amount of time
 # should be used this way : yield(GlobalUtils.wait(<time>),"completed")
+# TODO : Godot has actually a create_timer method that does the same, so replacing that woud be cool
 func wait(time):
 	var t = Timer.new()
 	t.set_wait_time(time)

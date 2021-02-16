@@ -179,6 +179,7 @@ custom_constants/separation = 5
 [node name="MainMenuButton" parent="MarginContainer/HBoxContainer/MenusButtons" instance=ExtResource( 2 )]
 margin_right = 133.0
 margin_bottom = 37.0
+script = null
 
 [node name="ReturnButton" parent="MarginContainer/HBoxContainer/MenusButtons" instance=ExtResource( 3 )]
 margin_top = 42.0
@@ -200,7 +201,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 2.0
-margin_top = 26.0
+margin_top = 39.0
 margin_right = -2.0
 margin_bottom = -2.0
 theme = SubResource( 9 )
@@ -273,7 +274,7 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 2.0
-margin_top = 26.0
+margin_top = 39.0
 margin_right = -2.0
 margin_bottom = -2.0
 theme = SubResource( 11 )
@@ -296,7 +297,7 @@ __meta__ = {
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 827.0
-margin_bottom = 520.0
+margin_bottom = 507.0
 
 [node name="Labels" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions"]
 margin_right = 148.0
@@ -369,7 +370,7 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 2.0
-margin_top = 26.0
+margin_top = 39.0
 margin_right = -2.0
 margin_bottom = -2.0
 theme = SubResource( 13 )
@@ -409,6 +410,14 @@ text = "Windowed"
 items = [ "Windowed", null, false, 0, null, "Full screen", null, false, 1, null ]
 selected = 0
 
+[node name="AcceptMainMenu" type="ConfirmationDialog" parent="MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1004.0
+margin_bottom = 580.0
+window_title = "Quit ?"
+dialog_text = "Are you sure you want to quit ? (All changes since last save will be lost !)"
+
 [node name="KeyChangePopup" type="ConfirmationDialog" parent="MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
@@ -422,7 +431,7 @@ script = ExtResource( 7 )
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 976.0
-margin_bottom = 520.0
+margin_bottom = 507.0
 items = [ "LeftClick", null, 0, false, false, 0, 0, null, "", false, "RightClick", null, 0, false, false, 1, 0, null, "", false, "MiddleClick", null, 0, false, false, 2, 0, null, "", false, "ExtraButton1", null, 0, false, false, 3, 0, null, "", false, "ExtraButton2", null, 0, false, false, 4, 0, null, "", false, "MouseWheelUp", null, 0, false, false, 5, 0, null, "", false, "MouseWheelDown", null, 0, false, false, 6, 0, null, "", false, "MouseWheelRight", null, 0, false, false, 7, 0, null, "", false, "MouseWheelLeft", null, 0, false, false, 8, 0, null, "", false ]
 hide_on_state_item_selection = true
 
@@ -430,14 +439,14 @@ hide_on_state_item_selection = true
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 976.0
-margin_bottom = 520.0
+margin_bottom = 507.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="KeyChangeVBox" type="VBoxContainer" parent="MarginContainer/KeyChangePopup/KeyChangeCenter"]
 margin_left = 399.0
-margin_top = 209.0
+margin_top = 196.0
 margin_right = 569.0
 margin_bottom = 302.0
 __meta__ = {
@@ -459,9 +468,9 @@ margin_right = 170.0
 margin_bottom = 93.0
 
 [node name="MouseJoystickButtons" type="HBoxContainer" parent="MarginContainer/KeyChangePopup/KeyChangeCenter/KeyChangeVBox/MouseJoystickCenter"]
-margin_left = 61.0
-margin_right = 109.0
-margin_bottom = 24.0
+margin_left = 42.0
+margin_right = 128.0
+margin_bottom = 37.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -481,9 +490,9 @@ dialog_text = "Enter a preset name : "
 
 [node name="PresetEdit" type="LineEdit" parent="MarginContainer/SavePresetPopup"]
 margin_left = 8.0
-margin_top = 22.0
+margin_top = 35.0
 margin_right = 976.0
-margin_bottom = 520.0
+margin_bottom = 507.0
 [connection signal="pressed" from="MarginContainer/HBoxContainer/MenusButtons/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/MenusButtons/ReturnButton" to="." method="_on_ReturnButton_pressed"]
 [connection signal="item_selected" from="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/PresetsButton" to="." method="_on_PresetsButton_item_selected"]
@@ -492,6 +501,7 @@ margin_bottom = 520.0
 [connection signal="value_changed" from="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginMusicSlider/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginFXSlider/FXSlider" to="." method="_on_FXSlider_value_changed"]
 [connection signal="item_selected" from="MarginContainer/HBoxContainer/TabContainer/Video/VideoMargin/VideoOptions/WindowType/WindowTypeOption" to="." method="_on_WindowTypeOption_item_selected"]
+[connection signal="confirmed" from="MarginContainer/AcceptMainMenu" to="." method="_on_AcceptMainMenu_confirmed"]
 [connection signal="confirmed" from="MarginContainer/KeyChangePopup" to="MarginContainer/KeyChangePopup" method="_on_KeyChangePopup_confirmed"]
 [connection signal="key_changed" from="MarginContainer/KeyChangePopup" to="." method="_on_KeyChangePopup_key_changed"]
 [connection signal="index_pressed" from="MarginContainer/KeyChangePopup/MouseButtonsPopup" to="MarginContainer/KeyChangePopup" method="_on_MouseButtonsPopup_index_pressed"]
