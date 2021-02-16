@@ -1,9 +1,9 @@
 # My specific ignore files/folders
 BackupScripts/
 Notes.txt
-Diggo/Resources/
-Diggo/addons/
-Diggo/Sounds/
+Diggo/Resources/*
+Diggo/addons/*
+Diggo/Sounds/*
 
 
 # Godot-specific ignores
