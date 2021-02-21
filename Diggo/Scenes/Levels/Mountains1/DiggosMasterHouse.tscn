@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Sprites/Maps/HouseInside1/DiggosMasterWall.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Maps/HouseInside1/DiggosMasterFloor.png" type="Texture" id=2]
@@ -9,8 +9,11 @@
 [ext_resource path="res://Sprites/Maps/HouseInside1/DiggosMasterFrame.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/Maps/HouseInside1/DiggosMasterSofa.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Maps/HouseInside1/DiggosMasterSupportItem.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/Characters/DiggosOwner/DiggosOwnerAnim.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scripts/Scenes/Levels/Mountains1/DiggosMasterHouse.gd" type="Script" id=11]
 
 [node name="DiggosMasterHouse" type="Node2D"]
+script = ExtResource( 11 )
 
 [node name="WallParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -32,7 +35,7 @@ scale = Vector2( 2, 1 )
 texture = ExtResource( 2 )
 
 [node name="DiggosMasterSupportItem" type="Sprite" parent="."]
-position = Vector2( 941.392, -51.3569 )
+position = Vector2( 1032.79, -55.8518 )
 scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 9 )
 
@@ -55,6 +58,9 @@ texture = ExtResource( 7 )
 position = Vector2( 1412.59, -54.0001 )
 scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 5 )
+
+[node name="DiggosMasterAnim" parent="." instance=ExtResource( 10 )]
+position = Vector2( 680.068, 209.924 )
 
 [node name="Sofa" type="Sprite" parent="."]
 position = Vector2( 650.036, 177.67 )
