@@ -1,6 +1,6 @@
 extends Node2D
 
-export(String,FILE) var INTRO_SCENE = "res://Scenes/Levels/Mountains1/MainHouse2.tscn" # First scene of the game (the one that should be launched at start)
+export(String,FILE) var INTRO_SCENE = "res://Scenes/Levels/Mountains1/DiggosMasterHouse.tscn" # First scene of the game (the one that should be launched at start)
 export(String,FILE) var SAVE_MENU = "res://Scenes/Menus/SaveMenu.tscn" # Save menu scene
 export(String,FILE) var OPTION_MENU = "res://Scenes/Menus/OptionsMenu.tscn" # Option menu scene
 export(String,FILE) var MENU_MUSIC = "res://Scenes/Sound/BGM/TitleThemeStreamPlayer.tscn"

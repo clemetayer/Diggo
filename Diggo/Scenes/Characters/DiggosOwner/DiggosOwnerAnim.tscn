@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Sprites/Characters/DiggosMaster/DiggoMaster.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Characters/DiggosMaster/DiggoMasterPieces.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Scenes/Characters/DiggosOwnerAnim.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/Maps/HouseInside1/DiggoBook.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
@@ -625,6 +626,10 @@ polygon = PoolVector2Array( 24.4851, 22.1968, 25.4005, 31.8078, 27.6888, 40.2746
 uv = PoolVector2Array( 24.4851, 22.1968, 25.4005, 31.8078, 27.6888, 40.2746, 32.2654, 45.9954, 36.8421, 47.3684, 39.5881, 48.0549, 37.7574, 57.8947, 37.0709, 68.8787, 36.3844, 77.8032, 37.0709, 88.5583, 37.2998, 98.627, 37.2998, 110.526, 38.4439, 121.739, 41.6476, 133.181, 45.0801, 137.071, 56.9794, 137.757, 69.794, 137.071, 81.6934, 137.071, 90.8467, 137.071, 93.8215, 135.24, 96.1098, 130.892, 94.7368, 117.849, 94.0503, 105.95, 92.9062, 94.2792, 92.2197, 84.4394, 91.5332, 71.6247, 90.6178, 61.5561, 89.4737, 57.2082, 91.762, 54.2334, 86.0412, 39.8169, 83.524, 33.1808, 80.778, 30.8924, 75.5149, 23.1121, 68.8787, 18.5355, 61.7849, 16.476, 54.0046, 17.1625, 42.3341, 18.9931, 31.8078, 19.9085 )
 polygons = [ PoolIntArray( 0, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 ) ]
 bones = [ NodePath("Body"), PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ), NodePath("Body/Head"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/LeftArm"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/LeftArm/LeftForeArm"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/LeftArm/LeftForeArm/LeftHand"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/RightArm"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/RightArm/RightForearm"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/RightArm/RightForearm/RightHand"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/RightLeg"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/RightLeg/RightLeg2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/RightLeg/RightLeg2/RightFoot"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/LeftLeg"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/LeftLeg/LeftLeg2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/LeftLeg/LeftLeg2/LeftFoot"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ) ]
+
+[node name="Book" type="Sprite" parent="Polygons"]
+position = Vector2( 67.4645, -49.2094 )
+texture = ExtResource( 4 )
 
 [node name="FrontLeg" type="Polygon2D" parent="Polygons"]
 position = Vector2( -77.5897, -160.793 )
