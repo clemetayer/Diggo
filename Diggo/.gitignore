@@ -1,3 +1,12 @@
+# Specific gitignore
+*.kra
+*.kra~
+Resources/
+Sounds/
+addons/
+CONTRIBUTING.md
+README.md
+LICENSE
 
 # Godot-specific ignores
 .import/
