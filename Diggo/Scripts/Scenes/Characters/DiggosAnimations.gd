@@ -12,6 +12,24 @@ func playSleepingAnimation():
 	closeMouth()
 	$AnimationPlayer.play("Sleep")
 
+# plays diggo's dig animation
+func playDigAnimation():
+	openEyes()
+	openMouth()
+	$AnimationPlayer.play("Dig")
+
+# plays diggo run animation
+func playRunAnimation():
+	openEyes()
+	openMouth()
+	$AnimationPlayer.play("Run")
+
+# plays diggo jump animation
+func playJumpAnimation():
+	openEyes()
+	openMouth()
+	$AnimationPlayer.play("Jump")
+
 # changes the mouth to open
 func openMouth():
 	$Polygons/ClosedMouthHead.visible = false

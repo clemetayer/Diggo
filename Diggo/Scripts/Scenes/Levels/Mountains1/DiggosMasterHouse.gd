@@ -2,10 +2,12 @@ extends Node2D
 
 # TODO : create a better fire
 
+export(String,FILE) var DIGGOS_MASTER_HOUSE_BGM = "res://Scenes/Sound/BGM/HomeTheme.tscn"
 export var DIALOG_DELAY = 2 # delay between the two dialogs
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	SoundManager.playBGMWithFilter(DIGGOS_MASTER_HOUSE_BGM)
 	$DiggosMasterAnim.playSittingAnimation()
 	$DiggosAnimations.playSleepingAnimation()
 	$FirstDialog.startDialog()

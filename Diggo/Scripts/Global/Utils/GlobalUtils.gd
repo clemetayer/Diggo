@@ -2,9 +2,9 @@ extends Node
 
 ####### Global script where some functions not needing to be in a specific class are stored #######
 
-##### Input functions #####
-# mouse input custom enum (because can't get global mouse enum as string)
 
+##### Enums #####
+# mouse input custom enum (because can't get global mouse enum as string)
 # FIXME : Enum values not correct somehow
 enum MouseInputEnum {
 	LeftClick = 1,
@@ -18,6 +18,14 @@ enum MouseInputEnum {
 	MouseWheelRight = 7
 }
 
+# animation global enums (to have common values for each character)
+enum AnimationEnum {
+	Idle,
+	Run,
+	Jump
+}
+
+##### Input functions #####
 # gets the enum mouse input value as a string
 func getMouseInputAsString(code) -> String:
 	if(code <= 9 and code > 0):

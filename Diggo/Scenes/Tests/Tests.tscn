@@ -1,9 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Parallax/Back1.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Characters/Diggo.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Characters/Diggo/Diggo.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Maps/DestructibleSprite.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Sprites/Maps/Test/MapTest.png" type="Texture" id=5]
+
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 4232, -2120, 4216, 1736, -2840, 1768, -2840, -2104 )

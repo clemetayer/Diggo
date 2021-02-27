@@ -6,6 +6,7 @@ extends Node
 # TODO : Replace basic classes with class_name
 # TODO : check potential memory leaks
 # TODO : create unit tests
+# TODO : changes some variables to pascal case (i.e : var anExample to var an_example)
 
 ## General necessary Todos 
 # TODO : put a script on main menu button/go back (possibly at the same time as changing theme of menu(s))
