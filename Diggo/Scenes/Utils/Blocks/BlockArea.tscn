@@ -15,6 +15,7 @@ script = ExtResource( 1 )
 [node name="Area2D" type="Area2D" parent="." groups=[
 "DestructibleSpriteBlock",
 ]]
+collision_layer = 2
 
 [node name="AreaCollision" type="CollisionShape2D" parent="Area2D" groups=[
 "DestructibleSpriteBlock",

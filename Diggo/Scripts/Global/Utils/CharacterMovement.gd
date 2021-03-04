@@ -6,7 +6,7 @@ export(bool) var IS_ON_FLOOR = true # true if the element is on floor
 export(int) var SPEED = 500 # Standard speed
 export(float) var ACCELERATION = 3.0 # Acceleration to get to standard speed mid air
 export(float) var JUMP_POWER = 500 # Power of a jump
-export(int) var GRAVITY = 20 # World's gravity
+export(int) var GRAVITY = 10 # World's gravity
 
 var floor_gravity = 100 # gravity value when on floor
 var velocity = Vector2() # velocity of the element
@@ -26,7 +26,7 @@ func getVelocity():
 
 # input function processing
 func inputManager(delta):
-	applyGravity()
+	applyGravity(delta)
 	if(Input.is_action_pressed("right")):
 		moveRight(delta)
 	elif(Input.is_action_pressed("left")):
@@ -41,11 +41,11 @@ func inputManager(delta):
 		jump()
 
 # Adds gravity acceleration on the character if he's in the air
-func applyGravity():
+func applyGravity(delta):
 	if(IS_ON_FLOOR):
 		velocity.y = floor_gravity
 	else:
-		velocity.y += GRAVITY
+		velocity.y += GRAVITY * delta * 100 # delta used to avoid different jump heights depending on fps
 
 # jump action
 func jump():

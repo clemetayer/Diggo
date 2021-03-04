@@ -1,34 +1,39 @@
 extends Node2D
 
 # plays diggo's idle animation
-func playIdleAnimation():
+func playIdleAnimation(speed=1):
 	openEyes()
 	openMouth()
 	$AnimationPlayer.play("Idle")
+	$AnimationPlayer.playback_speed = speed
 
 # plays diggo's sleeping animation
-func playSleepingAnimation():
+func playSleepingAnimation(speed=1):
 	closeEyes()
 	closeMouth()
 	$AnimationPlayer.play("Sleep")
+	$AnimationPlayer.playback_speed = speed
 
 # plays diggo's dig animation
-func playDigAnimation():
+func playDigAnimation(speed=1):
 	openEyes()
 	openMouth()
 	$AnimationPlayer.play("Dig")
+	$AnimationPlayer.playback_speed = speed
 
 # plays diggo run animation
-func playRunAnimation():
+func playRunAnimation(speed=3):
 	openEyes()
 	openMouth()
 	$AnimationPlayer.play("Run")
+	$AnimationPlayer.playback_speed = speed
 
 # plays diggo jump animation
-func playJumpAnimation():
+func playJumpAnimation(speed=1):
 	openEyes()
 	openMouth()
 	$AnimationPlayer.play("Jump")
+	$AnimationPlayer.playback_speed = speed
 
 # changes the mouth to open
 func openMouth():
