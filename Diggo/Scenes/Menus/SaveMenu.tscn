@@ -405,9 +405,9 @@ margin_right = 290.0
 margin_bottom = 80.0
 
 [node name="SearchInput" type="LineEdit" parent="Window/Elements/Banner/SearchContainer/InputCenter"]
-margin_top = 30.0
+margin_top = 25.0
 margin_right = 200.0
-margin_bottom = 50.0
+margin_bottom = 54.0
 rect_min_size = Vector2( 200, 20 )
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -457,10 +457,10 @@ __meta__ = {
 [node name="SaveFileName" type="LineEdit" parent="SaveFileNamePopup"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -92.0
-margin_top = 39.0
-margin_right = 92.0
-margin_bottom = 55.0
+margin_left = -150.5
+margin_top = 65.0
+margin_right = 150.5
+margin_bottom = 94.0
 align = 1
 max_length = 20
 
@@ -480,10 +480,10 @@ __meta__ = {
 [node name="SaveFileName" type="LineEdit" parent="OverwriteFilePopup"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -92.0
-margin_top = 39.0
-margin_right = 92.0
-margin_bottom = 55.0
+margin_left = -150.5
+margin_top = 65.0
+margin_right = 150.5
+margin_bottom = 94.0
 align = 1
 max_length = 20
 

@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "RichTextSleep",
 "language": "GDScript",
 "path": "res://Scripts/Global/RichTextEffects/SleepRTL.gd"
+}, {
+"base": "Control",
+"class": "StandardDialogBox",
+"language": "GDScript",
+"path": "res://Scripts/Global/Dialogs/StandardDialogBox.gd"
 } ]
 _global_script_class_icons={
-"RichTextSleep": ""
+"RichTextSleep": "",
+"StandardDialogBox": ""
 }
 
 [application]

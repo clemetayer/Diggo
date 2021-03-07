@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scenes/Levels/Mountains1/DiggosTutorialScene.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Buildings/MountainHouse1.tscn" type="PackedScene" id=2]
@@ -11,6 +11,10 @@
 [ext_resource path="res://Scenes/Parallax/DayMountains.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Sprites/Parallaxes/MountainDay/SkyUp.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Sprites/Parallaxes/MountainDay/GroundMountain.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Sprites/Maps/FirstMountainStuff/IceBlockFull.png" type="Texture" id=12]
+
+[sub_resource type="RectangleShape2D" id=17]
+extents = Vector2( 50.8867, 100.512 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 200, 0, 200, 200, 0, 200 )
@@ -290,6 +294,17 @@ DIG_SPEED = 200
 [node name="DiggoCamera" type="Camera2D" parent="DiggoKinematic"]
 current = true
 zoom = Vector2( 2, 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 12650, 615 )
+scale = Vector2( 9, 9 )
+collision_layer = 2
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D"]
+texture = ExtResource( 12 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 17 )
 
 [node name="MountainTilemap" type="TileMap" parent="."]
 tile_set = SubResource( 15 )

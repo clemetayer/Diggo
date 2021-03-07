@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Characters/Diggo/DiggoMainIcon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Other/Fonts/lemon/19919.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 2 )
+
+[node name="LoadingScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 1024, 600 )
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DiggoMainIcon" parent="." instance=ExtResource( 1 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 512.0
+margin_top = 205.0
+margin_right = 512.0
+margin_bottom = 205.0
+rect_scale = Vector2( 0.25, 0.25 )
+mouse_default_cursor_shape = 2
+maxAngle = 0.0
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 1024, 600 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoadingText" type="RichTextLabel" parent="CenterContainer"]
+margin_left = 412.0
+margin_top = 250.0
+margin_right = 612.0
+margin_bottom = 350.0
+rect_min_size = Vector2( 200, 100 )
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[wave amp=50 freq=2][color=#B53B00][center]Loading ...[/center][/color][/wave]"
+text = "Loading ..."
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 512, 300 )
+current = true

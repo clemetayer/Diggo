@@ -6,6 +6,7 @@ const SAVE_DATA_LOAD = preload("res://Scripts/Global/SaveSystem/SaveData.gd") # 
 var saves = [] # array of stored saves
 var currentData # current save
 var startPlayTime # start time in unix timestamp (used to compute the play time)
+var lastSave = null # save selected by the player (to load when there is a game over). Null at start to avoid loading an undefined scene
 
 # at start
 func _ready():
@@ -31,6 +32,7 @@ func newFile():
 	var saveDataInstance = SAVE_DATA_LOAD.new()
 	saveDataInstance.loadData(currentData.data);
 	saves.push_front(saveDataInstance)
+	lastSave = saveDataInstance
 	save()
 	return saveDataInstance
 
@@ -38,17 +40,28 @@ func newFile():
 func overwriteFile(save):
 	updateSaveTime()
 	save.loadData(currentData.data)
+	lastSave = save
 	save()
 
 # deletes the save (then saves after a small wait) 
 func deleteFile(save):
 	save.queue_free()
 	yield(GlobalUtils.wait(0.1),"completed")
+	if(save == lastSave): # case save -> delete -> go back
+		lastSave = null
 	save()
 
 # loads the current save scene
 func loadCurrentSave(sceneTree):
 	currentData.loadSave(sceneTree)
+
+# loads the last save (when game over)
+func loadLastSave(sceneTree):
+	lastSave.loadSave(sceneTree)
+
+# true if there is a last save stored (to check in case the save was deleted)
+func lastSaveExists():
+	return lastSave != null
 
 # returns the array of saves
 func getSaves():
