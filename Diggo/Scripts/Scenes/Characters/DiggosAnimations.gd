@@ -1,5 +1,7 @@
 extends Node2D
 
+# TODO : maybe use "set_next_animation" ? idk
+
 # plays diggo's idle animation
 func playIdleAnimation(speed=1):
 	openEyes()
@@ -29,7 +31,7 @@ func playRunAnimation(speed=3):
 	$AnimationPlayer.playback_speed = speed
 
 # plays diggo jump animation
-func playJumpAnimation(speed=1):
+func playJumpAnimation(speed=1): # FIXME : play this animation only once
 	openEyes()
 	openMouth()
 	$AnimationPlayer.play("Jump")

@@ -8,7 +8,7 @@
 [node name="SaveButton" type="TextureButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_scale = Vector2( 5, 5 )
+rect_scale = Vector2( 2.5, 2.5 )
 texture_normal = ExtResource( 1 )
 texture_pressed = ExtResource( 2 )
 texture_hover = ExtResource( 3 )

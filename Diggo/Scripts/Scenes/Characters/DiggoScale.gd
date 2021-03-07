@@ -3,6 +3,10 @@ extends Node2D
 # NOTE : the only reason for this to exist is because setting the scale on kinematic bodies creates an odd behaviour
 
 var isFacingRight = true
+var base_scale
+
+func _ready():
+	base_scale = Vector2(abs(get_scale().x),get_scale().y)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

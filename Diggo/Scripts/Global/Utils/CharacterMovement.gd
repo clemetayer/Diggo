@@ -4,7 +4,7 @@ export(NodePath) var ELEMENT # Element that should move (Should be a KinematicBo
 							 # Note : get_node() needed to actually access it
 export(bool) var IS_ON_FLOOR = true # true if the element is on floor
 export(int) var SPEED = 500 # Standard speed
-export(float) var ACCELERATION = 3.0 # Acceleration to get to standard speed mid air
+export(float) var ACCELERATION = 10 # Acceleration to get to standard speed mid air
 export(float) var JUMP_POWER = 500 # Power of a jump
 export(int) var GRAVITY = 10 # World's gravity
 
@@ -60,7 +60,7 @@ func moveRight(delta):
 		velocity.x = SPEED
 		get_node(ELEMENT).setAnimation(GlobalUtils.AnimationEnum.Run)
 	else:
-		velocity.x += (ACCELERATION * (1-abs((velocity.x/SPEED)))) * delta # vf = vi + a * t, but capped at SPEED
+		velocity.x += (ACCELERATION * min(abs(SPEED - velocity.x),2*SPEED)) * delta # vf = vi + a * t, but capped at SPEED
 
 # moves element to the left
 func moveLeft(delta):
@@ -69,4 +69,4 @@ func moveLeft(delta):
 		velocity.x = -SPEED
 		get_node(ELEMENT).setAnimation(GlobalUtils.AnimationEnum.Run)
 	else:
-		velocity.x -= (ACCELERATION * (1-abs((velocity.x/SPEED)))) * delta # vf = vi - a * t, but capped at SPEED
+		velocity.x -= (ACCELERATION * min(abs(SPEED + velocity.x), 2*SPEED)) * delta # vf = vi - a * t, but capped at SPEED
