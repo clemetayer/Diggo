@@ -1,17 +1,15 @@
-$DIGGO_FOLDER_PATH = Diggo
-
 # My specific ignore files/folders
 BackupScripts/
 Notes.txt
-$DIGGO_FOLDER_PATH/Resources/
-$DIGGO_FOLDER_PATH/addons/
-$DIGGO_FOLDER_PATH/Sounds/
+Diggo/Resources/
+Diggo/addons/
+Diggo/Sounds/
 
 # Godot-specific ignores
-$DIGGO_FOLDER_PATH/.import/
-$DIGGO_FOLDER_PATH/export.cfg
-$DIGGO_FOLDER_PATH/export_presets.cfg
+Diggo/.import/
+Diggo/export.cfg
+Diggo/export_presets.cfg
 
 # Mono-specific ignores
-$DIGGO_FOLDER_PATH/.mono/
-$DIGGO_FOLDER_PATH/data_*/
+Diggo/.mono/
+Diggo/data_*/
