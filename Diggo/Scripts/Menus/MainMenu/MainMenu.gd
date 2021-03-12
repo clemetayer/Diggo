@@ -5,13 +5,14 @@ export(String,FILE) var SAVE_MENU = "res://Scenes/Menus/SaveMenu.tscn" # Save me
 export(String,FILE) var OPTION_MENU = "res://Scenes/Menus/OptionsMenu.tscn" # Option menu scene
 export(String,FILE) var MENU_MUSIC = "res://Scenes/Sound/BGM/TitleThemeStreamPlayer.tscn"
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SoundManager.playBGMWithFilter(MENU_MUSIC,2,8)
 
 # launches the intro scene when "New game" pressed
 func _on_NewGameButton_pressed():
-	get_tree().change_scene(INTRO_SCENE)
+	SwitchSceneWithParam.goto_scene(INTRO_SCENE)
 
 # launches the save menu when "Continue" pressed
 func _on_ContinueButton_pressed():

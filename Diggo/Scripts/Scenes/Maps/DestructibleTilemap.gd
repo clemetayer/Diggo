@@ -2,6 +2,7 @@ extends TileMap
 
 export(String,FILE) var DESTRUCTIBLE_SPRITE_PATH = "res://Scenes/Maps/DestructibleSprite.tscn"
 export(String,FILE) var BLOCK_PATH = "res://Scenes/Utils/Blocks/BlockArea.tscn" 
+export(NodePath) var SEND_DONE_SIGNAL_NODE = null # node where to send the "destructible loaded signal"
 export(int) var TILE_SIZE_POW = 8
 export(int) var MIN_SIZE_POW = 2
 
@@ -31,8 +32,6 @@ func createDestructibleSprite(pos):
 	destructible_instance.TILE_SIZE_POW = TILE_SIZE_POW
 	destructible_instance.MIN_SIZE_POW = MIN_SIZE_POW
 	get_parent().get_parent().get_parent().add_child(destructible_instance)
-	destructible_instance.connect("destructible_sprite_loaded",get_tree().get_current_scene(),"destructibleLoaded")
-	destructible_instance.parseSprite()
 
 # adds tilemap as a child of the viewport
 func addTilemapToViewport(tilemapRect):

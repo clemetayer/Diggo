@@ -25,24 +25,17 @@ var stepPow = int(TILE_SIZE_POW - MIN_SIZE_POW/3)
 var blockArea # load of BLOCK_PATH
 var bitmap = BitMap # bitmap of the SPRITE
 var minSize = pow(2,MIN_SIZE_POW) # true value of minimal size (2^MIN_SIZE_POW)
-var started = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	started = false
-
-func parseSprite():
 	blockArea = load(BLOCK_PATH)
 	bitmap = BitMap.new()
 	bitmap.create_from_image_alpha(SPRITE.get_data())
 	subdivideOriginalSprite()
-	started = true
-	emit_signal("destructible_sprite_loaded")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if(started):
-		checkFPS()
+	checkFPS()
 
 # Check FPS, and changes the minimal block size if it is too low
 func checkFPS():

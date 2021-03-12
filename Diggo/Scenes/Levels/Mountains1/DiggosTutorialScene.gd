@@ -6,13 +6,6 @@ extends Node2D
 # TODO : Game over screen + different texts each time the player jumps off the cliff
 # TODO : maybe scale everything down to save resources
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-func destructibleLoaded():
-	print("destructible loaded !")
-
 # Called when the node enters the scene tree for the first time.
 #func _ready():
 #	pass # Replace with function body.
