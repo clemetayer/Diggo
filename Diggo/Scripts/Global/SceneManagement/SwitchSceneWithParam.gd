@@ -55,13 +55,19 @@ func update_progress():
 	# force the animation to update.
 	# get_node("animation").seek(progress * length, true)
 
-# sets to the new scene
+# sets to the new scene (but might set another wait if additionnal resources)
 func set_new_scene(scene_resource):
-	print("here 1") # FIXME : AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 	current_scene = scene_resource.instance()
-	get_node("/root").add_child(current_scene)
+	if(current_scene.ADDITIONAL_LOADS != null and current_scene.ADDITIONAL_LOADS):
+		get_node("/root").add_child(current_scene)
+		get_node("/root").move_child(current_scene,loading_screen.get_index()) # sets the scene below the loading screen so that it can process while not being visible
+		current_scene.connect("loaded",self,"switch_scene")
+	else:
+		get_node("/root").add_child(current_scene)
+		switch_scene()
+
+func switch_scene():
 	get_node("/root").remove_child(loading_screen)
-	print("here 2")
 
 # switches scene with loading screen, param is optionnal
 # param as a dictionnary

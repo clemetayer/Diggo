@@ -14,3 +14,9 @@ extends Node2D
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+export(bool) var ADDITIONAL_LOADS = true # tells the scene switcher that there are additionnal resources to load on ready
+signal loaded() # signal to tell the scene switcher that everything is loaded
+
+func _on_DestructibleTilemap_destructible_loaded():
+	emit_signal("loaded")

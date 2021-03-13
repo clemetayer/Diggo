@@ -1,6 +1,7 @@
 extends Node2D
 
 # TODO : check with a sprite with odd size
+# OPTIMIZATION : maybe use a polygon collision shape (i don"t know if that would improve things)
 
 # Here is how it works
 # first, the sprite is converted to a bitmap, to detect the transparent and not transparent parts

@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+# OPTIMIZATION : set a timer on dig hitbox to check more periodically
+
 export var DIG_SPEED = 100 # Diggo speed while digging
 export var DIG_RADIUS = 250 # Digging radius hitbox detection (to know if it is possible to dig)
 

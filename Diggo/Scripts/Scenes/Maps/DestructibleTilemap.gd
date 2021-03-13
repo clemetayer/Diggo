@@ -2,11 +2,12 @@ extends TileMap
 
 export(String,FILE) var DESTRUCTIBLE_SPRITE_PATH = "res://Scenes/Maps/DestructibleSprite.tscn"
 export(String,FILE) var BLOCK_PATH = "res://Scenes/Utils/Blocks/BlockArea.tscn" 
-export(NodePath) var SEND_DONE_SIGNAL_NODE = null # node where to send the "destructible loaded signal"
 export(int) var TILE_SIZE_POW = 8
 export(int) var MIN_SIZE_POW = 2
 
 var viewport
+
+signal destructible_loaded()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,6 +19,7 @@ func _ready():
 	# Note : TileMapRect.position is the offset from the center position to the first pixel on the top left
 	createDestructibleSprite(TileMapRect.position)
 	get_parent().get_parent().get_parent().remove_child(get_parent().get_parent())
+	emit_signal("destructible_loaded")
 #	get_parent().get_parent().call_deferred("queue_free") # FIXME : The texture of the viewport is linked in memory to the one in the sprite, so freeing the viewport will free the texture
 
 # creates the destructible sprite corresponding to the viewport of the tilemap
@@ -25,7 +27,7 @@ func createDestructibleSprite(pos):
 	var destructible_instance = load(DESTRUCTIBLE_SPRITE_PATH).instance()
 	var img = viewport.get_texture()
 	img.get_data().flip_y()
-#	img.get_data().save_png("res://test.png") # debug
+	img.get_data().save_png("res://test.png") # debug
 	destructible_instance.position = pos
 	destructible_instance.SPRITE = img
 	destructible_instance.BLOCK_PATH = BLOCK_PATH
