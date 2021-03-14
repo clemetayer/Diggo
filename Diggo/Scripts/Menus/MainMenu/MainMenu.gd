@@ -16,11 +16,11 @@ func _on_NewGameButton_pressed():
 
 # launches the save menu when "Continue" pressed
 func _on_ContinueButton_pressed():
-	SwitchSceneWithParam.change_scene(SAVE_MENU,{"isSaveMenu":false})
+	SwitchSceneWithParam.goto_scene(SAVE_MENU,{"isSaveMenu":false})
 
 # Launches the option menu when "Options" pressed
 func _on_OptionButton_pressed():
-	get_tree().change_scene(OPTION_MENU)
+	SwitchSceneWithParam.goto_scene(OPTION_MENU)
 
 # quits the game when pressing the quit button
 func _on_QuitButton_pressed():

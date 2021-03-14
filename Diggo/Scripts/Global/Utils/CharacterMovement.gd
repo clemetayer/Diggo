@@ -11,6 +11,7 @@ export(int) var GRAVITY = 10 # World's gravity
 var floor_gravity = 100 # gravity value when on floor
 var velocity = Vector2() # velocity of the element
 var epsilon = 0.5 # epsilon to check the velocity x float around 0
+var movementEnabled = true # true if the movement is enabled
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,12 +25,16 @@ func _process(delta):
 func getVelocity():
 	return velocity
 
+# enable or disable the movement
+func enableMovement(value):
+	movementEnabled = value
+
 # input function processing
 func inputManager(delta):
 	applyGravity(delta)
-	if(Input.is_action_pressed("right")):
+	if(Input.is_action_pressed("right") and movementEnabled):
 		moveRight(delta)
-	elif(Input.is_action_pressed("left")):
+	elif(Input.is_action_pressed("left") and movementEnabled):
 		moveLeft(delta)
 	elif(IS_ON_FLOOR):
 		get_node(ELEMENT).setAnimation(GlobalUtils.AnimationEnum.Idle)
@@ -37,7 +42,7 @@ func inputManager(delta):
 	else:
 		get_node(ELEMENT).setAnimation(GlobalUtils.AnimationEnum.Jump)
 		velocity.x /= 2 # Gently slows down in mid air
-	if(Input.is_action_pressed("jump")):
+	if(Input.is_action_pressed("jump") and movementEnabled):
 		jump()
 
 # Adds gravity acceleration on the character if he's in the air

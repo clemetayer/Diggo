@@ -2,7 +2,7 @@ extends TileMap
 
 export(String,FILE) var DESTRUCTIBLE_SPRITE_PATH = "res://Scenes/Maps/DestructibleSprite.tscn"
 export(String,FILE) var BLOCK_PATH = "res://Scenes/Utils/Blocks/BlockArea.tscn" 
-export(int) var TILE_SIZE_POW = 8
+export(int) var TILE_SIZE_POW = 6 
 export(int) var MIN_SIZE_POW = 2
 
 var viewport

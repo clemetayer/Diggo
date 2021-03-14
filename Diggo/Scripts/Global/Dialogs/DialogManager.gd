@@ -29,7 +29,6 @@ func nextDialog():
 		for target in DIALOGS[indexDialog].targets:
 			if target is NodePath:
 				var node = get_node(target)
-				node.connect("dialog_done",self,"nextDialog")
 				node.dialog = DIALOGS[indexDialog].dialog
 				node.startDialog()
 	else:

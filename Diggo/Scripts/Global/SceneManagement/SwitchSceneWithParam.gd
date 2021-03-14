@@ -12,6 +12,10 @@ var wait_frames
 var time_max = 100 # msec
 var current_scene
 
+# FIXME : find a way to not block loading animation while loading destructible sprites
+# TODO : add comments here and there
+# TODO : add a fade in/out to make loading less ... brutal
+
 func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() -1)
@@ -58,7 +62,7 @@ func update_progress():
 # sets to the new scene (but might set another wait if additionnal resources)
 func set_new_scene(scene_resource):
 	current_scene = scene_resource.instance()
-	if(current_scene.ADDITIONAL_LOADS != null and current_scene.ADDITIONAL_LOADS):
+	if(current_scene.get("ADDITIONAL_LOADS") != null and current_scene.ADDITIONAL_LOADS):
 		get_node("/root").add_child(current_scene)
 		get_node("/root").move_child(current_scene,loading_screen.get_index()) # sets the scene below the loading screen so that it can process while not being visible
 		current_scene.connect("loaded",self,"switch_scene")

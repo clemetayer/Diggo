@@ -26,6 +26,8 @@ scale = Vector2( 0.6, 0.6 )
 z_index = 1
 collision_mask = 2
 script = ExtResource( 1 )
+DIG_SPEED = 50
+DIG_RADIUS = 125
 
 [node name="DiggoScales" type="Node2D" parent="."]
 script = ExtResource( 2 )
@@ -39,6 +41,10 @@ RADIUS = 500
 
 [node name="CharacterMovement" parent="DiggoScales" instance=ExtResource( 5 )]
 ELEMENT = NodePath("../..")
+SPEED = 300
+ACCELERATION = 5.0
+JUMP_POWER = 375.0
+GRAVITY = 5
 
 [node name="InteractButtons" parent="DiggoScales" instance=ExtResource( 6 )]
 INTERACT_AREA = NodePath("../InteractArea")

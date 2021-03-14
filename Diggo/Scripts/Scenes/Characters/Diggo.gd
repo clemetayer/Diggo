@@ -10,32 +10,33 @@ var animationDone = true # true if the animation is done
 var canDig = true # true if it is possible to dig (see checkTimerDig)
 var animation = GlobalUtils.AnimationEnum.Idle # current animation that should be playing (but can be ignored if needed)
 var const_floor = Vector2(0,-1) # Vector position of the floor (note : floor is a keyword and cannot be used as a variable)
-var overrideMovement = false
+var movementOverrided = false # overrides the velocity value (for digging in that case)
+var movementEnabled = true # true if diggo can move
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	setIsOnFloorCharacterMovement()
 	inputManager()
 	animationManager()
-	if(not overrideMovement):
+	if(not movementOverrided):
 		velocity = $DiggoScales/CharacterMovement.getVelocity()
 	move_and_slide(velocity,const_floor)
 
 # sets the is on floor status of the character movement script
 func setIsOnFloorCharacterMovement():
-	if(not overrideMovement):
+	if(not movementOverrided):
 		$DiggoScales/CharacterMovement.IS_ON_FLOOR = is_on_floor()
 	else:
 		$DiggoScales/CharacterMovement.IS_ON_FLOOR = true # stops the gravity effect when digging
 
 # input function processing
 func inputManager():
-	if(Input.is_action_pressed("dig") and canDig):
-		overrideMovement = true
+	if(Input.is_action_pressed("dig") and canDig and movementEnabled):
+		movementOverrided = true
 		if(canDig):
 			dig()
 	else:
-		overrideMovement = false
+		movementOverrided = false
 		set_rotation(0)
 		$DiggoScales/DigHitbox/DigCollision.set_disabled(true)
 
@@ -50,6 +51,10 @@ func animationManager():
 				$DiggoScales/DiggosAnimations.playRunAnimation()
 			GlobalUtils.AnimationEnum.Jump:
 				$DiggoScales/DiggosAnimations.playJumpAnimation()
+
+func enableMovement(value):
+	movementEnabled = value
+	$DiggoScales/CharacterMovement.enableMovement(value)
 
 # digs the floor
 func dig():
@@ -75,7 +80,7 @@ func checkTimerDig():
 		$CheckDigTimer.start()
 	elif(not Input.is_action_pressed("action")):
 		canDig = false
-		overrideMovement = false
+		movementOverrided = false
 		$CheckDigTimer.stop()
 
 # sets the animation for diggo specified in GlobalUtils.AnimationEnum 
