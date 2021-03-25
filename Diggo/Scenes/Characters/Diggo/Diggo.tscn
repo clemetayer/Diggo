@@ -5,18 +5,18 @@
 [ext_resource path="res://Scenes/UI/Menus/CircleSelect.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Characters/Diggo/DiggosAnimations.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Utils/CharacterMovement.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Utils/InteractButtons.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Utils/Interact/InteractButtons.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scripts/Scenes/Characters/DigHitbox.gd" type="Script" id=7]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 200.0
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 132.918
+height = 206.834
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 250.0
+radius = 200.0
 
-[sub_resource type="CapsuleShape2D" id=3]
-radius = 198.486
-height = 118.289
+[sub_resource type="CircleShape2D" id=3]
+radius = 250.0
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 130, 225 )
@@ -47,8 +47,11 @@ JUMP_POWER = 375.0
 GRAVITY = 5
 
 [node name="InteractButtons" parent="DiggoScales" instance=ExtResource( 6 )]
-INTERACT_AREA = NodePath("../InteractArea")
 CIRCLE_SELECT_MENU = NodePath("../CircleSelect")
+
+[node name="InteractShape" type="CollisionShape2D" parent="DiggoScales/InteractButtons"]
+rotation = 1.5708
+shape = SubResource( 1 )
 
 [node name="DigHitbox" type="Area2D" parent="DiggoScales" groups=[
 "Terraform",
@@ -61,7 +64,7 @@ script = ExtResource( 7 )
 ]]
 position = Vector2( 100, 0 )
 scale = Vector2( 0.7, 0.7 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 disabled = true
 
 [node name="DigTest" type="Area2D" parent="DiggoScales"]
@@ -70,15 +73,6 @@ collision_mask = 2
 [node name="DigTestCollision" type="CollisionShape2D" parent="DiggoScales/DigTest"]
 position = Vector2( 100, 0 )
 scale = Vector2( 0.65, 0.65 )
-shape = SubResource( 2 )
-
-[node name="InteractArea" type="Area2D" parent="DiggoScales"]
-collision_mask = 2
-
-[node name="InteractCollision" type="CollisionShape2D" parent="DiggoScales/InteractArea"]
-position = Vector2( -27, 0 )
-rotation = 1.5708
-scale = Vector2( 0.5, 0.6 )
 shape = SubResource( 3 )
 
 [node name="CheckDigTimer" type="Timer" parent="."]

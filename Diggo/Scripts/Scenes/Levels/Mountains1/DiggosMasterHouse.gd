@@ -22,4 +22,4 @@ func _on_FirstDialog_dialogs_done():
 
 # switch to the "tutorial" scene
 func _on_SecondDialog_dialogs_done():
-	print("Goto tutorial scene")
+	SwitchSceneWithParam.goto_scene("res://Scenes/Levels/Mountains1/DiggosTutorialScene.tscn")

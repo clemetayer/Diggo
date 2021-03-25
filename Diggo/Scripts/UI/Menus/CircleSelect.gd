@@ -4,8 +4,8 @@ export(Array) var BUTTONS # array containing the buttons for the circle select m
 export(int) var RADIUS = 1000 # radius of the circle select menu
 export(float) var START_ANGLE = -PI/2 - PI/15 # start angle position for the first button
 
-# TODO : Remove buttons when exiting the interact zone
-# TODO : Click on buttons on hover with specific angle
+# TODO : Click on buttons on hover with specific angle (like the circle select menus in most games)
+# FIXME : Buttons a bit off centered
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,7 +15,6 @@ func _ready():
 func removeChildren():
 	for children in get_children():
 		remove_child(children)
-		children.queue_free()
 
 # adds the BUTTONS in the circle menu
 func addButtonChildren():
@@ -32,3 +31,4 @@ func addButtonChildren():
 func refreshButtons():
 	removeChildren()
 	addButtonChildren()
+	

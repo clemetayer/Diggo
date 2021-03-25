@@ -7,9 +7,23 @@ export(String,FILE) var MAIN_MENU_PATH = "res://Scenes/Menus/MainMenu.tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var gameOverDialog = SwitchSceneWithParam.get_param("gameOverDialog")
+	if(gameOverDialog != null and gameOverDialog is Array):
+		$GameOverDialogManager.DIALOGS = []
+		for dialog in gameOverDialog:
+			addGameOverDialog(dialog)
 	if(not SaveFile.lastSaveExists()): # if no last save, cannot continue
 		$CenterContainer/VBoxContainer/ContinueButton.hide()
-	$DialogManager.startDialog()
+	$GameOverDialogManager.startDialog()
+
+# Adds the game over dialog to the dialog manager
+func addGameOverDialog(dialog):
+	$GameOverDialogManager.DIALOGS.append({
+		"targets":[
+			NodePath("../CenterContainer/VBoxContainer/GameOverDialog") # Note : path from the dialog manager
+		],
+		"dialog":dialog
+	})
 
 # loads the last save
 func _on_ContinueButton_pressed():

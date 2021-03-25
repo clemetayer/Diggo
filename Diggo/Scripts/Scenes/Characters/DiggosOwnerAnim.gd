@@ -33,3 +33,6 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	match(anim_name):
 		"ThrowBall":
 			emit_signal("throwDone",$Polygons/BallOfDestiny.position)
+			$AnimationPlayer.play("ThrowToIdle")
+		"ThrowToIdle":
+			$AnimationPlayer.play("Idle")

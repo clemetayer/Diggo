@@ -1,12 +1,27 @@
 extends Node2D
 
 # TODO : maybe use "set_next_animation" ? idk
+# TODO : maybe use an animation tree to avoid having things like "jump_with_item,etc."
+# OPTIMIZATION : there is definitely a better architecture possible here
+
+var hasBall = false
+
+func _ready():
+	SignalManager.connect("catch_ball",self,"catchBall")
+	SignalManager.connect("give_ball",self,"giveBall")
 
 # plays diggo's idle animation
 func playIdleAnimation(speed=1):
 	openEyes()
 	openMouth()
-	$AnimationPlayer.play("Idle")
+	if(hasBall):
+		showBall()
+		hideTongue()
+		$AnimationPlayer.play("IdleWithBall")
+	else:
+		hideBall()
+		showTongue()
+		$AnimationPlayer.play("Idle")
 	$AnimationPlayer.playback_speed = speed
 
 # plays diggo's sleeping animation
@@ -20,21 +35,43 @@ func playSleepingAnimation(speed=1):
 func playDigAnimation(speed=1):
 	openEyes()
 	openMouth()
-	$AnimationPlayer.play("Dig")
+	if(hasBall):
+		showBall()
+		hideTongue()
+		$AnimationPlayer.play("DigWithBall") # FIXME : it is looking weird
+	else:
+		hideBall()
+		showTongue()
+		$AnimationPlayer.play("Dig")
 	$AnimationPlayer.playback_speed = speed
 
 # plays diggo run animation
 func playRunAnimation(speed=3):
 	openEyes()
 	openMouth()
-	$AnimationPlayer.play("Run")
+	if(hasBall):
+		showBall()
+		hideTongue()
+		$AnimationPlayer.play("RunWithBall")
+	else:
+		showTongue()
+		hideBall()
+		$AnimationPlayer.play("Run")
 	$AnimationPlayer.playback_speed = speed
+
 
 # plays diggo jump animation
 func playJumpAnimation(speed=1): # FIXME : play this animation only once
 	openEyes()
 	openMouth()
-	$AnimationPlayer.play("Jump")
+	if(hasBall):
+		showBall()
+		hideTongue()
+		$AnimationPlayer.play("JumpWithBall")
+	else:
+		hideBall()
+		showTongue()
+		$AnimationPlayer.play("Jump")
 	$AnimationPlayer.playback_speed = speed
 
 # changes the mouth to open
@@ -60,3 +97,27 @@ func openEyes():
 func closeEyes():
 	$Polygons/Eyes.visible = false
 	$Polygons/SleepEyes.visible = true
+
+# hides the tongue
+func hideTongue():
+	$Polygons/Tongue.hide()
+
+# shows the tongue
+func showTongue():
+	$Polygons/Tongue.show()
+
+# shows the ball
+func showBall():
+	$Polygons/BallOfDestiny.show()
+
+# hides the ball
+func hideBall():
+	$Polygons/BallOfDestiny.hide()
+
+# sets the "hasBall" to true after receiving the signal to catch ball
+func catchBall():
+	hasBall = true
+
+# sets the "hasBall" to false after receiving the signal to give ball
+func giveBall():
+	hasBall = false

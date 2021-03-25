@@ -2,5 +2,5 @@
 
 [ext_resource path="res://Scripts/Global/Utils/InteractButtons.gd" type="Script" id=1]
 
-[node name="InteractButtons" type="Node2D"]
+[node name="InteractButtons" type="Area2D"]
 script = ExtResource( 1 )

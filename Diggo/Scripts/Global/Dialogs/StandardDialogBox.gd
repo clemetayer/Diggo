@@ -33,6 +33,7 @@ func _process(delta):
 					page = 0
 					dialogPages = []
 					dialogStarted = false
+					$RTLCharTimer.stop()
 					self.hide()
 					emit_signal("dialog_done")
 			else: # shows the whole text at once
@@ -42,9 +43,7 @@ func _process(delta):
 func startDialog():
 	self.show()
 	computeDialogPages()
-	RTLTimer = Timer.new()
-	RTLTimer.connect("timeout",self,"_on_RTLTimer_timeout")
-	RTLTimer.start(TEXT_SPEED)
+	$RTLCharTimer.start(TEXT_SPEED)
 	page = 0
 	RTL.set_visible_characters(0)
 	RTL.set_bbcode(dialogPages[page])
@@ -74,7 +73,5 @@ func computeDialogPages():
 		dialogPages.append(dialog.substr(lStringIndex,dialog.length()))
 
 # shows another character
-func _on_RTLTimer_timeout():
+func _on_RTLCharTimer_timeout():
 	RTL.set_visible_characters(RTL.get_visible_characters()+1)
-	RTLTimer.start(TEXT_SPEED)
-	

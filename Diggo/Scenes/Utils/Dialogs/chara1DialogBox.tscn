@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Scripts/Global/Dialogs/CharacterDialogBox.gd" type="Script" id=1]
 
-
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 0.588235 )
 border_width_left = 3
@@ -25,6 +24,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+RTL_PATH = NodePath("Panel/TextMargin/Text")
 
 [node name="Panel" type="Panel" parent="."]
 margin_right = 200.0

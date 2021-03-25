@@ -37,6 +37,7 @@ BBCodeGenerator="*res://Scripts/Global/Utils/BBCodeGenerator.gd"
 GlobalUtils="*res://Scripts/Global/Utils/GlobalUtils.gd"
 GlobalParameters="*res://Scripts/Global/Parameters/GlobalParameters.gd"
 SoundManager="*res://Scenes/Sound/SoundManager.tscn"
+SignalManager="*res://Scripts/Global/SignalManagement/SignalManager.gd"
 
 [display]
 
@@ -79,9 +80,14 @@ jump={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
  ]
 }
+"find menu"={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":73,"unicode":0,"echo":false,"script":null)
+ ]
+}
 "find path"={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":80,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
  ]
 }
 interact={

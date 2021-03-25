@@ -2,19 +2,23 @@ extends Control
 
 export(float) var textSpeed = 0.05
 export(String) var dialog = "" # dialog string
+export(Array,String) var CHOICES = [] # options to show
+
+export(NodePath) var RTL_PATH # path to the rich text label
+export(NodePath) var OPTIONS_PATH = null# path to the choices HBox
 
 signal dialog_done()
+signal choice_made(choice)
 
 var dialogStarted = false # true if dialog has started
 var dialogPages = [] # pages of dialog if the whole dialog doesn't fit in one page
 var page = 0 # current dialog page
 
-onready var RTL = $Panel/TextMargin/Text # Rich text label access shortcut because it is accessed a lot
+onready var RTL = get_node(RTL_PATH) # Rich text label access shortcut because it is accessed a lot
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.hide()
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -39,11 +43,28 @@ func _process(delta):
 func startDialog():
 	self.show()
 	computeDialogPages()
+	setChoices()
 	$RTLCharTimer.wait_time = textSpeed
 	page = 0
 	RTL.set_visible_characters(0)
 	RTL.set_bbcode(dialogPages[page])
 	dialogStarted = true
+
+# sets the choices in the dialog box 
+func setChoices():
+	print("here 0")
+	if(OPTIONS_PATH != null and get_node_or_null(OPTIONS_PATH)):
+		print("here 1")
+		for child in get_node(OPTIONS_PATH).get_children(): # clears the current buttons
+			child.queue_free()
+			print("here 2")
+		for choice in CHOICES:
+			print("here 3")
+			var button = Button.new()
+			button.text = choice.label
+			button.set_h_size_flags(true)
+			button.connect("pressed",self,"choice_made",[choice.signalName])
+			get_node(OPTIONS_PATH).add_child(button)
 
 # divides the dialog in dialogPages
 func computeDialogPages():
@@ -71,3 +92,8 @@ func computeDialogPages():
 # shows another character
 func _on_RTLCharTimer_timeout():
 	RTL.set_visible_characters(RTL.get_visible_characters()+1)
+
+# emits the choice made by the player
+func choiceMade(choice):
+	print("dialog box : ", choice)
+	emit_signal("choice_made",choice)

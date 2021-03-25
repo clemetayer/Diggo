@@ -1,0 +1,131 @@
+// Not a real and useful json file, just here for backup (the structure of some things can vary, but the essential will stay here)
+{
+  "DiggoIntro": {
+	"FirstDialog":[
+		{
+			"NodePath": diggosOwner,
+			"dialog": "..."
+		},
+		{
+			"NodePath": diggosOwner,
+			"dialog": "Huh ..."
+		},
+		{
+			"NodePath": diggosOwner,
+			"dialog": "Well, that was an unexpected ending ..."
+		},
+		{
+			"NodePath": diggosOwner,
+			"dialog": "Alright, I guess it is time to do something else"
+		},
+		{
+			"NodePath": diggosOwner,
+			"dialog": "Hey, Diggo, wanna play ?"
+		}
+	],
+	"SecondDialog":[
+		{
+			"NodePath": diggosOwner,
+			"dialog": "Alright let's go then !"
+		}
+	]
+  },
+  "tutorialScene": {
+    "FirstDialog": [
+      {
+        "NodePath": diggosOwner,
+        "dialog": 	
+      },
+      {
+        "NodePath": diggosOwner,
+        "dialog": "Catch !"
+      }
+    ],
+    "SecondDialog": [
+      {
+        "NodePath": diggosOwner,
+        "dialog": "Good ! Here is an orange piece !"
+      }
+    ],
+    "ThirdDialog": [
+      {
+        "NodePath": diggosOwner,
+        "dialog": "Ready for another one ?"
+      },
+      {
+        "NodePath": diggosOwner,
+        "dialog": "I will throw a bit harder this time !"
+      }
+    ],
+    "LoopDialog": [
+      {
+        "NodePath": diggosOwner,
+        "dialog": "Do you want to go home now ?"
+      },
+      {
+        "NodePath": diggosOwner,
+        "dialog": "Maybe another throw then ?"
+      }
+    ],
+    "CatchBallDialog": [
+		{
+			"NodePath": diggosOwner,
+			"dialog": "Come on ! Go catch the ball !"
+		}
+	],
+	"BallDroppedDialog" : [
+		{
+			"NodePath": diggosOwner,
+			"dialog": "Oh..."
+		},
+		{
+			"NodePath": diggosOwner,
+			"dialog": "You have lost the ball, didn't you ?"
+		},
+		{
+			"NodePath": diggosOwner,
+			"dialog": "That's fine, i'm going to find it !"
+		}
+	],
+	"MoveTutorial" : [
+		[
+			{
+				"NodePath" : tutorialDialogBox,
+				"dialog" : "To move, press  " + BBCodeGenerator.BBCodeColor(InputMap.get_action_list("right")[0].as_text() + "," + InputMap.get_action_list("left")[0].as_text(), "#11DB00") +".", "#D8DB00")
+			}
+		]
+	],
+	"InteractTutorial" : [
+		[
+			{
+				"NodePath" : tutorialDialogBox,
+				"dialog" : BBCodeGenerator.BBCodeColor("To interact with objects, approach it, then click on the appearing button." , "#D8DB00")
+			}
+		]
+	],
+	"FindTutorial" : [
+		[
+			{
+				"NodePath" : tutorialDialogBox,
+				"dialog" : BBCodeGenerator.BBCodeColor("To locate an item, press " + BBCodeGenerator.BBCodeColor(InputMap.get_action_list("find menu")[0].as_text(), "#11DB00") + ", select it, then press " + BBCodeGenerator.BBCodeColor(InputMap.get_action_list("find path")[0].as_text(), "#11DB00") + " to show a path to it.", "#D8DB00")
+			}
+		]
+	],
+	"JumpTutorial" : [
+		[
+			{
+				"NodePath" : tutorialDialogBox,
+				"dialog" : BBCodeGenerator.BBCodeColor("To jump, press  " + BBCodeGenerator.BBCodeColor(InputMap.get_action_list("jump")[0].as_text(), "#11DB00") + ".", "#D8DB00")
+			}
+		]
+	],
+	"DigTutorial" : [
+		[
+			{
+				"NodePath" : tutorialDialogBox,
+				"dialog" : BBCodeGenerator.BBCodeColor("To dig, press  " + BBCodeGenerator.BBCodeColor(InputMap.get_action_list("dig")[0].as_text(), "#11DB00") + ". Keep in mind not everything can be dug.", "#D8DB00")
+			}
+		]
+	]
+  }
+}

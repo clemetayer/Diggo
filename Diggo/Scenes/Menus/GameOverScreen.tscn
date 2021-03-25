@@ -84,7 +84,7 @@ margin_bottom = 481.0
 mouse_default_cursor_shape = 2
 text = "Main menu"
 
-[node name="DialogManager" parent="." instance=ExtResource( 3 )]
+[node name="GameOverDialogManager" parent="." instance=ExtResource( 3 )]
 mouse_filter = 2
 DIALOGS = [ {
 "dialog": "Too bad, you lost ... But try again, i'm sure you can do it !",
