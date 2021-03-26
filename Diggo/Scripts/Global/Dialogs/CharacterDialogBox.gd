@@ -30,12 +30,13 @@ func _process(delta):
 					RTL.set_visible_characters(0)
 					RTL.set_bbcode(dialogPages[page])
 				else:
-					RTL.set_visible_characters(0)
-					page = 0
-					dialogPages = []
-					dialogStarted = false
-					self.hide()
-					emit_signal("dialog_done")
+					if(CHOICES.size() == 0):
+						RTL.set_visible_characters(0)
+						page = 0
+						dialogPages = []
+						dialogStarted = false
+						self.hide()
+						emit_signal("dialog_done")
 			else: # shows the whole text at once
 				RTL.set_visible_characters(RTL.get_total_character_count())
 
@@ -52,18 +53,14 @@ func startDialog():
 
 # sets the choices in the dialog box 
 func setChoices():
-	print("here 0")
 	if(OPTIONS_PATH != null and get_node_or_null(OPTIONS_PATH)):
-		print("here 1")
 		for child in get_node(OPTIONS_PATH).get_children(): # clears the current buttons
 			child.queue_free()
-			print("here 2")
 		for choice in CHOICES:
-			print("here 3")
 			var button = Button.new()
 			button.text = choice.label
-			button.set_h_size_flags(true)
-			button.connect("pressed",self,"choice_made",[choice.signalName])
+			button.set_h_size_flags(SIZE_EXPAND_FILL)
+			button.connect("pressed",self,"choiceMade",[choice.signalName])
 			get_node(OPTIONS_PATH).add_child(button)
 
 # divides the dialog in dialogPages
