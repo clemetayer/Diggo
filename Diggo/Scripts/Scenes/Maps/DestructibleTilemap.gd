@@ -9,16 +9,18 @@ var viewport
 
 signal destructible_loaded()
 
+# FIXME : Not working sometimes, i don't know why
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	yield(VisualServer, 'frame_post_draw') # waits one frame before getting the texture, otherwise, some unexpected behaviours happens
 	var TileMapRect = computeTileMapBounds()
-	var TileMapPosition = position
+	var TileMapPosition = position + TileMapRect.position 
 	viewport = createViewport(TileMapPosition,TileMapRect.size)
 	addTilemapToViewport(TileMapRect)
-	yield(VisualServer, 'frame_post_draw') # waits one frame before getting the texture, otherwise, some unexpected behaviours happens
 	# Note : TileMapRect.position is the offset from the center position to the first pixel on the top left
 	createDestructibleSprite(TileMapRect.position)
-	get_parent().get_parent().get_parent().remove_child(get_parent().get_parent())
+	self.get_parent().get_parent().get_parent().remove_child(get_parent().get_parent())
 	emit_signal("destructible_loaded")
 #	get_parent().get_parent().call_deferred("queue_free") # FIXME : The texture of the viewport is linked in memory to the one in the sprite, so freeing the viewport will free the texture
 
@@ -27,20 +29,21 @@ func createDestructibleSprite(pos):
 	var destructible_instance = load(DESTRUCTIBLE_SPRITE_PATH).instance()
 	var img = viewport.get_texture()
 	img.get_data().flip_y()
-	img.get_data().save_png("res://test.png") # debug
-	destructible_instance.position = pos
+#	img.get_data().save_png("res://test.png") # debug
+	destructible_instance.position = pos 
 	destructible_instance.SPRITE = img
 	destructible_instance.BLOCK_PATH = BLOCK_PATH
 	destructible_instance.TILE_SIZE_POW = TILE_SIZE_POW
 	destructible_instance.MIN_SIZE_POW = MIN_SIZE_POW
 	get_parent().get_parent().get_parent().add_child(destructible_instance)
+#	get_parent().get_parent().get_parent().call_deferred("add_child",destructible_instance)
 
 # adds tilemap as a child of the viewport
 func addTilemapToViewport(tilemapRect):
-	get_parent().call_deferred("remove_child",self)
-	viewport.call_deferred("add_child", self)
+	get_parent().remove_child(self)
+	viewport.add_child(self)
 	# offsets the tilemap position to the first pixel on the top left
-	position = Vector2(0,0) - tilemapRect.position
+	position = Vector2(0,0)
 
 # function by CKO on godot forum : https://godotengine.org/qa/3276/tilemap-size
 func computeTileMapBounds():
@@ -60,5 +63,5 @@ func createViewport(position,size):
 	viewport.set_usage(0)
 	viewport.render_target_v_flip = true
 	viewportC.add_child(viewport)
-	get_parent().call_deferred("add_child",viewportC)
+	get_parent().add_child(viewportC)
 	return viewport

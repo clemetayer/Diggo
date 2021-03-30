@@ -291,7 +291,6 @@ font_data = ExtResource( 1 )
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource( 6 )
-INTRO_SCENE = "res://Scenes/Levels/Mountains1/DiggosTutorialScene.tscn"
 
 [node name="MainMenuSprites" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, -0.529724 )

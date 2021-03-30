@@ -7,10 +7,9 @@ extends Node2D
 # TODO : make a backup file for dialogs
 # TODO : implement path finding menu
 
-# TODO : <<<<<<<<<< HERE finish changing the dialogs >>>>>>>>>>>>>
-
 export(bool) var ADDITIONAL_LOADS = true # tells the scene switcher that there are additionnal resources to load on ready
 export(String,FILE) var GAME_OVER_SCENE = "res://Scenes/Menus/GameOverScreen.tscn" # Game over scene
+export(String,FILE) var HOME_SCENE = "res://Scenes/Menus/MainMenu.tscn" # TODO : replace here with next scene
 
 signal loaded() # signal to tell the scene switcher that everything is loaded
 
@@ -18,15 +17,21 @@ var cinematicPlaying # variable that tells if a cinematic is playing (to make th
 var nbOfBallThrows # variable to know how many times the ball was thrown
 var ballTaken # true if diggo took the ball (to trigger specific dialogs)
 var ballLost # true if the player lost the ball by moving it around
+var sceneParam # saved scene parameters
+var gameOverLoading # to avoid trying to load the game over scene multiple times
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	setTutorialDialogs()
+	setSaveData()
+	sceneParam = SaveFile.currentData.getSceneParameter("tutorialScene")
+	showSigns()
 	$BallOfDestiny.hide()
 	$BallOfDestiny.sleeping = true
 	$DiggosOwnerAnim.scale.x = -abs($DiggosOwnerAnim.scale.x)
 	$DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x = -abs($DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x)
 	cinematicPlaying = true
+	gameOverLoading = false
 	nbOfBallThrows = 0
 	SignalManager.connect("catch_ball",self,"catchBall")
 	SignalManager.connect("diggo_owner_interact",self,"diggoOwnerInteract")
@@ -35,6 +40,14 @@ func _ready():
 func _process(delta):
 	if(not cinematicPlaying):
 		lookAtDiggo($DiggosOwnerAnim, $DiggosOwnerAnim/diggosOwnerDialogBox)
+
+# refreshes the save data when entering the scene
+func setSaveData():
+	SaveFile.currentData.setLocation({
+		'locationName':'Diggo tutorial scene',
+		'locationPath':'res://Scenes/Levels/Mountains1/DiggosTutorialScene.tscn'
+	})
+	SaveFile.setLastSafeSpot()
 
 # makes a node look at diggo (while not reversing the dialogBox) # OPTIMIZATION : might not be the best way (from an architecture point of view)
 func lookAtDiggo(node,dialogBox):
@@ -45,6 +58,33 @@ func lookAtDiggo(node,dialogBox):
 	else:
 		node.scale.x = -abs(node.scale.x)
 		dialogBox.rect_scale.x = -abs(dialogBox.rect_scale.x)
+
+func showSigns():
+	$Signs/Sign1.show()
+	if(sceneParam.nbOffCliff >= 1):
+		$Signs/Sign2.show()
+	else:
+		$Signs/Sign2.queue_free()
+	if(sceneParam.nbOffCliff >= 2):
+		$Signs/Sign3.show()
+	else:
+		$Signs/Sign3.queue_free()
+	if(sceneParam.nbOffCliff >= 3):
+		$Signs/Sign4.show()
+	else:
+		$Signs/Sign4.queue_free()
+	if(sceneParam.nbOffCliff >= 4):
+		$Signs/Sign5.show()
+	else:
+		$Signs/Sign5.queue_free()
+	if(sceneParam.nbOffCliff >= 5):
+		$Signs/Sign6.show()
+	else:
+		$Signs/Sign6.queue_free()
+	if(sceneParam.nbOffCliff >= 6):
+		$Signs/Sign7.show()
+	else:
+		$Signs/Sign7.queue_free()
 
 # sets the dialogs with BBCode for the tutorials
 func setTutorialDialogs():
@@ -91,6 +131,7 @@ func _on_FirstDialog_dialogs_done():
 	$DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x = abs($DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x)
 	$DiggosOwnerAnim.playThrowBallAnimation()
 	$Dialogs/Tutorial/MoveTutorial.startDialog()
+	ballTaken = false
 	nbOfBallThrows += 1
 
 func _on_SecondDialog_dialogs_done():
@@ -105,10 +146,10 @@ func _on_ThirdDialog_dialogs_done():
 	$DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x = abs($DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x)
 	$DiggosOwnerAnim.playThrowBallAnimation()
 	$Dialogs/Tutorial/FindTutorial.startDialog()
+	ballTaken = false
 	nbOfBallThrows += 1
 
 func _on_LoopDialog_dialogs_done():
-	# TODO : find a way to add choices in dialogs
 	$DiggoKinematic.enableMovement(true)
 	cinematicPlaying = false
 
@@ -158,7 +199,7 @@ func diggoOwnerInteract():
 	elif(ballLost):
 		cinematicPlaying = true
 		$DiggoKinematic.enableMovement(false)
-		$BallDroppedDialog.startDialog()
+		$Dialogs/DiggosOwner/BallDroppedDialog.startDialog()
 		ballLost = false
 	else:
 		$Dialogs/DiggosOwner/CatchBallDialog.startDialog()
@@ -168,8 +209,26 @@ func _on_CheckSceneItems_timeout():
 	if(get_node_or_null("BallOfDestiny") != null and not $SceneSizeRect.get_rect().has_point($BallOfDestiny.position)): # ball out of the map
 		$BallOfDestiny.queue_free()
 		ballLost = true
-	if(not $SceneSizeRect.get_rect().has_point($DiggoKinematic.position)): # diggo out of the map
-		SwitchSceneWithParam.goto_scene(GAME_OVER_SCENE,{"gameOverDialog":["Ah, you might have slipped here, that's unfornate ...\n Try to avoid standing close to the ledge !"]})
+	if(not $SceneSizeRect.get_rect().has_point($DiggoKinematic.position) and not gameOverLoading): # diggo out of the map
+		gameOverLoading = true
+		match(sceneParam.nbOffCliff):
+			0:
+				SwitchSceneWithParam.goto_scene(GAME_OVER_SCENE,{"gameOverDialog":["Ah, you might have slipped here, that's unfornate ...\n Try to avoid standing close to the ledge !"]})
+			1:
+				SwitchSceneWithParam.goto_scene(GAME_OVER_SCENE,{"gameOverDialog":["Again ? You should really be more careful ..."]})
+			2:
+				SwitchSceneWithParam.goto_scene(GAME_OVER_SCENE,{"gameOverDialog":["Come on ! I even put more signs in front of this cliff !"]})
+			3:
+				SwitchSceneWithParam.goto_scene(GAME_OVER_SCENE,{"gameOverDialog":["Oh, that's right, dogs can't read ..."]})
+			4:
+				SwitchSceneWithParam.goto_scene(GAME_OVER_SCENE,{"gameOverDialog":["Why are you so determined to die ??? The game hasn't even started yet !"]})
+			5: 
+				SwitchSceneWithParam.goto_scene(GAME_OVER_SCENE,{"gameOverDialog":["I'm starting to be bored ..."]})
+			_:# > 5
+				SwitchSceneWithParam.goto_scene(GAME_OVER_SCENE,{"gameOverDialog":["..."]})
+		var newSceneParam = sceneParam
+		newSceneParam.nbOffCliff += 1
+		SaveFile.currentData.setSceneParameter("nbOffCliff", newSceneParam)
 
 # Starts the tutorial for interactions
 func _on_InteractTutorialCheckArea_body_entered(body):
@@ -185,3 +244,18 @@ func _on_JumpTutorialCheckArea_body_entered(body):
 func _on_DigTutorialCheckArea_body_entered(body):
 	if(body.get_name() == "DiggoKinematic"):
 		$Dialogs/Tutorial/DigTutorial.startDialog()
+
+# loop dialog choices
+func _on_LoopDialog_choice_made(signal_name):
+	match(signal_name):
+		"goHome":
+			SwitchSceneWithParam.goto_scene(HOME_SCENE) 
+		"notGoHome":
+			$Dialogs/DiggosOwner/LoopDialog.nextDialog()
+		"throwBall":
+			$Dialogs/DiggosOwner/LoopDialog.endDialog()
+			$Dialogs/DiggosOwner/FirstDialog.startDialog()
+		"endDialog":
+			$Dialogs/DiggosOwner/LoopDialog.endDialog()
+			$DiggoKinematic.enableMovement(true)
+			ballTaken = true

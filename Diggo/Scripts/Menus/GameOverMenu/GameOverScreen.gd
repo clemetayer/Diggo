@@ -1,6 +1,9 @@
 extends Control
 
 # TODO : put a shader instead of a black background, with a cool moving gradient or something ...
+# FIXME : don't skip dialog on click
+# FIXME : this scene is kept in the background when pressing continue
+# FIXME : this creates some unexpected scene reloading issues for some reason
 
 export(String,FILE) var SAVE_MENU_PATH = "res://Scenes/Menus/SaveMenu.tscn"
 export(String,FILE) var MAIN_MENU_PATH = "res://Scenes/Menus/MainMenu.tscn"
@@ -12,8 +15,6 @@ func _ready():
 		$GameOverDialogManager.DIALOGS = []
 		for dialog in gameOverDialog:
 			addGameOverDialog(dialog)
-	if(not SaveFile.lastSaveExists()): # if no last save, cannot continue
-		$CenterContainer/VBoxContainer/ContinueButton.hide()
 	$GameOverDialogManager.startDialog()
 
 # Adds the game over dialog to the dialog manager
@@ -25,9 +26,9 @@ func addGameOverDialog(dialog):
 		"dialog":dialog
 	})
 
-# loads the last save
+# loads the last safe spot
 func _on_ContinueButton_pressed():
-	SaveFile.loadLastSave(get_tree())
+	SaveFile.loadLastSafeSpot(get_tree())
 
 # loads the save menu
 func _on_SaveMenuButton_pressed():

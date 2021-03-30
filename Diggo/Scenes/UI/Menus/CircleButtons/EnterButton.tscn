@@ -18,4 +18,5 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+SCENE_PATH = "res://Scenes/Menus/MainMenu.tscn"
 [connection signal="pressed" from="." to="." method="_on_EnterButton_pressed"]

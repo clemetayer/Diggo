@@ -43,6 +43,7 @@ func _process(delta):
 # Starts the dialog 
 func startDialog():
 	self.show()
+	dialogPages = []
 	computeDialogPages()
 	setChoices()
 	$RTLCharTimer.wait_time = textSpeed
@@ -50,6 +51,14 @@ func startDialog():
 	RTL.set_visible_characters(0)
 	RTL.set_bbcode(dialogPages[page])
 	dialogStarted = true
+
+# force to end the dialog
+func endDialog():
+	RTL.set_visible_characters(0)
+	page = 0
+	dialogPages = []
+	dialogStarted = false
+	self.hide()
 
 # sets the choices in the dialog box 
 func setChoices():
@@ -92,5 +101,4 @@ func _on_RTLCharTimer_timeout():
 
 # emits the choice made by the player
 func choiceMade(choice):
-	print("dialog box : ", choice)
 	emit_signal("choice_made",choice)

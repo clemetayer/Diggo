@@ -11,6 +11,14 @@ func _ready():
 	$DiggosMasterAnim.playSittingAnimation()
 	$DiggosAnimations.playSleepingAnimation()
 	$FirstDialog.startDialog()
+	setSaveData()
+
+# refreshes the save data when entering the scene
+func setSaveData():
+	SaveFile.currentData.setLocation({
+		'locationName':'Diggo introduction',
+		'locationPath':'res://Scenes/Levels/Mountains1/DiggoIntro.tscn'
+	})
 
 # change Diggo eyes and sleep text when first dialog done
 func _on_FirstDialog_dialogs_done():

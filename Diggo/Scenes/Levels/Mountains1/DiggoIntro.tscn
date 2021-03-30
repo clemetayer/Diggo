@@ -107,9 +107,33 @@ scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 4 )
 
 [node name="FirstDialog" parent="." instance=ExtResource( 11 )]
-DIALOGS = [ null, null, null, null, null ]
+DIALOGS = [ {
+"choices": false,
+"dialog": "...",
+"targets": [ NodePath("../DiggosMasterAnim/diggosOwnerDialogBox") ]
+}, {
+"choices": false,
+"dialog": "Huh ...",
+"targets": [ NodePath("../DiggosMasterAnim/diggosOwnerDialogBox") ]
+}, {
+"choices": false,
+"dialog": "Well, that was an unexpected ending ...",
+"targets": [ NodePath("../DiggosMasterAnim/diggosOwnerDialogBox") ]
+}, {
+"choices": false,
+"dialog": "Alright, I guess it is time to do something else",
+"targets": [ NodePath("../DiggosMasterAnim/diggosOwnerDialogBox") ]
+}, {
+"choices": false,
+"dialog": "Hey, Diggo, wanna play ?",
+"targets": [ NodePath("../DiggosMasterAnim/diggosOwnerDialogBox") ]
+} ]
 
 [node name="SecondDialog" parent="." instance=ExtResource( 11 )]
-DIALOGS = [ null ]
+DIALOGS = [ {
+"choices": false,
+"dialog": "Alright let's go then !",
+"targets": [ NodePath("../DiggosMasterAnim/diggosOwnerDialogBox") ]
+} ]
 [connection signal="dialogs_done" from="FirstDialog" to="." method="_on_FirstDialog_dialogs_done"]
 [connection signal="dialogs_done" from="SecondDialog" to="." method="_on_SecondDialog_dialogs_done"]

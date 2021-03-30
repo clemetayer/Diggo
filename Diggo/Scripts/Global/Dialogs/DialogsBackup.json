@@ -60,11 +60,19 @@
     "LoopDialog": [
       {
         "NodePath": diggosOwner,
-        "dialog": "Do you want to go home now ?"
+        "dialog": "Do you want to go home now ?",
+		"choices":[
+			{"label":"Yes", "signalName":"goHome"},
+			{"label":"No", "signalName":"notGoHome"}
+		]
       },
       {
         "NodePath": diggosOwner,
-        "dialog": "Maybe another throw then ?"
+        "dialog": "Maybe another throw then ?",
+		"choices":[
+			{"label":"Yes", "signalName":"throwBall"},
+			{"label":"No", "signalName":"endDialog"}
+		]
       }
     ],
     "CatchBallDialog": [
@@ -126,6 +134,15 @@
 				"dialog" : BBCodeGenerator.BBCodeColor("To dig, press  " + BBCodeGenerator.BBCodeColor(InputMap.get_action_list("dig")[0].as_text(), "#11DB00") + ". Keep in mind not everything can be dug.", "#D8DB00")
 			}
 		]
+	],
+	"GameOverDialogs" : [ // These should match (in order, last one is default) SaveData.sceneParam.nbOffCliff, with target "gameOverDialog"
+		"Ah, you might have slipped here, that's unfornate ...\n Try to avoid standing close to the ledge !",
+		"Again ? You should really be more careful ...",
+		"Come on ! I even put more signs in front of this cliff !",
+		"Oh, that's right, dogs can't read ...",
+		"Why are you so determined to die ??? The game hasn't even started yet !",
+		"I'm starting to be bored ...",
+		"..."
 	]
   }
 }

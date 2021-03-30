@@ -69,7 +69,7 @@ anti_aliasing = false
 
 [sub_resource type="StyleBoxEmpty" id=8]
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=9]
 size = 9
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -77,7 +77,7 @@ use_filter = true
 font_data = ExtResource( 2 )
 
 [sub_resource type="Theme" id=10]
-default_font = SubResource( 11 )
+default_font = SubResource( 9 )
 Button/colors/font_color = Color( 0.133333, 0.854902, 0.54902, 1 )
 Button/colors/font_color_disabled = Color( 0.337255, 0.380392, 0.741176, 1 )
 Button/colors/font_color_hover = Color( 0.270588, 0.788235, 0.423529, 1 )

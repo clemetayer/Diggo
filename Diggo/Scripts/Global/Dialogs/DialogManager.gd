@@ -30,7 +30,7 @@ func set_dialog(dialog):
 # function to check which action to take with the choices option
 func checkChoices(dialog):
 	var ret_dialog = dialog
-	if(dialog.choices): # i.e dialog.choices != false
+	if(dialog.has("choices") and dialog.choices): # i.e dialog.choices != false
 		if(dialog.choices is bool): # just went from false to true
 			ret_dialog.choices = []
 		else:
@@ -54,11 +54,14 @@ func startDialog():
 		if target is NodePath:
 			var node = get_node(target)
 			if(not node.is_connected("dialog_done", self, "nextDialog")): # to avoid useless connections
-				node.connect("dialog_done",self,"nextDialog")
-			if(DIALOGS[indexDialog].choices and DIALOGS[indexDialog].choices.size() > 0):
-				node.CHOICES = DIALOGS[indexDialog].choices
-				if(not node.is_connected("choice_made",self,"choiceMade")):
-					node.connect("choice_made",self,"choiceMade")
+					node.connect("dialog_done",self,"nextDialog")
+			if(not node.get("CHOICES") == null):
+				if(DIALOGS[indexDialog].choices and DIALOGS[indexDialog].choices.size() > 0):
+					node.CHOICES = DIALOGS[indexDialog].choices
+					if(not node.is_connected("choice_made",self,"choiceMade")):
+						node.connect("choice_made",self,"choiceMade")
+				else:
+					node.CHOICES = []
 			node.dialog = DIALOGS[indexDialog].dialog
 			node.startDialog()
 
@@ -70,16 +73,28 @@ func nextDialog():
 			for target in DIALOGS[indexDialog].targets:
 				if target is NodePath:
 					var node = get_node(target)
-					if(DIALOGS[indexDialog].choices and DIALOGS[indexDialog].choices > 0):
-						node.CHOICES = DIALOGS[indexDialog]
-						if(not node.is_connected("choice_made",self,"choiceMade")):
-							node.connect("choice_made",self,"choiceMade")
+					if(not node.get("CHOICES") == null):
+						if(DIALOGS[indexDialog].choices and DIALOGS[indexDialog].choices.size() > 0):
+							node.CHOICES = DIALOGS[indexDialog].choices
+							if(not node.is_connected("choice_made",self,"choiceMade")):
+								node.connect("choice_made",self,"choiceMade")
+						else:
+							node.CHOICES = []
 					node.dialog = DIALOGS[indexDialog].dialog
 					node.startDialog()
 		else:
 			isStarted = false
 			emit_signal("dialogs_done")
 
+# ends the dialog
+func endDialog():
+	if(isStarted):
+		for target in DIALOGS[indexDialog].targets:
+			if target is NodePath:
+				var node = get_node(target)
+				node.endDialog()
+		isStarted = false
+		indexDialog = 0
+
 func choiceMade(choice):
-	print("Choice made : ", choice)
 	emit_signal("choice_made",choice)

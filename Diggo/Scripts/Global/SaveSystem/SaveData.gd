@@ -10,7 +10,12 @@ func newFile(saveName):
 			'locationName':'Mountain house',
 			'locationPath':'res://Scenes/Levels/Mountains1/MainHouse2.tscn'
 		},
-		'totalTime': 0 # in unix timestamp (seconds)
+		'totalTime': 0, # in unix timestamp (seconds)
+		'sceneParameters':{
+			'tutorialScene':{
+				'nbOffCliff':0 # number of times diggo ran out of the cliff
+			}
+		} # specific parameters for scene
 	}
 
 # sets data to the one in parameter (duplicate)
@@ -50,3 +55,18 @@ func getCurrentTime():
 # returns the name of the save location
 func getLocation():
 	return data.location.locationName
+
+# sets the location in the save
+func setLocation(newLoc):
+	data.location = newLoc
+
+# gets a specific scene parameter if exists, or returns null
+func getSceneParameter(sceneName): # TODO : Add a printerr
+	if(data.sceneParameters.has(sceneName)):
+		return data.sceneParameters.get(sceneName)
+	return null
+
+# sets the scene parameter if exists
+func setSceneParameter(sceneName, newSceneParam): # TODO : Add a printerr
+	if(data.sceneParameters.has(sceneName)):
+		data.sceneParameters.sceneName = newSceneParam
