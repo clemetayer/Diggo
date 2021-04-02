@@ -8,8 +8,6 @@ export(NodePath) var RTL_PATH # path to the rich text label
 # FIXME : When digging, the dialogBox rotates too
 # FIXME : this blocks the mouse for buttons in circle menu
 
-signal dialog_done()
-
 onready var RTL = get_node(RTL_PATH) # Rich text label access shortcut because it is accessed a lot
 
 # Called when the node enters the scene tree for the first time.

@@ -12,7 +12,7 @@ func _ready():
 	isPaused = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if(Input.is_action_just_pressed("pause")):
 		if(!isPaused):
 			SoundManager.BGMFade(1,2000)
@@ -41,7 +41,8 @@ func _on_AcceptDialog_confirmed():
 	visible = false
 	isPaused = false
 	get_tree().paused = false
-	get_tree().change_scene(MAIN_MENU)
+	if(get_tree().change_scene(MAIN_MENU) != OK): # TODO : replace with custom loading
+		printerr("Error in PauseMenu -> _on_AcceptDialog_confirmed -> change_scene (MAIN_MENU)")
 
 # Hides the current scene and shows the option menu
 func _on_OptionsButton_pressed():

@@ -10,8 +10,6 @@ extends Node2D
 # else if this block is completely full, then one put a destructible block in it
 # else if it is not entirely full/transparent, one divide the block in 4, and redo the if-else section for each block
 
-signal destructible_sprite_loaded()
-
 export var TILE_SIZE_POW = 6 # Starting tile size (as a power of 2, i.e 2^6 = 64)
 export var MIN_SIZE_POW = 2 # Minimal tile size (as a power of 2, i.e 2^2 = 4)
 export var MIN_FPS = 15 # Minimal goal FPS

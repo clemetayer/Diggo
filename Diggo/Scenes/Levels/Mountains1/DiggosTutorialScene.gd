@@ -33,11 +33,13 @@ func _ready():
 	cinematicPlaying = true
 	gameOverLoading = false
 	nbOfBallThrows = 0
-	SignalManager.connect("catch_ball",self,"catchBall")
-	SignalManager.connect("diggo_owner_interact",self,"diggoOwnerInteract")
+	if(SignalManager.connect("catch_ball",self,"catchBall") != OK):
+		printerr("Error in DiggoTutorialScene -> _ready -> SignalManager -> connect (catch_ball)")
+	if(SignalManager.connect("diggo_owner_interact",self,"diggoOwnerInteract") != OK):
+		printerr("Error in DiggoTutorialScene -> _ready -> SignalManager -> connect (diggo_owner_interact)")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if(not cinematicPlaying):
 		lookAtDiggo($DiggosOwnerAnim, $DiggosOwnerAnim/diggosOwnerDialogBox)
 
@@ -169,7 +171,7 @@ func _on_BallDroppedDialog_dialogs_done():
 	else:
 		$Dialogs/DiggosOwner/LoopDialog.startDialog()
 
-func _on_DiggosOwnerAnim_throwDone(position):
+func _on_DiggosOwnerAnim_throwDone(_position):
 	var throwPow = 400
 	var angle = PI/5
 	$BallOfDestiny.show()

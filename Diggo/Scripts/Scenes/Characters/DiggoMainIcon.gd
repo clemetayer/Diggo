@@ -18,7 +18,7 @@ func _input(event):
 		$Polygons/EyesNormal.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	set_rotation(sin((2*PI/cycleTime)*OS.get_ticks_msec()/1000.0) * maxAngle)
 	if(!mouseOver):
 		$Polygons/EyesPet.visible = false

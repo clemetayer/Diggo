@@ -20,7 +20,7 @@ func _process(_delta):
 	animationManager()
 	if(not movementOverrided):
 		velocity = $DiggoScales/CharacterMovement.getVelocity()
-	move_and_slide(velocity,const_floor)
+	var _vect = move_and_slide(velocity,const_floor)
 
 # sets the is on floor status of the character movement script
 func setIsOnFloorCharacterMovement():
@@ -84,8 +84,8 @@ func checkTimerDig():
 		$CheckDigTimer.stop()
 
 # sets the animation for diggo specified in GlobalUtils.AnimationEnum 
-func setAnimation(animation):
-	self.animation = animation
+func setAnimation(pAnimation):
+	self.animation = pAnimation
 
 # sets the faceRightValue to val in parent (check DiggoScale.gd)
 func setFaceRight(val):

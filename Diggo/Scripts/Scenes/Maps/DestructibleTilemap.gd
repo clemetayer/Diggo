@@ -29,7 +29,7 @@ func createDestructibleSprite(pos):
 	var destructible_instance = load(DESTRUCTIBLE_SPRITE_PATH).instance()
 	var img = viewport.get_texture()
 	img.get_data().flip_y()
-#	img.get_data().save_png("res://test.png") # debug
+	img.get_data().save_png("res://test.png") # debug
 	destructible_instance.position = pos 
 	destructible_instance.SPRITE = img
 	destructible_instance.BLOCK_PATH = BLOCK_PATH
@@ -41,7 +41,8 @@ func createDestructibleSprite(pos):
 # adds tilemap as a child of the viewport
 func addTilemapToViewport(tilemapRect):
 	get_parent().remove_child(self)
-	viewport.add_child(self)
+	viewport.add_child(self) # FIXME : issue here is that it does the rest BEFORE adding child. Fix with a method waiting for child to be added
+							 #         Oh, and some position issues also
 	# offsets the tilemap position to the first pixel on the top left
 	position = Vector2(0,0)
 

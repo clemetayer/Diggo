@@ -7,8 +7,10 @@ extends Node2D
 var hasBall = false
 
 func _ready():
-	SignalManager.connect("catch_ball",self,"catchBall")
-	SignalManager.connect("give_ball",self,"giveBall")
+	if(SignalManager.connect("catch_ball",self,"catchBall") != OK):
+		printerr("Error in DiggosAnimations -> _ready -> SignalManager -> connect (catch_ball)")
+	if(SignalManager.connect("give_ball",self,"giveBall") != OK):
+		printerr("Error in DiggosAnimations -> _ready -> SignalManager -> connect (give_ball)")
 
 # plays diggo's idle animation
 func playIdleAnimation(speed=1):

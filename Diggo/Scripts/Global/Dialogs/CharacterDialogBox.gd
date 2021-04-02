@@ -21,7 +21,7 @@ func _ready():
 	self.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if(dialogStarted):
 		if(Input.is_action_just_pressed("next_dialog")):
 			if (RTL.get_visible_characters() > RTL.get_total_character_count()): 

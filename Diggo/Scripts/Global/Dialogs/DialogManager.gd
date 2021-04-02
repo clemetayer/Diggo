@@ -53,12 +53,12 @@ func startDialog():
 	for target in DIALOGS[indexDialog].targets:
 		if target is NodePath:
 			var node = get_node(target)
-			if(not node.is_connected("dialog_done", self, "nextDialog")): # to avoid useless connections
+			if(GlobalUtils.checkIfHasSignal(node,"dialog_done") and not node.is_connected("dialog_done", self, "nextDialog")): # to avoid useless connections
 					node.connect("dialog_done",self,"nextDialog")
 			if(not node.get("CHOICES") == null):
 				if(DIALOGS[indexDialog].choices and DIALOGS[indexDialog].choices.size() > 0):
 					node.CHOICES = DIALOGS[indexDialog].choices
-					if(not node.is_connected("choice_made",self,"choiceMade")):
+					if(GlobalUtils.checkIfHasSignal(node,"choice_made") and not node.is_connected("choice_made",self,"choiceMade")):
 						node.connect("choice_made",self,"choiceMade")
 				else:
 					node.CHOICES = []
@@ -76,7 +76,7 @@ func nextDialog():
 					if(not node.get("CHOICES") == null):
 						if(DIALOGS[indexDialog].choices and DIALOGS[indexDialog].choices.size() > 0):
 							node.CHOICES = DIALOGS[indexDialog].choices
-							if(not node.is_connected("choice_made",self,"choiceMade")):
+							if(GlobalUtils.checkIfHasSignal(node,"choice_made") and not node.is_connected("choice_made",self,"choiceMade")):
 								node.connect("choice_made",self,"choiceMade")
 						else:
 							node.CHOICES = []

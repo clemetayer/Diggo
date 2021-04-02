@@ -21,7 +21,7 @@ func _ready():
 	current_scene = root.get_child(root.get_child_count() -1)
 	loading_screen = load(LOADING_SCREEN).instance()
 
-func _process(time):
+func _process(_time):
 	if loader == null:
 		# no need to process anymore
 		set_process(false)
@@ -50,7 +50,8 @@ func _process(time):
 
 # UNUSED : updates the load progress
 func update_progress():
-	var progress = float(loader.get_stage()) / loader.get_stage_count()
+	pass
+#	var progress = float(loader.get_stage()) / loader.get_stage_count()
 	# Update your progress bar? Nope, but maybe someday
 	# get_node("progress").set_progress(progress)
 	# ...or update a progress animation? Still no
@@ -92,7 +93,8 @@ func goto_scene(path, params=null): # Game requests to switch to this scene.
 # Call this instead to be able to provide arguments to the next scene
 func change_scene(next_scene, params=null):
 	_params = params
-	get_tree().change_scene(next_scene)
+	if(get_tree().change_scene(next_scene) != OK):
+		printerr("Error in SwitchSceneWithParam::change_scene")
 
 # In the newly opened scene, you can get the parameters by name
 func get_param(name):
