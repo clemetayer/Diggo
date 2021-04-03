@@ -9,7 +9,7 @@ extends Node2D
 
 signal destructible_sprite_loaded()
 
-export var TILE_SIZE_POW = 8 # Starting tile size (as a power of 2, i.e 2^6 = 64)
+export var TILE_SIZE_POW = 6 # Starting tile size (as a power of 2, i.e 2^6 = 64)
 export var MIN_SIZE_POW = 2 # Minimal tile size (as a power of 2, i.e 2^2 = 4)
 export var MIN_FPS = 15 # Minimal goal FPS
 export var GOAL_FPS = 30 # Desired average FPS
@@ -19,6 +19,7 @@ export(String) var BLOCK_PATH = "res://Scenes/Utils/Blocks/BlockArea.tscn"# Path
 																		   # By default, it is a BlockArea, but you can also set it up to "BlockPysics" if you want to toast your CPU
 
 var stepFPS = (GOAL_FPS - MIN_FPS)/3 # Number of "steps" of FPS states (ex: 60-40-20)
+var stepPow = int(TILE_SIZE_POW - MIN_SIZE_POW/3)
 var blockArea # load of BLOCK_PATH
 var bitmap = BitMap # bitmap of the SPRITE
 var minSize = pow(2,MIN_SIZE_POW) # true value of minimal size (2^MIN_SIZE_POW)
@@ -45,15 +46,15 @@ func _process(_delta):
 func checkFPS():
 	var avgFps = Performance.get_monitor(Performance.TIME_FPS)
 	if(avgFps > GOAL_FPS):
-		minSize = 4
+		minSize = pow(2,MIN_SIZE_POW)
 	elif((avgFps < GOAL_FPS) and (avgFps >= MIN_FPS + 2*stepFPS)):
-		minSize = 8
+		minSize = pow(2,MIN_SIZE_POW + stepPow)
 	elif((avgFps < MIN_FPS + 2*stepFPS) and (avgFps >= MIN_FPS + stepFPS)):
-		minSize = 16
+		minSize = pow(2,MIN_SIZE_POW + 2 * stepPow)
 	elif((avgFps < MIN_FPS + stepFPS) and (avgFps >= MIN_FPS)):
-		minSize = 32
+		minSize = pow(2,MIN_SIZE_POW + 3 * stepPow)
 	else:
-		minSize = 64
+		minSize = pow(2,MIN_SIZE_POW + 4 * stepPow)
 
 # Returns an array : ret[0] => is empty; ret[1] => is full
 func isTransparentOrFull(size, position):
