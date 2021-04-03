@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Sprites/Tilemaps/DestructibleSnowTilemap.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Maps/DestructibleTilemap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DestructibleSnowTilemap.png 0"
@@ -34,3 +35,7 @@ current = true
 [node name="DestructibleTilemap" parent="." instance=ExtResource( 2 )]
 tile_set = SubResource( 1 )
 tile_data = PoolIntArray( -196603, 0, 0, -196602, 0, 0, -65539, 0, 0, -65537, 0, 0, -131072, 0, 0, -131071, 0, 0, -131070, 0, 0, -131069, 0, 0, -131068, 0, 0, -7, 0, 0, -6, 0, 0, -5, 0, 0, -4, 0, 0, -3, 0, 0, -2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, 65530, 0, 0, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 131068, 0, 0, 131069, 0, 0, 131070, 0, 0, 131071, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65540, 0, 0, 196605, 0, 0, 196606, 0, 0, 131075, 0, 0, 262142, 0, 0, 262143, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0 )
+
+[node name="icon" type="Sprite" parent="DestructibleTilemap"]
+position = Vector2( -68.5806, -126.137 )
+texture = ExtResource( 3 )
