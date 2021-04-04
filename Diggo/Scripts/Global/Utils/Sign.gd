@@ -7,7 +7,6 @@ func _ready():
 	$SignText.hide()
 
 func _on_Sign_body_entered(body):
-	print("here" + get_name())
 	if(body.is_in_group("Player")):
 		$SignText.show()
 
