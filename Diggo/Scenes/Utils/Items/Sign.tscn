@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 21.3291, 69.2532 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 0.313726 )
 
 [sub_resource type="Theme" id=3]
@@ -27,7 +27,7 @@ RichTextLabel/fonts/italics_font = null
 RichTextLabel/fonts/mono_font = null
 RichTextLabel/fonts/normal_font = null
 RichTextLabel/styles/focus = null
-RichTextLabel/styles/normal = SubResource( 5 )
+RichTextLabel/styles/normal = SubResource( 2 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 15

@@ -35,8 +35,8 @@ func getSaveName():
 	return data.name
 
 # loads the scene specified by the save
-func loadSave(sceneTree):
-	sceneTree.change_scene(data.location.locationPath)
+func loadSave(_sceneTree):
+	SwitchSceneWithParam.goto_scene(data.location.locationPath)
 
 # updates the time of the save
 func updateTime(diffTime):

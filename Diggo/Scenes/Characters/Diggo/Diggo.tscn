@@ -21,7 +21,9 @@ radius = 250.0
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 130, 225 )
 
-[node name="DiggoKinematic" type="KinematicBody2D"]
+[node name="DiggoKinematic" type="KinematicBody2D" groups=[
+"Player",
+]]
 scale = Vector2( 0.6, 0.6 )
 z_index = 1
 collision_mask = 2

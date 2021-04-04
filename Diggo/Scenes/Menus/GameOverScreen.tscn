@@ -85,7 +85,6 @@ mouse_default_cursor_shape = 2
 text = "Main menu"
 
 [node name="GameOverDialogManager" parent="." instance=ExtResource( 3 )]
-mouse_filter = 2
 DIALOGS = [ {
 "dialog": "Too bad, you lost ... But try again, i'm sure you can do it !",
 "targets": [ NodePath("../CenterContainer/VBoxContainer/GameOverDialog") ]

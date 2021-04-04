@@ -28,14 +28,6 @@ func _process(delta):
 					page += 1
 					RTL.set_visible_characters(0)
 					RTL.set_bbcode(dialogPages[page])
-				else:
-					RTL.set_visible_characters(0)
-					page = 0
-					dialogPages = []
-					dialogStarted = false
-					$RTLCharTimer.stop()
-					self.hide()
-					emit_signal("dialog_done")
 			else: # shows the whole text at once
 				RTL.set_visible_characters(RTL.get_total_character_count())
 

@@ -1,10 +1,7 @@
 extends Node2D
 
 # FIXME : fix a bit the tilemap looking a bit weird on some spots
-# TODO : add warning panels in front of the cliff (add another panel each time the player jumps off the cliff)
 # TODO : add a Game over transition if the player jumps off the cliff
-# TODO : Game over screen + different texts each time the player jumps off the cliff
-# TODO : make a backup file for dialogs
 # TODO : implement path finding menu
 
 export(bool) var ADDITIONAL_LOADS = true # tells the scene switcher that there are additionnal resources to load on ready
@@ -62,30 +59,18 @@ func lookAtDiggo(node,dialogBox):
 		dialogBox.rect_scale.x = -abs(dialogBox.rect_scale.x)
 
 func showSigns():
-	$Signs/Sign1.show()
-	if(sceneParam.nbOffCliff >= 1):
-		$Signs/Sign2.show()
-	else:
+	if(not sceneParam.nbOffCliff >= 1):
 		$Signs/Sign2.queue_free()
-	if(sceneParam.nbOffCliff >= 2):
-		$Signs/Sign3.show()
-	else:
+	if(not sceneParam.nbOffCliff >= 2):
 		$Signs/Sign3.queue_free()
-	if(sceneParam.nbOffCliff >= 3):
-		$Signs/Sign4.show()
-	else:
+	if(not sceneParam.nbOffCliff >= 3):
 		$Signs/Sign4.queue_free()
-	if(sceneParam.nbOffCliff >= 4):
-		$Signs/Sign5.show()
-	else:
+	if(not sceneParam.nbOffCliff >= 4):
 		$Signs/Sign5.queue_free()
-	if(sceneParam.nbOffCliff >= 5):
-		$Signs/Sign6.show()
-	else:
+	if(not sceneParam.nbOffCliff >= 5):
 		$Signs/Sign6.queue_free()
-	if(sceneParam.nbOffCliff >= 6):
-		$Signs/Sign7.show()
-	else:
+	if(not sceneParam.nbOffCliff >= 6):
+		$Signs/Sign7Block.queue_free()
 		$Signs/Sign7.queue_free()
 
 # sets the dialogs with BBCode for the tutorials
