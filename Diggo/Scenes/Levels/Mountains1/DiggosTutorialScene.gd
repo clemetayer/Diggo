@@ -1,8 +1,7 @@
 extends Node2D
 
-# FIXME : fix a bit the tilemap looking a bit weird on some spots
+# FIXME : fix the tilemap looking a bit weird on some spots
 # TODO : add a Game over transition if the player jumps off the cliff
-# TODO : implement path finding menu
 
 export(bool) var ADDITIONAL_LOADS = true # tells the scene switcher that there are additionnal resources to load on ready
 export(String,FILE) var GAME_OVER_SCENE = "res://Scenes/Menus/GameOverScreen.tscn" # Game over scene
@@ -21,6 +20,7 @@ var gameOverLoading # to avoid trying to load the game over scene multiple times
 func _ready():
 	setTutorialDialogs()
 	setSaveData()
+	setPathFind()
 	sceneParam = SaveFile.currentData.getSceneParameter("tutorialScene")
 	showSigns()
 	$BallOfDestiny.hide()
@@ -31,9 +31,9 @@ func _ready():
 	gameOverLoading = false
 	nbOfBallThrows = 0
 	if(SignalManager.connect("catch_ball",self,"catchBall") != OK):
-		printerr("Error in DiggoTutorialScene -> _ready -> SignalManager -> connect (catch_ball)")
+		printerr("Error in DiggoTutorialScene -> _ready -> SignalManager -> connect (catch_ball)") # LOGGER
 	if(SignalManager.connect("diggo_owner_interact",self,"diggoOwnerInteract") != OK):
-		printerr("Error in DiggoTutorialScene -> _ready -> SignalManager -> connect (diggo_owner_interact)")
+		printerr("Error in DiggoTutorialScene -> _ready -> SignalManager -> connect (diggo_owner_interact)") # LOGGER
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -47,6 +47,14 @@ func setSaveData():
 		'locationPath':'res://Scenes/Levels/Mountains1/DiggosTutorialScene.tscn'
 	})
 	SaveFile.setLastSafeSpot()
+
+#  sets the path find variables
+func setPathFind():
+	PathFindingItems.setEnabled("ballOfReality",true)
+	PathFindingItems.setNodePath("noItem",$DiggoKinematic.get_path())
+	PathFindingItems.setNodePath("ballOfReality",$BallOfDestiny.get_path())
+	$PathFinder.TARGET_START = $DiggoKinematic.get_path()
+	$PathFinder.TARGET_END = PathFindingItems.getCurrentPath()
 
 # makes a node look at diggo (while not reversing the dialogBox) # OPTIMIZATION : might not be the best way (from an architecture point of view)
 func lookAtDiggo(node,dialogBox):

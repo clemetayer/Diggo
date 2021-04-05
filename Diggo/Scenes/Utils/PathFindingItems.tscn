@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Global/PathFinding/PathFindingItems.gd" type="Script" id=1]
+
+[node name="PathFindingItems" type="Node"]
+script = ExtResource( 1 )
+ITEMS = [ {
+"active": true,
+"buttonPath": "res://Scenes/UI/Menus/PathFindItems/NoItem.tscn",
+"enabled": true,
+"name": "noItem",
+"node": null,
+"scene": [  ]
+}, {
+"active": false,
+"buttonPath": "res://Scenes/UI/Menus/PathFindItems/BallOfDestiny.tscn",
+"enabled": false,
+"name": "ballOfReality",
+"node": null,
+"scene": [ "res://Scenes/Levels/Mountains1/DiggosTutorialScene.tscn" ]
+} ]

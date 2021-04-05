@@ -9,7 +9,8 @@ extends Node
 # TODO : changes some variables to pascal case (i.e : var anExample to var an_example)
 # TODO : set scripts folder names to be more coherent with scenes folders
 # TODO : refactor a bit the dialog box system
-# TODO : use a logger to handle errors
+# TODO : use a logger to handle errors (LOGGER)
+# TODO : choose ball of destiny or ball of reality
 
 ## General necessary Todos 
 # TODO : put a script on main menu button/go back (possibly at the same time as changing theme of menu(s))

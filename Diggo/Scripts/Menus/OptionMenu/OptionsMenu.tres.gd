@@ -122,8 +122,8 @@ func _on_MainMenuButton_pressed():
 	if(IS_FROM_PAUSE):
 		$MarginContainer/AcceptMainMenu.popup_centered_ratio(0.25)
 	else:
-		if(get_tree().change_scene(MAIN_MENU) != OK): # TODO : replace with custom loading
-			printerr("Error in OptionsMenu -> _on_MainMenuButton_pressed -> change_scene (MAIN_MENU)")
+		if(get_tree().change_scene(MAIN_MENU) != OK): 
+			printerr("Error in OptionsMenu -> _on_MainMenuButton_pressed -> change_scene (MAIN_MENU)") # LOGGER
 
 # hides self (that should normally be in the pause menu in that case)
 func _on_ReturnButton_pressed():
@@ -133,5 +133,5 @@ func _on_ReturnButton_pressed():
 # saves the parameters, unpauses, and goes back to main menu 
 func _on_AcceptMainMenu_confirmed():
 	get_tree().paused = false
-	if(get_tree().change_scene(MAIN_MENU) != OK): # TODO : replace with custom loading
-		printerr("Error in OptionsMenu -> _on_MainMenuButton_pressed -> change_scene (MAIN_MENU)")
+	if(get_tree().change_scene(MAIN_MENU) != OK): 
+		printerr("Error in OptionsMenu -> _on_MainMenuButton_pressed -> change_scene (MAIN_MENU)") # LOGGER

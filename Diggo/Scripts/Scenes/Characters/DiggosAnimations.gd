@@ -8,9 +8,9 @@ var hasBall = false
 
 func _ready():
 	if(SignalManager.connect("catch_ball",self,"catchBall") != OK):
-		printerr("Error in DiggosAnimations -> _ready -> SignalManager -> connect (catch_ball)")
+		printerr("Error in DiggosAnimations -> _ready -> SignalManager -> connect (catch_ball)") # LOGGER
 	if(SignalManager.connect("give_ball",self,"giveBall") != OK):
-		printerr("Error in DiggosAnimations -> _ready -> SignalManager -> connect (give_ball)")
+		printerr("Error in DiggosAnimations -> _ready -> SignalManager -> connect (give_ball)") # LOGGER
 
 # plays diggo's idle animation
 func playIdleAnimation(speed=1):

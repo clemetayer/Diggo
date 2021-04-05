@@ -38,6 +38,7 @@ GlobalUtils="*res://Scripts/Global/Utils/GlobalUtils.gd"
 GlobalParameters="*res://Scripts/Global/Parameters/GlobalParameters.gd"
 SoundManager="*res://Scenes/Sound/SoundManager.tscn"
 SignalManager="*res://Scripts/Global/SignalManagement/SignalManager.gd"
+PathFindingItems="*res://Scenes/Utils/PathFindingItems.tscn"
 
 [display]
 

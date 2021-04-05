@@ -89,9 +89,9 @@ func loadPresetWithName(presetName):
 		if typeof(presetData) == TYPE_DICTIONARY:
 			commands = presetData
 		else:
-			printerr("Corrupted data!")
+			printerr("Corrupted data!") # LOGGER
 	else:
-		printerr("No saved data!")
+		printerr("No saved data!") # LOGGER
 
 # saves the current parameters at PARAMETERS_SAVE_PATH
 func saveParameters():
@@ -110,7 +110,7 @@ func loadParameters():
 		if typeof(parametersData) == TYPE_DICTIONARY:
 			parameters = parametersData
 		else:
-			printerr("Corrupted data!")
+			printerr("Corrupted data!") # LOGGER
 	else: 
 		print("No saved data, creating parameter file ...")
 		saveParameters()

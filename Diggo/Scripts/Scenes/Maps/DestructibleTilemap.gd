@@ -14,6 +14,7 @@ func _ready():
 	var TileMapRect = computeTileMapBounds()
 	var TileMapPosition = position
 	viewport = createViewport(TileMapPosition,TileMapRect.size)
+#	yield(viewport,"completed") # uncomment if there is an error for add_child on null instance, it probably means that the error is somewhere else, but it shows it here
 	addTilemapToViewport(TileMapRect)
 	yield(VisualServer, 'frame_post_draw') # waits one frame before getting the texture, otherwise, some unexpected behaviours happens
 	# Note : TileMapRect.position is the offset from the center position to the first pixel on the top left
@@ -62,6 +63,7 @@ func createViewport(position,size):
 	viewport.render_target_v_flip = true
 	viewportC.add_child(viewport)
 	get_parent().call_deferred("add_child",viewportC)
+#	yield(viewportC,"tree_entered") # uncomment if there is an error for add_child on null instance, it probably means that the error is somewhere else, but it shows it here
 	return viewport
 
 func destructibleLoaded():
