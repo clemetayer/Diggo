@@ -75,3 +75,82 @@ func checkIfHasSignal(node,signal_name):
 		if(el["name"] == signal_name):
 			return true
 	return false
+
+##### Effects #####
+### Shake screen functions ###
+var screen_shake_param = {
+	TRANS = Tween.TRANS_SINE,
+	EASE = Tween.EASE_IN_OUT,
+	camera = null,
+	priority = 0,
+	amplitude = 16,
+	duration_node = null,
+	frequency_node = null,
+	tween_node = null,
+}
+
+# shakes the screen
+func shakeScreen(camera, duration = 0.2, frequency = 15, amplitude = 16, priority = 0):
+	if (priority >= screen_shake_param.priority):
+		screen_shake_param.priority = priority
+		screen_shake_param.amplitude = amplitude
+		screen_shake_param.camera = camera
+		# set duration node
+		if(screen_shake_param.duration_node != null and screen_shake_param.duration_node.is_instance_valid()): # duration_node not freed
+			screen_shake_param.duration_node.queue_free()
+		screen_shake_param.duration_node = Timer.new()
+		screen_shake_param.duration_node.connect("timeout",self,"_reset")
+		screen_shake_param.duration_node.set_wait_time(duration)
+		add_child(screen_shake_param.duration_node)
+		# set frequency node
+		if(screen_shake_param.frequency_node != null and screen_shake_param.frequency_node.is_instance_valid()): # frequency_node not freed
+			screen_shake_param.frequency_node.queue_free()
+		screen_shake_param.frequency_node = Timer.new()
+		screen_shake_param.frequency_node.connect("timeout",self,"_new_shake")
+		screen_shake_param.frequency_node.set_wait_time(1/float(frequency))
+		add_child(screen_shake_param.frequency_node)
+		# set tween node
+		if(screen_shake_param.tween_node != null and screen_shake_param.tween_node.is_instance_valid()): # tween_node not freed
+			screen_shake_param.tween_node.queue_free()
+		screen_shake_param.tween_node = Tween.new()
+		add_child(screen_shake_param.tween_node)
+		screen_shake_param.duration_node.start()
+		screen_shake_param.frequency_node.start()
+
+		_new_shake()
+
+func _new_shake():
+	var rand = Vector2()
+	var amp = screen_shake_param.amplitude
+	rand.x = rand_range(-amp, amp)
+	rand.y = rand_range(-amp, amp)
+	
+	screen_shake_param.tween_node.interpolate_property(
+		screen_shake_param.camera,
+		"offset", 
+		screen_shake_param.camera.offset, 
+		rand, 
+		screen_shake_param.frequency_node.wait_time, 
+		screen_shake_param.TRANS, 
+		screen_shake_param.EASE)
+	screen_shake_param.tween_node.start()
+
+func _reset():
+	screen_shake_param.frequency_node.stop()
+	screen_shake_param.frequency_node.queue_free()
+	screen_shake_param.duration_node.stop()
+	screen_shake_param.duration_node.queue_free()
+	screen_shake_param.tween_node.interpolate_property(
+		screen_shake_param.camera,
+		"offset", 
+		screen_shake_param.camera.offset, 
+		Vector2(), 
+		screen_shake_param.frequency_node.wait_time, 
+		screen_shake_param.TRANS, 
+		screen_shake_param.EASE)
+	screen_shake_param.tween_node.start()
+	screen_shake_param.tween_node.connect("tween_all_completed",self,"freeTween")
+	screen_shake_param.priority = 0
+
+func freeTween():
+	screen_shake_param.tween_node.queue_free()

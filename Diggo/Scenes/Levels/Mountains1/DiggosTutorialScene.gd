@@ -34,6 +34,8 @@ func _ready():
 		printerr("Error in DiggoTutorialScene -> _ready -> SignalManager -> connect (catch_ball)") # LOGGER
 	if(SignalManager.connect("diggo_owner_interact",self,"diggoOwnerInteract") != OK):
 		printerr("Error in DiggoTutorialScene -> _ready -> SignalManager -> connect (diggo_owner_interact)") # LOGGER
+	if(SignalManager.connect("screen_shake",self,"screenShake") != OK):
+		printerr("Error in DiggoTutorialScene -> _ready -> SignalManager -> connect (screen_shake)") # LOGGER
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -85,34 +87,38 @@ func showSigns():
 func setTutorialDialogs():
 	var moveDialog = BBCodeGenerator.BBCodeColor(
 		"To move, press  " + 
-		BBCodeGenerator.BBCodeColor(
-			InputMap.get_action_list("right")[0].as_text() + 
+			formatKey(InputMap.get_action_list("right")[0]) + 
 			"," + 
-			InputMap.get_action_list("left")[0].as_text(), "#11DB00") +
+			formatKey(InputMap.get_action_list("left")[0]) +
 		".", "#D8DB00")
 	var interactDialog = BBCodeGenerator.BBCodeColor(
 		"To interact with objects, approach it, then click on the appearing button." , "#D8DB00")
 	var findDialog = BBCodeGenerator.BBCodeColor(
 		"To locate an item, press " + 
-		BBCodeGenerator.BBCodeColor(InputMap.get_action_list("find menu")[0].as_text(), "#11DB00") + 
+			formatKey(InputMap.get_action_list("find menu")[0]) +
 		", select it, then press " + 
-		BBCodeGenerator.BBCodeColor(InputMap.get_action_list("find path")[0].as_text(), "#11DB00") + 
+			formatKey(InputMap.get_action_list("find path")[0]) +
 		" to show a path to it.", "#D8DB00")
 	var jumpDialog = BBCodeGenerator.BBCodeColor(
 		"To jump, press  " + 
-		BBCodeGenerator.BBCodeColor(
-			InputMap.get_action_list("jump")[0].as_text(), "#11DB00") +
+			formatKey(InputMap.get_action_list("jump")[0]) +
 		".", "#D8DB00")
 	var digDialog = BBCodeGenerator.BBCodeColor(
 		"To dig, press  " + 
-		BBCodeGenerator.BBCodeColor(
-			InputMap.get_action_list("dig")[0].as_text(), "#11DB00") +
+			formatKey(InputMap.get_action_list("dig")[0]) +
 		". Keep in mind not everything can be dug.", "#D8DB00")
 	$Dialogs/Tutorial/MoveTutorial.DIALOGS[0].dialog = moveDialog
 	$Dialogs/Tutorial/InteractTutorial.DIALOGS[0].dialog = interactDialog
 	$Dialogs/Tutorial/FindTutorial.DIALOGS[0].dialog = findDialog
 	$Dialogs/Tutorial/JumpTutorial.DIALOGS[0].dialog = jumpDialog
 	$Dialogs/Tutorial/DigTutorial.DIALOGS[0].dialog = digDialog
+
+# formats the command to show in the rich text label
+func formatKey(key):
+	if(key is InputEventKey):
+		return BBCodeGenerator.BBCodeColor(key.as_text(),"#11DB00")
+	if(key is InputEventMouseButton):
+		return BBCodeGenerator.BBCodeColor(GlobalUtils.getInputAsString(key.button_index),"#11DB00")
 
 func _on_DestructibleTilemap_destructible_loaded():
 	emit_signal("loaded")
@@ -135,12 +141,12 @@ func _on_SecondDialog_dialogs_done():
 	$Dialogs/DiggosOwner/ThirdDialog.startDialog()
 
 func _on_ThirdDialog_dialogs_done():
-	# TODO : implement MEGA THROW
 	$DiggoKinematic.enableMovement(true)
 	$DiggosOwnerAnim.scale.x = abs($DiggosOwnerAnim.scale.x)
 	$DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x = abs($DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x)
-	$DiggosOwnerAnim.playThrowBallAnimation()
+	$DiggosOwnerAnim.playMegaThrowAnimation()
 	$Dialogs/Tutorial/FindTutorial.startDialog()
+	$BallOfDestiny/TerraformArea.throwFeedback()
 	ballTaken = false
 	nbOfBallThrows += 1
 
@@ -199,6 +205,9 @@ func diggoOwnerInteract():
 	else:
 		$Dialogs/DiggosOwner/CatchBallDialog.startDialog()
 
+func screenShake(duration,frequency,amplitude,priority):
+	GlobalUtils.shakeScreen($DiggoKinematic/DiggoCamera,duration,frequency,amplitude,priority)
+
 # Checks if the ball is dropped out of the scene
 func _on_CheckSceneItems_timeout():
 	if(get_node_or_null("BallOfDestiny") != null and not $SceneSizeRect.get_rect().has_point($BallOfDestiny.position)): # ball out of the map
@@ -227,18 +236,21 @@ func _on_CheckSceneItems_timeout():
 
 # Starts the tutorial for interactions
 func _on_InteractTutorialCheckArea_body_entered(body):
-	if(body.get_name() == "DiggoKinematic"):
+	if(body.is_in_group("Player")):
 		$Dialogs/Tutorial/InteractTutorial.startDialog()
+		$InteractTutorialCheckArea.queue_free()
 
 # Starts the jump tutorial
 func _on_JumpTutorialCheckArea_body_entered(body):
 	if(body.get_name() == "DiggoKinematic"):
 		$Dialogs/Tutorial/JumpTutorial.startDialog()
+		$JumpTutorialCheckArea.queue_free()
 
 # Starts the dig tutorial
 func _on_DigTutorialCheckArea_body_entered(body):
 	if(body.get_name() == "DiggoKinematic"):
 		$Dialogs/Tutorial/DigTutorial.startDialog()
+		$DigTutorialCheckArea.queue_free()
 
 # loop dialog choices
 func _on_LoopDialog_choice_made(signal_name):

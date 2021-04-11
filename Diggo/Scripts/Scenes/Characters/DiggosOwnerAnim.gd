@@ -2,37 +2,33 @@ extends Node2D
 
 signal throwDone(position)
 
+#func _ready(): # debug
+#	playMegaThrowAnimation()
+
 func playIdleAnimation():
 	$AnimationPlayer.play("Idle")
-	showBook(false)
-	showBall(false)
 
 func playSittingAnimation():
 	$AnimationPlayer.play("Sitting")
-	showBook(true)
-	showBall(false)
 
 func playThrowBallAnimation():
 	$AnimationPlayer.play("ThrowBall")
-	showBook(false)
-	showBall(true)
 
-func showBook(value):
-	if(value):
-		$Polygons/Book.show()
-	else:
-		$Polygons/Book.hide()
+func playMegaThrowAnimation():
+	$AnimationPlayer.play("MegaThrow")
+	$ParticleAndEffects/DuplicateSprite.startEffect()
+	$ParticleAndEffects/LazerBeamThrow/StartLazer.start()
 
-func showBall(value):
-	if(value):
-		$Polygons/BallOfDestiny.show()
-	else:
-		$Polygons/BallOfDestiny.hide()
-
-func _on_AnimationPlayer_animation_finished(anim_name):
-	match(anim_name):
+func _on_AnimationPlayer_animation_changed(old_name, _new_name):
+	match(old_name):
 		"ThrowBall":
-			emit_signal("throwDone",$Polygons/BallOfDestiny.position)
-			$AnimationPlayer.play("ThrowToIdle")
-		"ThrowToIdle":
-			$AnimationPlayer.play("Idle")
+			emit_signal("throwDone",$ViewportContainer/Viewport/Polygons/BallOfDestiny.position)
+		"MegaThrow":
+			$ParticleAndEffects/DuplicateSprite/FadeOutDelay.start()
+
+func _on_FadeOutDelay_timeout():
+	$ParticleAndEffects/DuplicateSprite.endEffect()
+
+func _on_StartLazer_timeout():
+	SignalManager.emit_screen_shake(3)
+	$ParticleAndEffects/LazerBeamThrow.startAnim()

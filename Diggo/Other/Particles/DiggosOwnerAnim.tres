@@ -1,7 +1,7 @@
 [gd_resource type="ParticlesMaterial" format=2]
 
 [resource]
-trail_divisor = 10
+trail_divisor = 20
 flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )

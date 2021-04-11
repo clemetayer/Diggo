@@ -8,6 +8,7 @@ signal catch_ball()
 signal give_ball()
 signal diggo_owner_interact()
 signal path_finding_item_chosen()
+signal screen_shake(duration,frequency,amplitude,priority)
 
 func emit_catch_ball():
 	emit_signal("catch_ball")
@@ -20,3 +21,6 @@ func emit_give_ball():
 
 func emit_path_finding_item_chosen():
 	emit_signal("path_finding_item_chosen")
+
+func emit_screen_shake(duration = 0.2, frequency = 15, amplitude = 16, priority = 0):
+	emit_signal("screen_shake",duration,frequency,amplitude,priority)

@@ -8,8 +8,6 @@
 [ext_resource path="res://Scripts/Menus/Other/KeyChangePopup.gd" type="Script" id=7]
 [ext_resource path="res://Other/Fonts/lemon/19919.ttf" type="DynamicFontData" id=11]
 
-
-
 [sub_resource type="DynamicFont" id=1]
 size = 20
 use_filter = true
