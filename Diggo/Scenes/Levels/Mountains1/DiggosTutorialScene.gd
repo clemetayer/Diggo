@@ -6,6 +6,7 @@ extends Node2D
 export(bool) var ADDITIONAL_LOADS = true # tells the scene switcher that there are additionnal resources to load on ready
 export(String,FILE) var GAME_OVER_SCENE = "res://Scenes/Menus/GameOverScreen.tscn" # Game over scene
 export(String,FILE) var HOME_SCENE = "res://Scenes/Menus/MainMenu.tscn" # TODO : replace here with next scene
+export(Vector2) var DIGGO_EAT_POSITION = Vector2(1000,570)
 
 signal loaded() # signal to tell the scene switcher that everything is loaded
 
@@ -36,6 +37,8 @@ func _ready():
 		printerr("Error in DiggoTutorialScene -> _ready -> SignalManager -> connect (diggo_owner_interact)") # LOGGER
 	if(SignalManager.connect("screen_shake",self,"screenShake") != OK):
 		printerr("Error in DiggoTutorialScene -> _ready -> SignalManager -> connect (screen_shake)") # LOGGER
+	if(SignalManager.connect("diggo_anim_info",self,"diggoAnimInfo") != OK):
+		printerr("Error in DiggoTutorialScene -> _ready -> SignalManager -> connect (diggo_anim_info)") # LOGGER
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -136,19 +139,25 @@ func _on_FirstDialog_dialogs_done():
 	nbOfBallThrows += 1
 
 func _on_SecondDialog_dialogs_done():
-	# TODO : implement give an orange animation
 	cinematicPlaying = true
-	$Dialogs/DiggosOwner/ThirdDialog.startDialog()
+	if($DiggoKinematic.position.x <= $DiggosOwnerAnim.position.x): # diggo on the left of owner
+		$DiggoKinematic.setFaceRight(true)
+	else: # diggo on the right of owner
+		$DiggoKinematic.setFaceRight(false)
+	$DiggosOwnerAnim.playGiveItem()
 
-func _on_ThirdDialog_dialogs_done():
-	$DiggoKinematic.enableMovement(true)
+func _on_ThirdDialog_dialogs_done(): # TODO : <<<<<<<<<<<<<here : enables movement after "catch !" dialog>>>>>>>>>>>>>>>>>>>
+	$DiggoKinematic.enableMovement(false)
 	$DiggosOwnerAnim.scale.x = abs($DiggosOwnerAnim.scale.x)
 	$DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x = abs($DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x)
 	$DiggosOwnerAnim.playMegaThrowAnimation()
-	$Dialogs/Tutorial/FindTutorial.startDialog()
 	$BallOfDestiny/TerraformArea.throwFeedback()
 	ballTaken = false
 	nbOfBallThrows += 1
+
+func _on_FourthDialog_dialogs_done():
+	$DiggoKinematic.enableMovement(true)
+	$Dialogs/Tutorial/FindTutorial.startDialog()
 
 func _on_LoopDialog_dialogs_done():
 	$DiggoKinematic.enableMovement(true)
@@ -180,6 +189,9 @@ func _on_DiggosOwnerAnim_throwDone(_position):
 	$DiggosOwnerAnim.playIdleAnimation()
 	cinematicPlaying = false
 
+func _on_DiggosOwnerAnim_megaThrowDone():
+	$Dialogs/DiggosOwner/FourthDialog.startDialog()
+
 # signal function when catch ball signal received
 func catchBall():
 	$BallOfDestiny.sleeping = true
@@ -205,8 +217,17 @@ func diggoOwnerInteract():
 	else:
 		$Dialogs/DiggosOwner/CatchBallDialog.startDialog()
 
+# shakes the screen
 func screenShake(duration,frequency,amplitude,priority):
 	GlobalUtils.shakeScreen($DiggoKinematic/DiggoCamera,duration,frequency,amplitude,priority)
+
+# go to the mega throw dialog
+func diggoAnimInfo(info):
+	match(info):
+		"EatAnimDone":
+			cinematicPlaying = true
+			$Dialogs/DiggosOwner/ThirdDialog.startDialog()
+			$DiggoKinematic.animationOverrided = false
 
 # Checks if the ball is dropped out of the scene
 func _on_CheckSceneItems_timeout():
@@ -266,3 +287,9 @@ func _on_LoopDialog_choice_made(signal_name):
 			$Dialogs/DiggosOwner/LoopDialog.endDialog()
 			$DiggoKinematic.enableMovement(true)
 			ballTaken = true
+
+# sets diggo eat animation
+func _on_DiggosOwnerAnim_itemGiven():
+	$DiggoKinematic.setAnimation(GlobalUtils.AnimationEnum.Eat)
+	$DiggoKinematic.animationOverrided = true
+

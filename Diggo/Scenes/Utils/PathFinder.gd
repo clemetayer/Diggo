@@ -22,6 +22,13 @@ func inputManager():
 func getPath():
 	if((PATH_LINE != "") and (get_node(PATH_LINE) is Line2D)):
 		get_node(PATH_LINE).points = get_simple_path(get_node(TARGET_START).position,get_node(TARGET_END).position)
+		$LineOpacityAnimate.interpolate_property(
+			get_node(PATH_LINE),
+			"default_color:a",
+			1,
+			0,
+			3)
+		$LineOpacityAnimate.start()
 	else: 
 		printerr("Error : Path line node not present or wrong type") # LOGGER
 

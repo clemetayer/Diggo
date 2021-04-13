@@ -377,7 +377,7 @@ BUTTONS = [ "res://Scenes/UI/Menus/CircleButtons/DiggosOwnerButton.tscn" ]
 shape = SubResource( 6 )
 
 [node name="DiggoKinematic" parent="." instance=ExtResource( 4 )]
-position = Vector2( 761.852, 556.354 )
+position = Vector2( 711.055, 556.354 )
 scale = Vector2( 0.25, 0.25 )
 DIG_SPEED = 200
 
@@ -428,8 +428,9 @@ PATH_LINE = NodePath("../PathFindLine")
 navpoly = SubResource( 24 )
 
 [node name="PathFindLine" type="Line2D" parent="."]
-width = 30.0
-default_color = Color( 1, 1, 1, 1 )
+points = PoolVector2Array( 2135.02, -475.84 )
+width = 40.0
+default_color = Color( 0.803922, 0.666667, 0.470588, 1 )
 texture = ExtResource( 21 )
 texture_mode = 1
 joint_mode = 2
@@ -462,7 +463,7 @@ DIALOGS = [ {
 [node name="SecondDialog" parent="Dialogs/DiggosOwner" instance=ExtResource( 16 )]
 DIALOGS = [ {
 "choices": false,
-"dialog": "Good ! Here is an orange piece !",
+"dialog": "Good ! Here is a grape !",
 "targets": [ NodePath("../../../DiggosOwnerAnim/diggosOwnerDialogBox") ]
 } ]
 
@@ -474,6 +475,13 @@ DIALOGS = [ {
 }, {
 "choices": false,
 "dialog": "I will throw a bit harder this time !",
+"targets": [ NodePath("../../../DiggosOwnerAnim/diggosOwnerDialogBox") ]
+} ]
+
+[node name="FourthDialog" parent="Dialogs/DiggosOwner" instance=ExtResource( 16 )]
+DIALOGS = [ {
+"choices": false,
+"dialog": "Catch !",
 "targets": [ NodePath("../../../DiggosOwnerAnim/diggosOwnerDialogBox") ]
 } ]
 
@@ -607,12 +615,15 @@ layer = -101
 [connection signal="body_entered" from="InteractTutorialCheckArea" to="." method="_on_InteractTutorialCheckArea_body_entered"]
 [connection signal="body_entered" from="JumpTutorialCheckArea" to="." method="_on_JumpTutorialCheckArea_body_entered"]
 [connection signal="body_entered" from="DigTutorialCheckArea" to="." method="_on_DigTutorialCheckArea_body_entered"]
+[connection signal="itemGiven" from="DiggosOwnerAnim" to="." method="_on_DiggosOwnerAnim_itemGiven"]
+[connection signal="megaThrowDone" from="DiggosOwnerAnim" to="." method="_on_DiggosOwnerAnim_megaThrowDone"]
 [connection signal="throwDone" from="DiggosOwnerAnim" to="." method="_on_DiggosOwnerAnim_throwDone"]
 [connection signal="tween_all_completed" from="BallOfDestiny/PositionTween" to="BallOfDestiny/TerraformArea" method="_on_PositionTween_tween_all_completed"]
 [connection signal="destructible_loaded" from="DestructibleTilemap" to="." method="_on_DestructibleTilemap_destructible_loaded"]
 [connection signal="dialogs_done" from="Dialogs/DiggosOwner/FirstDialog" to="." method="_on_FirstDialog_dialogs_done"]
 [connection signal="dialogs_done" from="Dialogs/DiggosOwner/SecondDialog" to="." method="_on_SecondDialog_dialogs_done"]
 [connection signal="dialogs_done" from="Dialogs/DiggosOwner/ThirdDialog" to="." method="_on_ThirdDialog_dialogs_done"]
+[connection signal="dialogs_done" from="Dialogs/DiggosOwner/FourthDialog" to="." method="_on_FourthDialog_dialogs_done"]
 [connection signal="choice_made" from="Dialogs/DiggosOwner/LoopDialog" to="." method="_on_LoopDialog_choice_made"]
 [connection signal="dialogs_done" from="Dialogs/DiggosOwner/LoopDialog" to="." method="_on_LoopDialog_dialogs_done"]
 [connection signal="dialogs_done" from="Dialogs/DiggosOwner/BallDroppedDialog" to="." method="_on_BallDroppedDialog_dialogs_done"]

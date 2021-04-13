@@ -22,7 +22,8 @@ enum MouseInputEnum {
 enum AnimationEnum {
 	Idle,
 	Run,
-	Jump
+	Jump,
+	Eat
 }
 
 ##### Input functions #####

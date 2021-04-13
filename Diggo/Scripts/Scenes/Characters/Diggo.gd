@@ -10,6 +10,7 @@ var animationDone = true # true if the animation is done
 var canDig = true # true if it is possible to dig (see checkTimerDig)
 var animation = GlobalUtils.AnimationEnum.Idle # current animation that should be playing (but can be ignored if needed)
 var const_floor = Vector2(0,-1) # Vector position of the floor (note : floor is a keyword and cannot be used as a variable)
+var animationOverrided = false # true if this is a specific animation that should override the animation of characterMovement
 var movementOverrided = false # overrides the velocity value (for digging in that case)
 var movementEnabled = true # true if diggo can move
 
@@ -51,6 +52,8 @@ func animationManager():
 				$DiggoScales/DiggosAnimations.playRunAnimation()
 			GlobalUtils.AnimationEnum.Jump:
 				$DiggoScales/DiggosAnimations.playJumpAnimation()
+			GlobalUtils.AnimationEnum.Eat:
+				$DiggoScales/DiggosAnimations.playEatAnimation()
 
 func enableMovement(value):
 	movementEnabled = value
@@ -85,7 +88,8 @@ func checkTimerDig():
 
 # sets the animation for diggo specified in GlobalUtils.AnimationEnum 
 func setAnimation(pAnimation):
-	self.animation = pAnimation
+	if(not animationOverrided):
+		self.animation = pAnimation
 
 # sets the faceRightValue to val in parent (check DiggoScale.gd)
 func setFaceRight(val):
