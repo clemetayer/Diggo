@@ -2,10 +2,12 @@ extends Node2D
 
 # FIXME : fix the tilemap looking a bit weird on some spots
 # TODO : add a Game over transition if the player jumps off the cliff
+# TODO : add a disable feature for interact buttons
 
 export(bool) var ADDITIONAL_LOADS = true # tells the scene switcher that there are additionnal resources to load on ready
 export(String,FILE) var GAME_OVER_SCENE = "res://Scenes/Menus/GameOverScreen.tscn" # Game over scene
 export(String,FILE) var HOME_SCENE = "res://Scenes/Menus/MainMenu.tscn" # TODO : replace here with next scene
+export(String,FILE) var DIGGOS_MASTER_HOUSE_BGM = "res://Scenes/Sound/BGM/HomeTheme.tscn" # BGM of the tutorial scene
 export(Vector2) var DIGGO_EAT_POSITION = Vector2(1000,570)
 
 signal loaded() # signal to tell the scene switcher that everything is loaded
@@ -19,6 +21,7 @@ var gameOverLoading # to avoid trying to load the game over scene multiple times
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	SoundManager.addBGMToQueue(SoundManager.createParameters(DIGGOS_MASTER_HOUSE_BGM,true,2,true,2,true,32))
 	setTutorialDialogs()
 	setSaveData()
 	setPathFind()
@@ -146,7 +149,7 @@ func _on_SecondDialog_dialogs_done():
 		$DiggoKinematic.setFaceRight(false)
 	$DiggosOwnerAnim.playGiveItem()
 
-func _on_ThirdDialog_dialogs_done(): # TODO : <<<<<<<<<<<<<here : enables movement after "catch !" dialog>>>>>>>>>>>>>>>>>>>
+func _on_ThirdDialog_dialogs_done():
 	$DiggoKinematic.enableMovement(false)
 	$DiggosOwnerAnim.scale.x = abs($DiggosOwnerAnim.scale.x)
 	$DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x = abs($DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x)
@@ -272,6 +275,20 @@ func _on_DigTutorialCheckArea_body_entered(body):
 	if(body.get_name() == "DiggoKinematic"):
 		$Dialogs/Tutorial/DigTutorial.startDialog()
 		$DigTutorialCheckArea.queue_free()
+		$SaveTutorialCheckArea/SaveTutorialCheckCollision.call_deferred("set_disabled",false) # enables the save check area tutorial
+
+# Starts the save tutorial
+func _on_SaveTutorialCheckArea_body_entered(body):
+	if(body.get_name() == "DiggoKinematic"):
+		$Dialogs/Tutorial/SaveTutorial.startDialog()
+		$SaveTutorialCheckArea.queue_free()
+		$SaveTutorialCheckArea2/SaveTutorialCheckCollision2.call_deferred("set_disabled",false) # enables the second part check of the save area tutorial
+
+# Starts the second part of the save tutorial
+func _on_SaveTutorialCheckArea2_body_entered(body):
+	if(body.get_name() == "DiggoKinematic"):
+		$Dialogs/Tutorial/SaveTutorial2.startDialog()
+		$SaveTutorialCheckArea2.queue_free()
 
 # loop dialog choices
 func _on_LoopDialog_choice_made(signal_name):
@@ -292,4 +309,3 @@ func _on_LoopDialog_choice_made(signal_name):
 func _on_DiggosOwnerAnim_itemGiven():
 	$DiggoKinematic.setAnimation(GlobalUtils.AnimationEnum.Eat)
 	$DiggoKinematic.animationOverrided = true
-

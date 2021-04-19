@@ -5,7 +5,6 @@ export(int) var RADIUS = 1000 # radius of the circle select menu
 export(float) var START_ANGLE = -PI/2 - PI/15 # start angle position for the first button
 
 # TODO : Click on buttons on hover with specific angle (like the circle select menus in most games)
-# FIXME : Buttons a bit off centered
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,7 +23,7 @@ func addButtonChildren():
 		for button in BUTTONS:
 			if(button is Button or button is TextureButton):
 				add_child(button)
-				button.set_position(Vector2(cos(angle)*RADIUS, sin(angle)*RADIUS))
+				button.set_position(Vector2(cos(angle)*RADIUS + button.rect_size.x/2, sin(angle)*RADIUS - button.rect_size.y/2))
 				angle = fmod(angle+angleAdd,2*PI)
 
 # refreshes the buttons in the menu

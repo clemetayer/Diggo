@@ -38,5 +38,5 @@ func _on_MouseButton_pressed():
 # When mouse key selected, update the key
 func _on_MouseButtonsPopup_index_pressed(index):
 	var mouseButtonText = $MouseButtonsPopup.get_item_text(index)
-	currentCode = GlobalUtils.MouseInputEnum[mouseButtonText] # IDEA : put mouse input enum in GlobalParameters ?
+	currentCode = GlobalUtils.MouseInputEnum[mouseButtonText] 
 	setText()

@@ -24,6 +24,8 @@ func _on_Key_pressed():
 [node name="KeyCommand" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -32,6 +34,8 @@ __meta__ = {
 [node name="KeyCommandContainer" type="HBoxContainer" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }

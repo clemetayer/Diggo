@@ -5,10 +5,14 @@
 [ext_resource path="res://Scripts/UI/Menus/CircleButtons/DiggosOwnerButton.gd" type="Script" id=3]
 
 [node name="DiggosOwnerButton" type="TextureButton"]
-anchor_right = 0.171
-anchor_bottom = 0.292
-margin_right = -105.104
-margin_bottom = -105.2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -35.0
+margin_top = -35.0
+margin_right = 35.0
+margin_bottom = 35.0
 rect_scale = Vector2( 2.5, 2.5 )
 texture_normal = ExtResource( 1 )
 texture_pressed = ExtResource( 1 )

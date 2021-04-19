@@ -33,7 +33,7 @@ func createDestructibleSprite(pos):
 	destructible_instance.BLOCK_PATH = BLOCK_PATH
 	destructible_instance.TILE_SIZE_POW = TILE_SIZE_POW
 	destructible_instance.MIN_SIZE_POW = MIN_SIZE_POW
-	get_parent().get_parent().get_parent().add_child(destructible_instance)
+	get_parent().get_parent().get_parent().add_child(destructible_instance) # it's very likely that the error is somewhere else. Uncomment the yields in _ready and createViewport to see the real error
 	destructible_instance.connect("destructible_sprite_loaded",self,"destructibleLoaded")
 	destructible_instance.parseSprite()
 
@@ -59,7 +59,9 @@ func createViewport(position,size):
 	viewport = Viewport.new()
 	viewport.transparent_bg = true
 	viewport.size = size
+	viewport.own_world = true
 	viewport.set_usage(0)
+	
 	viewport.render_target_v_flip = true
 	viewportC.add_child(viewport)
 	get_parent().call_deferred("add_child",viewportC)

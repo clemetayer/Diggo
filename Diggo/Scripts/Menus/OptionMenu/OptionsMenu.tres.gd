@@ -4,10 +4,6 @@ export (String,FILE) var KEY_COMMAND = "res://Scenes/Menus/KeyCommand.tscn"
 export (String,FILE) var MAIN_MENU = "res://Scenes/Menus/MainMenu.tscn"
 export (bool) var IS_FROM_PAUSE = false
 
-# TODO : After managing presets, check that every command is implemented before updating with preset (or put "UNASSIGNED_KEY" ?)
-# TODO : Actually change the keys at start/when modifying the keys
-# TODO : Remove the ".json" at the end of the presets
-
 var keyCommandLoad # instance of key command scene
 
 # Called when the node enters the scene tree for the first time.
@@ -19,33 +15,36 @@ func _ready():
 	loadAudioLevels()
 	loadVideoParameters()
 	if(not IS_FROM_PAUSE):
-		$MarginContainer/HBoxContainer/MenusButtons/ReturnButton.visible = false
+		$MenusButtons/ReturnButton.visible = false
 	else:
 		$Camera2D.current = false
 
 # sets the option button to the preset specified in parameters
 func loadControlsPreset():
-	$MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/PresetsButton.select(GlobalParameters.getCurrentPresetIndex())
+	$MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/PresetsButton.select(GlobalParameters.getCurrentPresetIndex())
 
 # selects the video parameter defined in GlobalParameters
 func loadVideoParameters():
 	match(int(GlobalParameters.getScreenMode())):
 		GlobalParameters.screenModes.FULL_SCREEN:
-			$MarginContainer/HBoxContainer/TabContainer/Video/VideoMargin/VideoOptions/WindowType/WindowTypeOption.select(1)
+			$MarginContainer/TabContainer/Video/VideoMargin/VideoOptions/WindowType/WindowTypeOption.select(1)
 		GlobalParameters.screenModes.WINDOWED:
-			$MarginContainer/HBoxContainer/TabContainer/Video/VideoMargin/VideoOptions/WindowType/WindowTypeOption.select(0)
+			$MarginContainer/TabContainer/Video/VideoMargin/VideoOptions/WindowType/WindowTypeOption.select(0)
 
 # loads the audio levels from parameters
 func loadAudioLevels():
-	$MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginMasterSlider/MasterSlider.value = GlobalParameters.getSoundMaster()
-	$MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginMusicSlider/MusicSlider.value = GlobalParameters.getSoundMusic()
-	$MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginFXSlider/FXSlider.value = GlobalParameters.getSoundFX()
+	$MarginContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginMasterSlider/MasterSlider.value = GlobalParameters.getSoundMaster()
+	$MarginContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginMusicSlider/MusicSlider.value = GlobalParameters.getSoundMusic()
+	$MarginContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginFXSlider/FXSlider.value = GlobalParameters.getSoundFX()
 
 # adds the preset names in PresetsButton
 func addPresets():
 	var presets = GlobalParameters.getPresets()
 	for preset in presets:
-		$MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/PresetsButton.add_item(preset)
+		if(preset.ends_with(".json")): # should remove the ".json" at the end
+			$MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/PresetsButton.add_item(preset.left(preset.length() - ".json".length()))
+		else:
+			$MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/PresetsButton.add_item(preset)
 
 # adds the keys in the controls panel
 func addKeys():
@@ -55,7 +54,7 @@ func addKeys():
 
 # removes all the keys
 func resetKeys():
-	GlobalUtils.removeAllChildren($MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/KeysMargin/KeysScroll/KeysContainer)
+	GlobalUtils.removeAllChildren($MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/KeysMargin/KeysScroll/KeysContainer)
 
 # adds the key with command in controls panel
 func addKey(command,key):
@@ -63,7 +62,7 @@ func addKey(command,key):
 	keyCommandInstance.COMMAND = command
 	keyCommandInstance.KEY = key
 	keyCommandInstance.connect("change_key",self,"changeKey")
-	$MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/KeysMargin/KeysScroll/KeysContainer.add_child(keyCommandInstance)
+	$MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/KeysMargin/KeysScroll/KeysContainer.add_child(keyCommandInstance)
 
 # shows the popup to change the key
 func changeKey(keyInstance):
@@ -93,9 +92,11 @@ func _on_SavePresetButton_pressed():
 func _on_SavePresetPopup_confirmed():
 	var name = $MarginContainer/SavePresetPopup/PresetEdit.get_text()
 	GlobalParameters.saveCommandsPreset(name)
-	$MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/PresetsButton.add_item(name)
-	var index = $MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/PresetsButton.get_item_count()-1
-	$MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/PresetsButton.select(index)
+	$MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/PresetsButton.add_item(name)
+	var index = $MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/PresetsButton.get_item_count()-1
+	$MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/PresetsButton.select(index)
+	GlobalParameters.saveParameters()
+	GlobalParameters.mapKeys()
 
 # select the preset
 func _on_PresetsButton_item_selected(index):
@@ -119,6 +120,7 @@ func _on_FXSlider_value_changed(value):
 # saves the current parameters 
 func _on_MainMenuButton_pressed():
 	GlobalParameters.saveParameters()
+	GlobalParameters.mapKeys()
 	if(IS_FROM_PAUSE):
 		$MarginContainer/AcceptMainMenu.popup_centered_ratio(0.25)
 	else:
@@ -128,6 +130,7 @@ func _on_MainMenuButton_pressed():
 # hides self (that should normally be in the pause menu in that case)
 func _on_ReturnButton_pressed():
 	GlobalParameters.saveParameters()
+	GlobalParameters.mapKeys()
 	visible = false
 
 # saves the parameters, unpauses, and goes back to main menu 
@@ -135,3 +138,8 @@ func _on_AcceptMainMenu_confirmed():
 	get_tree().paused = false
 	if(get_tree().change_scene(MAIN_MENU) != OK): 
 		printerr("Error in OptionsMenu -> _on_MainMenuButton_pressed -> change_scene (MAIN_MENU)") # LOGGER
+
+# maps the buttons to the current preset
+func _on_SelectPresetButton_pressed():
+	GlobalParameters.saveParameters()
+	GlobalParameters.mapKeys()

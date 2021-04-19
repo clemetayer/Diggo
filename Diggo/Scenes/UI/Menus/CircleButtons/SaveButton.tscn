@@ -6,8 +6,14 @@
 [ext_resource path="res://Scripts/UI/Menus/CircleButtons/SaveButton.gd" type="Script" id=4]
 
 [node name="SaveButton" type="TextureButton"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -50.0
+margin_top = -50.0
+margin_right = 50.0
+margin_bottom = 50.0
 rect_scale = Vector2( 2.5, 2.5 )
 texture_normal = ExtResource( 1 )
 texture_pressed = ExtResource( 2 )

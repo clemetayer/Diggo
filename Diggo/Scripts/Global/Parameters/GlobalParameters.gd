@@ -9,20 +9,11 @@ enum screenModes {WINDOWED, FULL_SCREEN}
 var commandPresets = []
 
 # commands assigned to keys, see https://docs.godotengine.org/en/stable/classes/class_@globalscope.html#enum-globalscope-keylist
-var commands = {
-	"up": KEY_Z,
-	"down": KEY_S,
-	"left": KEY_Q,
-	"right": KEY_D,
-	"action": BUTTON_LEFT,
-	"jump": KEY_SPACE,
-	"find path": KEY_F,
-	"interact": KEY_I
-}
+var commands = {}
 
 # current parameters selected
 var parameters = {
-	"commandsPreset":"Preset1",
+	"commandsPreset":"BasePreset",
 	"sounds": {
 		"master":100,
 		"music":100,
@@ -33,10 +24,28 @@ var parameters = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	loadBasePreset()
 	loadCommandsPresetsNames()
 	loadParameters()
 	loadPresetWithName(getCommandsPreset())
 	setScreenParameters()
+	mapKeys()
+
+# maps the commands key in game parameters
+func mapKeys():
+	for command in commands.keys():
+		# delete the key
+		if not InputMap.get_action_list(command).empty():
+			InputMap.action_erase_event(command, InputMap.get_action_list(command)[0])
+		# adds the key
+		if(commands[command]>0 and commands[command]<=9): # is mouse button
+			var input = InputEventMouseButton.new()
+			input.button_index = commands[command]
+			InputMap.action_add_event(command, input)
+		else: # is keyboard
+			var input = InputEventKey.new()
+			input.scancode = commands[command]
+			InputMap.action_add_event(command,input)
 
 # saves the current commands preset at COMMANDS_SAVE_PATH/<presetName>.json
 func saveCommandsPreset(presetName):
@@ -48,6 +57,18 @@ func saveCommandsPreset(presetName):
 	file.store_string(to_json(commands))
 	file.close()
 
+# loads a base preset from the project parameters
+func loadBasePreset():
+	var commandsArray = InputMap.get_actions()
+	for command in commandsArray:
+		if(not (command.begins_with("ui_") # do not include the basic godot commands
+		or command == "next_dialog")): # do not include the "next dialog" command
+			var key = InputMap.get_action_list(command)[0]
+			if(key is InputEventMouseButton):
+				commands[command] = key.button_index
+			elif(key is InputEventKey):
+				commands[command] = key.scancode
+	
 # loads the valid save presets names
 func loadCommandsPresetsNames():
 	var dir = Directory.new()

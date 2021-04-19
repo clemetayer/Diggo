@@ -7,7 +7,7 @@ export var DIALOG_DELAY = 2 # delay between the two dialogs
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	SoundManager.playBGMWithFilter(DIGGOS_MASTER_HOUSE_BGM)
+	SoundManager.addBGMToQueue(SoundManager.createParameters(DIGGOS_MASTER_HOUSE_BGM,true,8,true,2,true,0,32))
 	$DiggosMasterAnim.playSittingAnimation()
 	$DiggosAnimations.playSleepingAnimation()
 	$FirstDialog.startDialog()
@@ -23,7 +23,7 @@ func setSaveData():
 # change Diggo eyes and sleep text when first dialog done
 func _on_FirstDialog_dialogs_done():
 	$SleepTextLabel.set_bbcode(BBCodeGenerator.BBCodeColor("!","yellow"))
-	$DiggosAnimations.openEyes()
+	$DiggosAnimations.playWakeUpAnimation()
 	$SleepTextLabel.set_scale(Vector2(4,4))
 	yield(GlobalUtils.wait(DIALOG_DELAY),"completed")
 	$SecondDialog.startDialog()

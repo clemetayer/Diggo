@@ -5,17 +5,17 @@ extends Node
 
 ##### Enums #####
 # mouse input custom enum (because can't get global mouse enum as string)
-# FIXME : Enum values not correct somehow
-enum MouseInputEnum {
-	LeftClick = 1,
-	RightClick = 2,
-	MiddleClick = 3,
-	ExtraButton1 = 8,
-	ExtraButton2 = 9,
-	MouseWheelUp = 4,
-	MouseWheelDown = 5,
-	MouseWheelLeft = 6,
-	MouseWheelRight = 7
+# ARCHITECTURE : Actually, that's not an enum
+var MouseInputEnum = {
+	"LeftClick" : 1,
+	"RightClick" : 2,
+	"MiddleClick" : 3,
+	"ExtraButton1" : 8,
+	"ExtraButton2" : 9,
+	"MouseWheelUp" : 4,
+	"MouseWheelDown" : 5,
+	"MouseWheelLeft" : 6,
+	"MouseWheelRight" : 7
 }
 
 # animation global enums (to have common values for each character)
@@ -30,7 +30,9 @@ enum AnimationEnum {
 # gets the enum mouse input value as a string
 func getMouseInputAsString(code) -> String:
 	if(code <= 9 and code > 0):
-		return MouseInputEnum.keys()[code]
+		for mouseButton in MouseInputEnum: # kind of a dirty way to do this, but it works, and it's only 9 codes that should not move that much
+			if(MouseInputEnum[mouseButton] == code):
+				return mouseButton
 	return ""
 
 # gets the name of the input code as a string

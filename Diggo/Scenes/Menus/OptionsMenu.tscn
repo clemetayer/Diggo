@@ -1,19 +1,50 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scenes/Menus/MainMenuSprites.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Menus/MainMenuButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Menus/ReturnButton.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Menus/OptionMenu/OptionsMenu.tres.gd" type="Script" id=4]
 [ext_resource path="res://Other/Themes/MenusThemes.tres" type="Theme" id=5]
+[ext_resource path="res://Other/Fonts/lemon/DynamicLemonS13.tres" type="DynamicFont" id=6]
 [ext_resource path="res://Scripts/Menus/Other/KeyChangePopup.gd" type="Script" id=7]
 [ext_resource path="res://Other/Fonts/lemon/19919.ttf" type="DynamicFontData" id=11]
 
 [sub_resource type="DynamicFont" id=1]
+size = 15
+font_data = ExtResource( 11 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 15
+font_data = ExtResource( 11 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 15
+font_data = ExtResource( 11 )
+
+[sub_resource type="Theme" id=6]
+default_font = SubResource( 5 )
+
+[sub_resource type="Theme" id=7]
+default_font = ExtResource( 6 )
+
+[sub_resource type="Theme" id=8]
+default_font = ExtResource( 6 )
+
+[sub_resource type="Theme" id=9]
+default_font = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=10]
 size = 20
 use_filter = true
 font_data = ExtResource( 11 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=11]
 content_margin_left = 10.0
 content_margin_right = 10.0
 content_margin_top = 15.0
@@ -32,7 +63,7 @@ shadow_color = Color( 0, 0, 0, 0.184314 )
 shadow_size = 1
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=12]
 content_margin_left = 10.0
 content_margin_right = 10.0
 content_margin_top = 15.0
@@ -51,7 +82,7 @@ shadow_color = Color( 0, 0, 0, 0.184314 )
 shadow_size = 1
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=13]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 border_width_left = 2
 border_width_top = 2
@@ -66,7 +97,7 @@ shadow_color = Color( 0, 0, 0, 0.184314 )
 shadow_size = 1
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=14]
 content_margin_left = 10.0
 content_margin_right = 10.0
 content_margin_top = 15.0
@@ -85,7 +116,7 @@ shadow_color = Color( 0, 0, 0, 0.184314 )
 shadow_size = 1
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=15]
 content_margin_left = 10.0
 content_margin_right = 10.0
 content_margin_top = 15.0
@@ -104,39 +135,18 @@ shadow_color = Color( 0, 0, 0, 0.184314 )
 shadow_size = 1
 anti_aliasing = false
 
-[sub_resource type="Theme" id=7]
+[sub_resource type="Theme" id=16]
 Button/colors/font_color = Color( 0.270588, 0.788235, 0.423529, 1 )
 Button/colors/font_color_disabled = Color( 0.337255, 0.380392, 0.741176, 1 )
 Button/colors/font_color_hover = Color( 0.258824, 0.878431, 0.309804, 1 )
 Button/colors/font_color_pressed = Color( 0.133333, 0.854902, 0.54902, 1 )
 Button/constants/hseparation = 2
-Button/fonts/font = SubResource( 1 )
-Button/styles/disabled = SubResource( 2 )
-Button/styles/focus = SubResource( 3 )
-Button/styles/hover = SubResource( 4 )
-Button/styles/normal = SubResource( 5 )
-Button/styles/pressed = SubResource( 6 )
-
-[sub_resource type="DynamicFont" id=8]
-size = 15
-font_data = ExtResource( 11 )
-
-[sub_resource type="Theme" id=9]
-default_font = SubResource( 8 )
-
-[sub_resource type="DynamicFont" id=10]
-size = 15
-font_data = ExtResource( 11 )
-
-[sub_resource type="Theme" id=11]
-default_font = SubResource( 10 )
-
-[sub_resource type="DynamicFont" id=12]
-size = 15
-font_data = ExtResource( 11 )
-
-[sub_resource type="Theme" id=13]
-default_font = SubResource( 12 )
+Button/fonts/font = SubResource( 10 )
+Button/styles/disabled = SubResource( 11 )
+Button/styles/focus = SubResource( 12 )
+Button/styles/hover = SubResource( 13 )
+Button/styles/normal = SubResource( 14 )
+Button/styles/pressed = SubResource( 15 )
 
 [node name="OptionsMenu" type="Node2D"]
 script = ExtResource( 4 )
@@ -151,6 +161,7 @@ position = Vector2( 512, 300 )
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_right = 1024.58
 margin_bottom = 600.995
+mouse_filter = 1
 theme = ExtResource( 5 )
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
@@ -160,55 +171,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="TabContainer" type="TabContainer" parent="MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1004.0
 margin_bottom = 580.0
-custom_constants/separation = 10
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MenusButtons" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-margin_right = 133.0
-margin_bottom = 560.0
-theme = SubResource( 7 )
-custom_constants/separation = 5
-
-[node name="MainMenuButton" parent="MarginContainer/HBoxContainer/MenusButtons" instance=ExtResource( 2 )]
-margin_right = 133.0
-margin_bottom = 37.0
-script = null
-
-[node name="ReturnButton" parent="MarginContainer/HBoxContainer/MenusButtons" instance=ExtResource( 3 )]
-margin_top = 42.0
-margin_right = 133.0
-margin_bottom = 79.0
-rect_scale = Vector2( 1, 1 )
-
-[node name="TabContainer" type="TabContainer" parent="MarginContainer/HBoxContainer"]
-margin_left = 143.0
-margin_right = 984.0
-margin_bottom = 560.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Controls" type="Button" parent="MarginContainer/HBoxContainer/TabContainer"]
+[node name="Controls" type="Button" parent="MarginContainer/TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 2.0
 margin_top = 39.0
 margin_right = -2.0
 margin_bottom = -2.0
-theme = SubResource( 9 )
+theme = SubResource( 2 )
 
-[node name="ControlsMargin" type="MarginContainer" parent="MarginContainer/HBoxContainer/TabContainer/Controls"]
-margin_right = 767.0
-margin_bottom = 470.0
+[node name="ControlsMargin" type="MarginContainer" parent="MarginContainer/TabContainer/Controls"]
+margin_right = 980.0
+margin_bottom = 520.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
@@ -217,24 +202,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ControlsOptions" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin"]
+[node name="ControlsOptions" type="VBoxContainer" parent="MarginContainer/TabContainer/Controls/ControlsMargin"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 825.0
-margin_bottom = 516.0
+margin_right = 970.0
+margin_bottom = 510.0
 custom_constants/separation = 15
 
-[node name="PresetsCenter" type="CenterContainer" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions"]
-margin_right = 815.0
+[node name="PresetsCenter" type="CenterContainer" parent="MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions"]
+margin_right = 960.0
 margin_bottom = 31.0
 
-[node name="PresetsHBox" type="HBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter"]
-margin_left = 303.0
-margin_right = 511.0
+[node name="PresetsHBox" type="HBoxContainer" parent="MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter"]
+margin_left = 376.0
+margin_right = 584.0
 margin_bottom = 31.0
 custom_constants/separation = 15
 
-[node name="PresetsButton" type="OptionButton" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox"]
+[node name="PresetsButton" type="OptionButton" parent="MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox"]
 margin_right = 80.0
 margin_bottom = 31.0
 text = "Preset"
@@ -242,17 +227,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SavePresetButton" type="Button" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox"]
+[node name="SavePresetButton" type="Button" parent="MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox"]
 margin_left = 95.0
 margin_right = 208.0
 margin_bottom = 31.0
 text = "Save preset"
 
-[node name="KeysMargin" type="MarginContainer" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions"]
+[node name="KeysMargin" type="MarginContainer" parent="MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions"]
 margin_top = 46.0
-margin_right = 815.0
-margin_bottom = 506.0
-rect_min_size = Vector2( 815, 460 )
+margin_right = 960.0
+margin_bottom = 446.0
+rect_min_size = Vector2( 0, 400 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 40
@@ -260,16 +245,33 @@ custom_constants/margin_top = 40
 custom_constants/margin_left = 40
 custom_constants/margin_bottom = 40
 
-[node name="KeysScroll" type="ScrollContainer" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/KeysMargin"]
+[node name="KeysScroll" type="ScrollContainer" parent="MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/KeysMargin"]
 margin_left = 40.0
 margin_top = 40.0
-margin_right = 775.0
-margin_bottom = 420.0
+margin_right = 920.0
+margin_bottom = 360.0
 
-[node name="KeysContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/KeysMargin/KeysScroll"]
-custom_constants/separation = 30
+[node name="KeysContainer" type="GridContainer" parent="MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/KeysMargin/KeysScroll"]
+margin_right = 880.0
+margin_bottom = 320.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 4
 
-[node name="Audio" type="Button" parent="MarginContainer/HBoxContainer/TabContainer"]
+[node name="SelectPresetContainer" type="CenterContainer" parent="MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions"]
+margin_top = 461.0
+margin_right = 960.0
+margin_bottom = 492.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+
+[node name="SelectPresetButton" type="Button" parent="MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/SelectPresetContainer"]
+margin_left = 418.0
+margin_right = 542.0
+margin_bottom = 31.0
+text = "Select preset"
+
+[node name="Audio" type="Button" parent="MarginContainer/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -277,9 +279,9 @@ margin_left = 2.0
 margin_top = 39.0
 margin_right = -2.0
 margin_bottom = -2.0
-theme = SubResource( 11 )
+theme = SubResource( 4 )
 
-[node name="AudioMargin" type="MarginContainer" parent="MarginContainer/HBoxContainer/TabContainer/Audio"]
+[node name="AudioMargin" type="MarginContainer" parent="MarginContainer/TabContainer/Audio"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 6.10352e-05
@@ -293,79 +295,79 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AudioOptions" type="HBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin"]
+[node name="AudioOptions" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/AudioMargin"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 827.0
+margin_right = 970.0
 margin_bottom = 507.0
 
-[node name="Labels" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions"]
+[node name="Labels" type="VBoxContainer" parent="MarginContainer/TabContainer/Audio/AudioMargin/AudioOptions"]
 margin_right = 148.0
 margin_bottom = 450.0
 
-[node name="MasterVolume" type="Label" parent="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Labels"]
+[node name="MasterVolume" type="Label" parent="MarginContainer/TabContainer/Audio/AudioMargin/AudioOptions/Labels"]
 margin_right = 148.0
 margin_bottom = 45.0
 text = "Master Volume : 
 "
 
-[node name="MusicVolume" type="Label" parent="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Labels"]
+[node name="MusicVolume" type="Label" parent="MarginContainer/TabContainer/Audio/AudioMargin/AudioOptions/Labels"]
 margin_top = 49.0
 margin_right = 148.0
 margin_bottom = 94.0
 text = "Music Volume : 
 "
 
-[node name="FXVolume" type="Label" parent="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Labels"]
+[node name="FXVolume" type="Label" parent="MarginContainer/TabContainer/Audio/AudioMargin/AudioOptions/Labels"]
 margin_top = 98.0
 margin_right = 148.0
 margin_bottom = 143.0
 text = "FX Volume : 
 "
 
-[node name="Sliders" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions"]
+[node name="Sliders" type="VBoxContainer" parent="MarginContainer/TabContainer/Audio/AudioMargin/AudioOptions"]
 margin_left = 152.0
 margin_right = 747.0
 margin_bottom = 450.0
 size_flags_horizontal = 3
 custom_constants/separation = 35
 
-[node name="MarginMasterSlider" type="MarginContainer" parent="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders"]
+[node name="MarginMasterSlider" type="MarginContainer" parent="MarginContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders"]
 margin_right = 595.0
 margin_bottom = 16.0
 custom_constants/margin_right = 300
 
-[node name="MasterSlider" type="HSlider" parent="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginMasterSlider"]
+[node name="MasterSlider" type="HSlider" parent="MarginContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginMasterSlider"]
 margin_right = 295.0
 margin_bottom = 16.0
 value = 100.0
 rounded = true
 
-[node name="MarginMusicSlider" type="MarginContainer" parent="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders"]
+[node name="MarginMusicSlider" type="MarginContainer" parent="MarginContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders"]
 margin_top = 51.0
 margin_right = 595.0
 margin_bottom = 67.0
 custom_constants/margin_right = 300
 
-[node name="MusicSlider" type="HSlider" parent="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginMusicSlider"]
+[node name="MusicSlider" type="HSlider" parent="MarginContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginMusicSlider"]
 margin_right = 295.0
 margin_bottom = 16.0
 value = 100.0
 rounded = true
 
-[node name="MarginFXSlider" type="MarginContainer" parent="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders"]
+[node name="MarginFXSlider" type="MarginContainer" parent="MarginContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders"]
 margin_top = 102.0
 margin_right = 595.0
 margin_bottom = 118.0
 custom_constants/margin_right = 300
 
-[node name="FXSlider" type="HSlider" parent="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginFXSlider"]
+[node name="FXSlider" type="HSlider" parent="MarginContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginFXSlider"]
 margin_right = 295.0
 margin_bottom = 16.0
 value = 100.0
 rounded = true
 
-[node name="Video" type="Button" parent="MarginContainer/HBoxContainer/TabContainer"]
+[node name="Video" type="Button" parent="MarginContainer/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -373,9 +375,9 @@ margin_left = 2.0
 margin_top = 39.0
 margin_right = -2.0
 margin_bottom = -2.0
-theme = SubResource( 13 )
+theme = SubResource( 6 )
 
-[node name="VideoMargin" type="MarginContainer" parent="MarginContainer/HBoxContainer/TabContainer/Video"]
+[node name="VideoMargin" type="MarginContainer" parent="MarginContainer/TabContainer/Video"]
 margin_right = 767.0
 margin_bottom = 470.0
 custom_constants/margin_right = 10
@@ -386,23 +388,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VideoOptions" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/Video/VideoMargin"]
+[node name="VideoOptions" type="VBoxContainer" parent="MarginContainer/TabContainer/Video/VideoMargin"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 757.0
 margin_bottom = 460.0
 
-[node name="WindowType" type="HBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/Video/VideoMargin/VideoOptions"]
+[node name="WindowType" type="HBoxContainer" parent="MarginContainer/TabContainer/Video/VideoMargin/VideoOptions"]
 margin_right = 747.0
 margin_bottom = 31.0
 
-[node name="WindowTypeLabel" type="Label" parent="MarginContainer/HBoxContainer/TabContainer/Video/VideoMargin/VideoOptions/WindowType"]
+[node name="WindowTypeLabel" type="Label" parent="MarginContainer/TabContainer/Video/VideoMargin/VideoOptions/WindowType"]
 margin_top = 5.0
 margin_right = 155.0
 margin_bottom = 26.0
 text = "Window setting  : "
 
-[node name="WindowTypeOption" type="OptionButton" parent="MarginContainer/HBoxContainer/TabContainer/Video/VideoMargin/VideoOptions/WindowType"]
+[node name="WindowTypeOption" type="OptionButton" parent="MarginContainer/TabContainer/Video/VideoMargin/VideoOptions/WindowType"]
 margin_left = 159.0
 margin_right = 279.0
 margin_bottom = 31.0
@@ -415,6 +417,8 @@ margin_left = 20.0
 margin_top = 20.0
 margin_right = 1004.0
 margin_bottom = 580.0
+rect_min_size = Vector2( 300, 120 )
+theme = SubResource( 7 )
 window_title = "Quit ?"
 dialog_text = "Are you sure you want to quit ? (All changes since last save will be lost !)"
 
@@ -423,6 +427,8 @@ margin_left = 20.0
 margin_top = 20.0
 margin_right = 1004.0
 margin_bottom = 580.0
+rect_min_size = Vector2( 300, 200 )
+theme = SubResource( 8 )
 popup_exclusive = true
 window_title = "Enter a new key"
 script = ExtResource( 7 )
@@ -431,7 +437,7 @@ script = ExtResource( 7 )
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 976.0
-margin_bottom = 507.0
+margin_bottom = 513.0
 items = [ "LeftClick", null, 0, false, false, 0, 0, null, "", false, "RightClick", null, 0, false, false, 1, 0, null, "", false, "MiddleClick", null, 0, false, false, 2, 0, null, "", false, "ExtraButton1", null, 0, false, false, 3, 0, null, "", false, "ExtraButton2", null, 0, false, false, 4, 0, null, "", false, "MouseWheelUp", null, 0, false, false, 5, 0, null, "", false, "MouseWheelDown", null, 0, false, false, 6, 0, null, "", false, "MouseWheelRight", null, 0, false, false, 7, 0, null, "", false, "MouseWheelLeft", null, 0, false, false, 8, 0, null, "", false ]
 hide_on_state_item_selection = true
 
@@ -439,45 +445,52 @@ hide_on_state_item_selection = true
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 976.0
-margin_bottom = 507.0
+margin_bottom = 513.0
+rect_min_size = Vector2( 300, 150 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="KeyChangeVBox" type="VBoxContainer" parent="MarginContainer/KeyChangePopup/KeyChangeCenter"]
-margin_left = 399.0
-margin_top = 196.0
-margin_right = 569.0
-margin_bottom = 302.0
+margin_left = 334.0
+margin_top = 177.0
+margin_right = 634.0
+margin_bottom = 327.0
+rect_min_size = Vector2( 300, 150 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="KeyChangeText" type="RichTextLabel" parent="MarginContainer/KeyChangePopup/KeyChangeCenter/KeyChangeVBox"]
-margin_right = 170.0
-margin_bottom = 65.0
+margin_right = 300.0
+margin_bottom = 165.0
 rect_min_size = Vector2( 170, 65 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 bbcode_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MouseJoystickCenter" type="CenterContainer" parent="MarginContainer/KeyChangePopup/KeyChangeCenter/KeyChangeVBox"]
-margin_top = 69.0
-margin_right = 170.0
-margin_bottom = 93.0
+margin_top = 169.0
+margin_right = 300.0
+margin_bottom = 200.0
+size_flags_horizontal = 3
 
 [node name="MouseJoystickButtons" type="HBoxContainer" parent="MarginContainer/KeyChangePopup/KeyChangeCenter/KeyChangeVBox/MouseJoystickCenter"]
-margin_left = 42.0
-margin_right = 128.0
-margin_bottom = 37.0
+margin_left = 116.0
+margin_right = 184.0
+margin_bottom = 31.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MouseButton" type="Button" parent="MarginContainer/KeyChangePopup/KeyChangeCenter/KeyChangeVBox/MouseJoystickCenter/MouseJoystickButtons"]
-margin_right = 48.0
-margin_bottom = 24.0
+margin_right = 68.0
+margin_bottom = 31.0
 text = "Mouse"
 
 [node name="SavePresetPopup" type="ConfirmationDialog" parent="MarginContainer"]
@@ -485,25 +498,47 @@ margin_left = 20.0
 margin_top = 20.0
 margin_right = 1004.0
 margin_bottom = 580.0
+rect_min_size = Vector2( 300, 120 )
+theme = SubResource( 9 )
 window_title = "Enter a preset name"
 dialog_text = "Enter a preset name : "
 
 [node name="PresetEdit" type="LineEdit" parent="MarginContainer/SavePresetPopup"]
 margin_left = 8.0
-margin_top = 35.0
+margin_top = 29.0
 margin_right = 976.0
-margin_bottom = 507.0
-[connection signal="pressed" from="MarginContainer/HBoxContainer/MenusButtons/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/MenusButtons/ReturnButton" to="." method="_on_ReturnButton_pressed"]
-[connection signal="item_selected" from="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/PresetsButton" to="." method="_on_PresetsButton_item_selected"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/SavePresetButton" to="." method="_on_SavePresetButton_pressed"]
-[connection signal="value_changed" from="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginMasterSlider/MasterSlider" to="." method="_on_MasterSlider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginMusicSlider/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/HBoxContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginFXSlider/FXSlider" to="." method="_on_FXSlider_value_changed"]
-[connection signal="item_selected" from="MarginContainer/HBoxContainer/TabContainer/Video/VideoMargin/VideoOptions/WindowType/WindowTypeOption" to="." method="_on_WindowTypeOption_item_selected"]
+margin_bottom = 513.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MenusButtons" type="HBoxContainer" parent="."]
+margin_right = 227.0
+margin_bottom = 37.0
+theme = SubResource( 16 )
+custom_constants/separation = 5
+
+[node name="MainMenuButton" parent="MenusButtons" instance=ExtResource( 2 )]
+margin_right = 133.0
+margin_bottom = 37.0
+script = null
+
+[node name="ReturnButton" parent="MenusButtons" instance=ExtResource( 3 )]
+margin_left = 138.0
+margin_right = 227.0
+margin_bottom = 37.0
+rect_scale = Vector2( 1, 1 )
+[connection signal="item_selected" from="MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/PresetsButton" to="." method="_on_PresetsButton_item_selected"]
+[connection signal="pressed" from="MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/SavePresetButton" to="." method="_on_SavePresetButton_pressed"]
+[connection signal="pressed" from="MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/SelectPresetContainer/SelectPresetButton" to="." method="_on_SelectPresetButton_pressed"]
+[connection signal="value_changed" from="MarginContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginMasterSlider/MasterSlider" to="." method="_on_MasterSlider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginMusicSlider/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/TabContainer/Audio/AudioMargin/AudioOptions/Sliders/MarginFXSlider/FXSlider" to="." method="_on_FXSlider_value_changed"]
+[connection signal="item_selected" from="MarginContainer/TabContainer/Video/VideoMargin/VideoOptions/WindowType/WindowTypeOption" to="." method="_on_WindowTypeOption_item_selected"]
 [connection signal="confirmed" from="MarginContainer/AcceptMainMenu" to="." method="_on_AcceptMainMenu_confirmed"]
 [connection signal="confirmed" from="MarginContainer/KeyChangePopup" to="MarginContainer/KeyChangePopup" method="_on_KeyChangePopup_confirmed"]
 [connection signal="key_changed" from="MarginContainer/KeyChangePopup" to="." method="_on_KeyChangePopup_key_changed"]
 [connection signal="index_pressed" from="MarginContainer/KeyChangePopup/MouseButtonsPopup" to="MarginContainer/KeyChangePopup" method="_on_MouseButtonsPopup_index_pressed"]
 [connection signal="pressed" from="MarginContainer/KeyChangePopup/KeyChangeCenter/KeyChangeVBox/MouseJoystickCenter/MouseJoystickButtons/MouseButton" to="MarginContainer/KeyChangePopup" method="_on_MouseButton_pressed"]
 [connection signal="confirmed" from="MarginContainer/SavePresetPopup" to="." method="_on_SavePresetPopup_confirmed"]
+[connection signal="pressed" from="MenusButtons/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
+[connection signal="pressed" from="MenusButtons/ReturnButton" to="." method="_on_ReturnButton_pressed"]

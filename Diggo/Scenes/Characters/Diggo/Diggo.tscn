@@ -36,7 +36,6 @@ script = ExtResource( 2 )
 
 [node name="CircleSelect" parent="DiggoScales" instance=ExtResource( 3 )]
 margin_right = 1.7962
-margin_bottom = 0.0
 RADIUS = 500
 
 [node name="DiggosAnimations" parent="DiggoScales" instance=ExtResource( 4 )]

@@ -78,4 +78,4 @@ func _on_ReturnButton_pressed():
 
 # returns to the main menu when pressing the main menu button
 func _on_MainMenuButton_pressed(): 
-	get_tree().change_scene("res://Scenes/Menus/MainMenu.tscn")
+	SwitchSceneWithParam.goto_scene("res://Scenes/Menus/MainMenu.tscn")
