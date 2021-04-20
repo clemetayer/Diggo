@@ -39,6 +39,7 @@ GlobalParameters="*res://Scripts/Global/Parameters/GlobalParameters.gd"
 SoundManager="*res://Scenes/Sound/SoundManager.tscn"
 SignalManager="*res://Scripts/Global/SignalManagement/SignalManager.gd"
 PathFindingItems="*res://Scenes/Utils/PathFindingItems.tscn"
+TransitionManager="*res://Scenes/Utils/Transitions/TransitionManager.tscn"
 
 [display]
 

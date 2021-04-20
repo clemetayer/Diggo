@@ -166,12 +166,15 @@ func _on_LoopDialog_dialogs_done():
 	cinematicPlaying = false
 
 func _on_BallDroppedDialog_dialogs_done():
-	# TODO : add a fade transition here and maybe reset the position of diggo
+	TransitionManager.standardFadeIn()
+	yield(SignalManager,"fade_in_done")
 	add_child(load("res://Scenes/Interactibles/Items/BallOfDestiny.tscn").instance())
 	$BallOfDestiny.sleeping = true
 	$BallOfDestiny.hide()
 	$DiggosOwnerAnim.scale.x = abs($DiggosOwnerAnim.scale.x)
 	$DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x = abs($DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x)
+	TransitionManager.standardFadeOut()
+	yield(SignalManager,"fade_out_done")
 	if(nbOfBallThrows == 1):
 		nbOfBallThrows = 0 # resets the number of throws
 		$Dialogs/DiggosOwner/FirstDialog.startDialog()

@@ -10,6 +10,8 @@ signal diggo_anim_info(info) # sends informations on the state of diggo's animat
 signal diggo_owner_interact()
 signal path_finding_item_chosen()
 signal screen_shake(duration,frequency,amplitude,priority)
+signal fade_in_done()
+signal fade_out_done()
 
 func emit_catch_ball():
 	emit_signal("catch_ball")
@@ -31,3 +33,9 @@ func emit_set_diggo_animation(animationName):
 
 func emit_diggo_anim_info(info):
 	emit_signal("diggo_anim_info",info)
+
+func emit_fade_in_done():
+	emit_signal("fade_in_done")
+
+func emit_fade_out_done():
+	emit_signal("fade_out_done")
