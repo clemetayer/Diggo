@@ -1,6 +1,5 @@
 extends Node2D
 
-# FIXME : fix the tilemap looking a bit weird on some spots
 # TODO : add a Game over transition if the player jumps off the cliff
 # TODO : add a disable feature for interact buttons
 

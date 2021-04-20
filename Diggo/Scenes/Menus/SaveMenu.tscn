@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Other/Fonts/lemon/19919.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/Menus/SaveMenu/SaveMenu.gd" type="Script" id=2]
@@ -20,7 +20,9 @@
 [ext_resource path="res://Other/Themes/MenusTheme/ProgressBarFG.tres" type="StyleBox" id=18]
 [ext_resource path="res://Other/Themes/MenusTheme/TabContainerDisabled.tres" type="StyleBox" id=19]
 [ext_resource path="res://Scenes/Menus/ReturnButton.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Other/Themes/MenusTheme/MainButtonStyle.tres" type="StyleBox" id=21]
 [ext_resource path="res://Other/Themes/MenusTheme/DisabledButton.tres" type="StyleBox" id=22]
+[ext_resource path="res://Other/Themes/MenusTheme/PressedButton.tres" type="StyleBox" id=23]
 [ext_resource path="res://Other/Themes/MenusTheme/TabContainerBack.tres" type="StyleBox" id=24]
 [ext_resource path="res://Other/Themes/MenusTheme/SliderTheme.tres" type="StyleBox" id=25]
 [ext_resource path="res://Other/Themes/MenusTheme/Grabber.tres" type="StyleBox" id=26]
@@ -31,15 +33,32 @@
 [ext_resource path="res://Other/Themes/MenusTheme/VerticalGrabber.tres" type="StyleBox" id=31]
 [ext_resource path="res://Other/Themes/MenusTheme/VerticalSlider.tres" type="StyleBox" id=32]
 [ext_resource path="res://Other/Themes/MenusTheme/PopupMenuDisabled.tres" type="StyleBox" id=33]
-[ext_resource path="res://Scenes/Menus/MainMenuButton.tscn" type="PackedScene" id=34]
+[ext_resource path="res://Other/Themes/MenusTheme/HoverButton.tres" type="StyleBox" id=34]
 
+[sub_resource type="DynamicFont" id=17]
+size = 20
+use_filter = true
+font_data = ExtResource( 1 )
 
+[sub_resource type="Theme" id=18]
+default_font = SubResource( 17 )
+Button/colors/font_color = Color( 0.270588, 0.788235, 0.423529, 1 )
+Button/colors/font_color_disabled = Color( 0.337255, 0.380392, 0.741176, 1 )
+Button/colors/font_color_hover = Color( 0.258824, 0.878431, 0.309804, 1 )
+Button/colors/font_color_pressed = Color( 0.133333, 0.854902, 0.54902, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = ExtResource( 22 )
+Button/styles/focus = ExtResource( 8 )
+Button/styles/hover = ExtResource( 34 )
+Button/styles/normal = ExtResource( 21 )
+Button/styles/pressed = ExtResource( 23 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=19]
 size = 20
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=20]
 content_margin_right = 780.0
 content_margin_bottom = 150.0
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -56,7 +75,7 @@ shadow_color = Color( 0, 0, 0, 0.184314 )
 shadow_size = 1
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=21]
 content_margin_right = 780.0
 content_margin_bottom = 150.0
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -73,7 +92,7 @@ shadow_color = Color( 0, 0, 0, 0.184314 )
 shadow_size = 1
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=22]
 content_margin_right = 780.0
 content_margin_bottom = 150.0
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -90,7 +109,7 @@ shadow_color = Color( 0, 0, 0, 0.184314 )
 shadow_size = 1
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=23]
 content_margin_right = 780.0
 content_margin_bottom = 150.0
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -107,7 +126,7 @@ shadow_color = Color( 0, 0, 0, 0.184314 )
 shadow_size = 1
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=24]
 content_margin_right = 780.0
 content_margin_bottom = 150.0
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -124,7 +143,7 @@ shadow_color = Color( 0, 0, 0, 0.184314 )
 shadow_size = 1
 anti_aliasing = false
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=25]
 bg_color = Color( 0, 0, 0, 0 )
 border_width_left = 1
 border_width_top = 1
@@ -139,26 +158,26 @@ shadow_color = Color( 0, 0, 0, 0.203922 )
 shadow_size = 1
 anti_aliasing = false
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=26]
 size = 10
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="Theme" id=9]
-default_font = SubResource( 8 )
+[sub_resource type="Theme" id=27]
+default_font = SubResource( 26 )
 Button/colors/font_color = Color( 0.133333, 0.854902, 0.54902, 1 )
 Button/colors/font_color_disabled = Color( 0.337255, 0.380392, 0.741176, 1 )
 Button/colors/font_color_hover = Color( 0.270588, 0.788235, 0.423529, 1 )
 Button/colors/font_color_pressed = Color( 0.258824, 0.878431, 0.309804, 1 )
 Button/constants/hseparation = 2
 Button/fonts/font = null
-Button/styles/disabled = SubResource( 2 )
-Button/styles/focus = SubResource( 3 )
-Button/styles/hover = SubResource( 4 )
-Button/styles/normal = SubResource( 5 )
-Button/styles/pressed = SubResource( 6 )
+Button/styles/disabled = SubResource( 20 )
+Button/styles/focus = SubResource( 21 )
+Button/styles/hover = SubResource( 22 )
+Button/styles/normal = SubResource( 23 )
+Button/styles/pressed = SubResource( 24 )
 HScrollBar/icons/decrement = null
 HScrollBar/icons/decrement_highlight = null
 HScrollBar/icons/increment = null
@@ -187,7 +206,7 @@ LineEdit/fonts/font = null
 LineEdit/icons/clear = null
 LineEdit/styles/focus = ExtResource( 15 )
 LineEdit/styles/normal = ExtResource( 17 )
-LineEdit/styles/read_only = SubResource( 7 )
+LineEdit/styles/read_only = SubResource( 25 )
 Panel/styles/panel = ExtResource( 6 )
 PanelContainer/styles/panel = ExtResource( 6 )
 PopupDialog/styles/panel = ExtResource( 5 )
@@ -340,9 +359,14 @@ margin_bottom = 80.0
 margin_right = 133.0
 margin_bottom = 80.0
 
-[node name="MainMenuButton" parent="Window/Elements/Banner/MainRetButtons" instance=ExtResource( 34 )]
+[node name="MainMenuButton" type="Button" parent="Window/Elements/Banner/MainRetButtons"]
 margin_right = 133.0
 margin_bottom = 37.0
+theme = SubResource( 18 )
+text = "MainMenu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ReturnButton" parent="Window/Elements/Banner/MainRetButtons" instance=ExtResource( 20 )]
 visible = false
@@ -364,7 +388,7 @@ margin_bottom = 80.0
 rect_min_size = Vector2( 200, 80 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/normal_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 19 )
 bbcode_enabled = true
 bbcode_text = "[wave amp=50 freq=2][center]Select a save file [/center][/wave]"
 text = "Select a save file "
@@ -424,7 +448,7 @@ margin_right = 984.0
 margin_bottom = 560.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = SubResource( 9 )
+theme = SubResource( 27 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
