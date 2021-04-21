@@ -8,7 +8,9 @@ var isPaused
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	visible = false
+	SignalManager.connect("show_save_menu",self,"saveMenu")
 	$OptionsMenu.visible = false
+	$SaveMenu.visible = false
 	isPaused = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -24,6 +26,11 @@ func _process(_delta):
 			visible = false
 			isPaused = false
 			get_tree().paused = false
+
+# shows the save menu from game
+func saveMenu():
+	Input.action_press("pause") # forces the pause
+	$SaveMenu.show()
 
 # Hides the pause menu when pressed
 func _on_ReturnButton_pressed():

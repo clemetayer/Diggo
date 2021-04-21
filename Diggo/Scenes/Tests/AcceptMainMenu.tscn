@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Other/Fonts/lemon/DynamicLemonS13.tres" type="DynamicFont" id=1]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 1 )
+
+[node name="AcceptMainMenu" type="ConfirmationDialog"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1004.0
+margin_bottom = 580.0
+rect_min_size = Vector2( 300, 120 )
+theme = SubResource( 1 )
+window_title = "Quit ?"
+dialog_text = "Are you sure you want to quit ? (All changes since last save will be lost !)"

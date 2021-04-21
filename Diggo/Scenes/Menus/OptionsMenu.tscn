@@ -34,7 +34,7 @@ font_data = ExtResource( 11 )
 [sub_resource type="Theme" id=6]
 default_font = SubResource( 5 )
 
-[sub_resource type="Theme" id=7]
+[sub_resource type="Theme" id=19]
 default_font = ExtResource( 6 )
 
 [sub_resource type="Theme" id=8]
@@ -209,7 +209,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 2.0
-margin_top = 39.0
+margin_top = 33.0
 margin_right = -2.0
 margin_bottom = -2.0
 theme = SubResource( 2 )
@@ -299,7 +299,7 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 2.0
-margin_top = 39.0
+margin_top = 33.0
 margin_right = -2.0
 margin_bottom = -2.0
 theme = SubResource( 4 )
@@ -322,7 +322,7 @@ __meta__ = {
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 970.0
-margin_bottom = 507.0
+margin_bottom = 513.0
 
 [node name="Labels" type="VBoxContainer" parent="MarginContainer/TabContainer/Audio/AudioMargin/AudioOptions"]
 margin_right = 148.0
@@ -395,7 +395,7 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 2.0
-margin_top = 39.0
+margin_top = 33.0
 margin_right = -2.0
 margin_bottom = -2.0
 theme = SubResource( 6 )
@@ -441,7 +441,7 @@ margin_top = 20.0
 margin_right = 1004.0
 margin_bottom = 580.0
 rect_min_size = Vector2( 300, 120 )
-theme = SubResource( 7 )
+theme = SubResource( 19 )
 window_title = "Quit ?"
 dialog_text = "Are you sure you want to quit ? (All changes since last save will be lost !)"
 

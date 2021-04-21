@@ -1,5 +1,9 @@
 extends Node
 
+# TODO -NOW : loop chains are not perfectly accurate
+# TODO -NOW : HouseTheme - some elements are waaay too loud (like chorus for instance)
+# TODO -NOW : HouseTheme - re-export it as a loop
+# TODO -NOW : add sound FX
 # TODO : if song is shorter than the loop end value, then set loop end at the end of the track
 
 var filterBGMIndex = 0 # index of the filter in the BGM bus

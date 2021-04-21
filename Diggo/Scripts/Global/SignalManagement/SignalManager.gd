@@ -6,6 +6,7 @@ extends Node
 
 signal catch_ball()
 signal give_ball()
+signal show_save_menu()
 signal diggo_anim_info(info) # sends informations on the state of diggo's animation (if an animation is done for instance)
 signal diggo_owner_interact()
 signal path_finding_item_chosen()
@@ -39,3 +40,6 @@ func emit_fade_in_done():
 
 func emit_fade_out_done():
 	emit_signal("fade_out_done")
+
+func emit_show_save_menu():
+	emit_signal("show_save_menu")

@@ -7,6 +7,8 @@ export(String,FILE) var MAIN_MENU_PATH = "res://Scenes/Menus/MainMenu.tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	TransitionManager.standardFadeOut(1)
+	yield(SignalManager,"fade_out_done")
 	var gameOverDialog = SwitchSceneWithParam.get_param("gameOverDialog")
 	if(gameOverDialog != null and gameOverDialog is Array):
 		$GameOverDialogManager.DIALOGS = []

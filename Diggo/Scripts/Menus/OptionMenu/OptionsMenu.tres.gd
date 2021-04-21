@@ -1,5 +1,7 @@
 extends Node2D
 
+# TODO -NOW : organise buttons by groups 
+
 export (String,FILE) var KEY_COMMAND = "res://Scenes/Menus/KeyCommand.tscn"
 export (String,FILE) var MAIN_MENU = "res://Scenes/Menus/MainMenu.tscn"
 export (bool) var IS_FROM_PAUSE = false
@@ -124,8 +126,7 @@ func _on_MainMenuButton_pressed():
 	if(IS_FROM_PAUSE):
 		$MarginContainer/AcceptMainMenu.popup_centered_ratio(0.25)
 	else:
-		if(get_tree().change_scene(MAIN_MENU) != OK): 
-			printerr("Error in OptionsMenu -> _on_MainMenuButton_pressed -> change_scene (MAIN_MENU)") # LOGGER
+		SwitchSceneWithParam.goto_scene(MAIN_MENU)
 
 # hides self (that should normally be in the pause menu in that case)
 func _on_ReturnButton_pressed():
@@ -136,8 +137,7 @@ func _on_ReturnButton_pressed():
 # saves the parameters, unpauses, and goes back to main menu 
 func _on_AcceptMainMenu_confirmed():
 	get_tree().paused = false
-	if(get_tree().change_scene(MAIN_MENU) != OK): 
-		printerr("Error in OptionsMenu -> _on_MainMenuButton_pressed -> change_scene (MAIN_MENU)") # LOGGER
+	SwitchSceneWithParam.goto_scene("res://Scenes/Menus/MainMenu.tscn")
 
 # maps the buttons to the current preset
 func _on_SelectPresetButton_pressed():

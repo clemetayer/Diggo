@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Other/Themes/MenusThemes.tres" type="Theme" id=1]
 [ext_resource path="res://Other/Fonts/lemon/19919.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Scripts/Menus/PauseMenu/PauseMenu.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Menus/OptionsMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Menus/SaveMenu.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -31,7 +32,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AcceptDialog" type="AcceptDialog" parent="."]
+[node name="AcceptDialog" type="ConfirmationDialog" parent="."]
 margin_right = 133.0
 margin_bottom = 88.0
 popup_exclusive = true
@@ -48,9 +49,9 @@ __meta__ = {
 
 [node name="ButtonsContainer" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 437.0
-margin_top = 149.0
+margin_top = 158.0
 margin_right = 587.0
-margin_bottom = 450.0
+margin_bottom = 441.0
 custom_constants/separation = 30
 
 [node name="PauseTextCenter" type="CenterContainer" parent="CenterContainer/ButtonsContainer"]
@@ -72,9 +73,10 @@ margin_right = 150.0
 margin_bottom = 167.0
 
 [node name="ReturnButton" type="Button" parent="CenterContainer/ButtonsContainer/ResumeCenter"]
-margin_left = 30.0
-margin_right = 119.0
-margin_bottom = 37.0
+margin_left = 41.0
+margin_top = 3.0
+margin_right = 109.0
+margin_bottom = 34.0
 text = "Return"
 
 [node name="OptionsCenter" type="CenterContainer" parent="CenterContainer/ButtonsContainer"]
@@ -83,9 +85,10 @@ margin_right = 150.0
 margin_bottom = 234.0
 
 [node name="OptionsButton" type="Button" parent="CenterContainer/ButtonsContainer/OptionsCenter"]
-margin_left = 25.0
-margin_right = 125.0
-margin_bottom = 37.0
+margin_left = 36.0
+margin_top = 3.0
+margin_right = 114.0
+margin_bottom = 34.0
 text = "Options"
 
 [node name="MainMenuCenter" type="CenterContainer" parent="CenterContainer/ButtonsContainer"]
@@ -94,14 +97,20 @@ margin_right = 150.0
 margin_bottom = 301.0
 
 [node name="MainMenuButton" type="Button" parent="CenterContainer/ButtonsContainer/MainMenuCenter"]
-margin_left = 4.0
-margin_right = 145.0
-margin_bottom = 37.0
+margin_left = 21.0
+margin_top = 3.0
+margin_right = 129.0
+margin_bottom = 34.0
 text = "Main menu"
 
 [node name="OptionsMenu" parent="." instance=ExtResource( 4 )]
 pause_mode = 2
 visible = false
+IS_FROM_PAUSE = true
+
+[node name="SaveMenu" parent="." instance=ExtResource( 5 )]
+visible = false
+IS_SAVE_MENU = true
 IS_FROM_PAUSE = true
 [connection signal="confirmed" from="AcceptDialog" to="." method="_on_AcceptDialog_confirmed"]
 [connection signal="pressed" from="CenterContainer/ButtonsContainer/ResumeCenter/ReturnButton" to="." method="_on_ReturnButton_pressed"]

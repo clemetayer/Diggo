@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=34 format=2]
+[gd_resource type="Theme" load_steps=33 format=2]
 
 [ext_resource path="res://Other/Themes/MenusTheme/DisabledButton.tres" type="StyleBox" id=1]
 [ext_resource path="res://Other/Themes/MenusTheme/FocusButton.tres" type="StyleBox" id=2]
@@ -25,7 +25,7 @@
 [ext_resource path="res://Other/Themes/MenusTheme/VerticalScrollBar.tres" type="StyleBox" id=23]
 [ext_resource path="res://Other/Themes/MenusTheme/VerticalGrabber.tres" type="StyleBox" id=24]
 [ext_resource path="res://Other/Themes/MenusTheme/VerticalSlider.tres" type="StyleBox" id=25]
-[ext_resource path="res://Other/Fonts/lemon/19919.ttf" type="DynamicFontData" id=26]
+[ext_resource path="res://Other/Fonts/lemon/DynamicLemonS13.tres" type="DynamicFont" id=26]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 0 )
@@ -52,15 +52,8 @@ anti_aliasing = false
 
 [sub_resource type="StyleBoxEmpty" id=6]
 
-[sub_resource type="DynamicFont" id=7]
-size = 20
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
-font_data = ExtResource( 26 )
-
 [resource]
-default_font = SubResource( 7 )
+default_font = ExtResource( 26 )
 Button/colors/font_color = Color( 0.133333, 0.854902, 0.54902, 1 )
 Button/colors/font_color_disabled = Color( 0.337255, 0.380392, 0.741176, 1 )
 Button/colors/font_color_hover = Color( 0.270588, 0.788235, 0.423529, 1 )

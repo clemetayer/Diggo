@@ -1,6 +1,9 @@
 extends Node2D
 
+# FIXME -NOW : Clicking on main menu crashes the game
+
 export(bool) var IS_SAVE_MENU = false # True if this is a save menu
+export (bool) var IS_FROM_PAUSE = false # True if this scene was triggered from a game scene
 
 var loadSaveButton = preload("res://Scenes/Menus/SaveFileButton.tscn") # load of the saveFile button
 var newSaveButton = preload("res://Scenes/Menus/NewSaveButton.tscn") # load of the "New save" button
@@ -8,8 +11,10 @@ var newSaveButton = preload("res://Scenes/Menus/NewSaveButton.tscn") # load of t
 # starts when entering scene
 func _ready():
 	checkSceneParameters()
-	if(not IS_SAVE_MENU): # disable the "Go back button"
+	if(not IS_FROM_PAUSE): # disable the return button
 		$Window/Elements/Banner/MainRetButtons/ReturnButton.hide()
+	else:
+		$Camera2D.current = false
 	var saves = SaveFile.getSaves()
 	var saveIndex = 0
 	if(IS_SAVE_MENU):
@@ -74,8 +79,16 @@ func overwriteSave(button):
 
 # loads the current save loaded when pressing the "Return" button
 func _on_ReturnButton_pressed():
-	SaveFile.loadCurrentSave(get_tree())
+	hide()
 
 # returns to the main menu when pressing the main menu button
 func _on_MainMenuButton_pressed(): 
+	if(IS_FROM_PAUSE):
+		$AcceptMainMenu.popup_centered_ratio(0.25)
+	else:
+		SwitchSceneWithParam.goto_scene("res://Scenes/Menus/MainMenu.tscn")
+
+# returns to the main menu on accept
+func _on_AcceptMainMenu_confirmed():
+	get_tree().paused = false
 	SwitchSceneWithParam.goto_scene("res://Scenes/Menus/MainMenu.tscn")

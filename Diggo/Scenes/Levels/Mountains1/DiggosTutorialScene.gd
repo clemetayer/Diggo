@@ -1,7 +1,7 @@
 extends Node2D
 
-# TODO : add a Game over transition if the player jumps off the cliff
-# TODO : add a disable feature for interact buttons
+# TODO -NOW : add a disable feature for interact buttons
+# TODO -NOW : make the parallax in the background looking a bit better
 
 export(bool) var ADDITIONAL_LOADS = true # tells the scene switcher that there are additionnal resources to load on ready
 export(String,FILE) var GAME_OVER_SCENE = "res://Scenes/Menus/GameOverScreen.tscn" # Game over scene
@@ -171,6 +171,7 @@ func _on_BallDroppedDialog_dialogs_done():
 	add_child(load("res://Scenes/Interactibles/Items/BallOfDestiny.tscn").instance())
 	$BallOfDestiny.sleeping = true
 	$BallOfDestiny.hide()
+	$DiggoKinematic.position = Vector2(1015,557)
 	$DiggosOwnerAnim.scale.x = abs($DiggosOwnerAnim.scale.x)
 	$DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x = abs($DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x)
 	TransitionManager.standardFadeOut()
@@ -241,6 +242,8 @@ func _on_CheckSceneItems_timeout():
 		ballLost = true
 	if(not $SceneSizeRect.get_rect().has_point($DiggoKinematic.position) and not gameOverLoading): # diggo out of the map
 		gameOverLoading = true
+		TransitionManager.standardFadeIn()
+		yield(SignalManager,"fade_in_done")
 		match(sceneParam.nbOffCliff):
 			0:
 				SwitchSceneWithParam.goto_scene(GAME_OVER_SCENE,{"gameOverDialog":["Ah, you might have slipped here, that's unfornate ...\n Try to avoid standing close to the ledge !"]})
