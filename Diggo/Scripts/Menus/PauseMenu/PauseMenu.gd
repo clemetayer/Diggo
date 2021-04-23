@@ -8,7 +8,8 @@ var isPaused
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	visible = false
-	SignalManager.connect("show_save_menu",self,"saveMenu")
+	if(SignalManager.connect("show_save_menu",self,"saveMenu") != OK):
+		Logger.error("Error connecting signal \"show_save_menu\" to method \"saveMenu\"" + GlobalUtils.stack2String(get_stack()))
 	$OptionsMenu.visible = false
 	$SaveMenu.visible = false
 	isPaused = false
@@ -48,8 +49,7 @@ func _on_AcceptDialog_confirmed():
 	visible = false
 	isPaused = false
 	get_tree().paused = false
-	if(get_tree().change_scene(MAIN_MENU) != OK):
-		printerr("Error in PauseMenu -> _on_AcceptDialog_confirmed -> change_scene (MAIN_MENU)") # LOGGER
+	SwitchSceneWithParam.goto_scene(MAIN_MENU)
 
 # Hides the current scene and shows the option menu
 func _on_OptionsButton_pressed():

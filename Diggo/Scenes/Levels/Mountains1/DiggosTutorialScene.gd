@@ -2,6 +2,8 @@ extends Node2D
 
 # TODO -NOW : add a disable feature for interact buttons
 # TODO -NOW : make the parallax in the background looking a bit better
+# TODO -NOW : redraw diggo's owner leg a bit
+# FIXME -NOW : mega throw -> loose ball -> talk to owner crashes the game
 
 export(bool) var ADDITIONAL_LOADS = true # tells the scene switcher that there are additionnal resources to load on ready
 export(String,FILE) var GAME_OVER_SCENE = "res://Scenes/Menus/GameOverScreen.tscn" # Game over scene
@@ -29,23 +31,22 @@ func _ready():
 	$BallOfDestiny.hide()
 	$BallOfDestiny.sleeping = true
 	$DiggosOwnerAnim.scale.x = -abs($DiggosOwnerAnim.scale.x)
-	$DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x = -abs($DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x)
 	cinematicPlaying = true
 	gameOverLoading = false
 	nbOfBallThrows = 0
 	if(SignalManager.connect("catch_ball",self,"catchBall") != OK):
-		printerr("Error in DiggoTutorialScene -> _ready -> SignalManager -> connect (catch_ball)") # LOGGER
+		Logger.error("Error connecting signal \"catch_ball\" to method \"catchBall\"" + GlobalUtils.stack2String(get_stack()))
 	if(SignalManager.connect("diggo_owner_interact",self,"diggoOwnerInteract") != OK):
-		printerr("Error in DiggoTutorialScene -> _ready -> SignalManager -> connect (diggo_owner_interact)") # LOGGER
+		Logger.error("Error connecting signal \"diggo_owner_interact\" to method \"diggoOwnerInteract\"" + GlobalUtils.stack2String(get_stack())) 
 	if(SignalManager.connect("screen_shake",self,"screenShake") != OK):
-		printerr("Error in DiggoTutorialScene -> _ready -> SignalManager -> connect (screen_shake)") # LOGGER
+		Logger.error("Error connecting signal \"screen_shake\" to method \"screenShake\"" + GlobalUtils.stack2String(get_stack())) 
 	if(SignalManager.connect("diggo_anim_info",self,"diggoAnimInfo") != OK):
-		printerr("Error in DiggoTutorialScene -> _ready -> SignalManager -> connect (diggo_anim_info)") # LOGGER
+		Logger.error("Error connecting signal \"diggo_anim_info\" to method \"diggoAnimInfo\"" + GlobalUtils.stack2String(get_stack())) 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if(not cinematicPlaying):
-		lookAtDiggo($DiggosOwnerAnim, $DiggosOwnerAnim/diggosOwnerDialogBox)
+		lookAtDiggo($DiggosOwnerAnim)
 
 # refreshes the save data when entering the scene
 func setSaveData():
@@ -64,14 +65,12 @@ func setPathFind():
 	$PathFinder.TARGET_END = PathFindingItems.getCurrentPath()
 
 # makes a node look at diggo (while not reversing the dialogBox) # OPTIMIZATION : might not be the best way (from an architecture point of view)
-func lookAtDiggo(node,dialogBox):
+func lookAtDiggo(node):
 	var diggo_pos = $DiggoKinematic.position
 	if(diggo_pos > node.position):
 		node.scale.x = abs(node.scale.x)
-		dialogBox.rect_scale.x = abs(dialogBox.rect_scale.x)
 	else:
 		node.scale.x = -abs(node.scale.x)
-		dialogBox.rect_scale.x = -abs(dialogBox.rect_scale.x)
 
 func showSigns():
 	if(not sceneParam.nbOffCliff >= 1):
@@ -134,7 +133,6 @@ func _on_DestructibleTilemap_destructible_loaded():
 func _on_FirstDialog_dialogs_done():
 	$DiggoKinematic.enableMovement(true)
 	$DiggosOwnerAnim.scale.x = abs($DiggosOwnerAnim.scale.x)
-	$DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x = abs($DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x)
 	$DiggosOwnerAnim.playThrowBallAnimation()
 	$Dialogs/Tutorial/MoveTutorial.startDialog()
 	ballTaken = false
@@ -151,7 +149,6 @@ func _on_SecondDialog_dialogs_done():
 func _on_ThirdDialog_dialogs_done():
 	$DiggoKinematic.enableMovement(false)
 	$DiggosOwnerAnim.scale.x = abs($DiggosOwnerAnim.scale.x)
-	$DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x = abs($DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x)
 	$DiggosOwnerAnim.playMegaThrowAnimation()
 	$BallOfDestiny/TerraformArea.throwFeedback()
 	ballTaken = false
@@ -173,7 +170,6 @@ func _on_BallDroppedDialog_dialogs_done():
 	$BallOfDestiny.hide()
 	$DiggoKinematic.position = Vector2(1015,557)
 	$DiggosOwnerAnim.scale.x = abs($DiggosOwnerAnim.scale.x)
-	$DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x = abs($DiggosOwnerAnim/diggosOwnerDialogBox.rect_scale.x)
 	TransitionManager.standardFadeOut()
 	yield(SignalManager,"fade_out_done")
 	if(nbOfBallThrows == 1):
@@ -314,3 +310,4 @@ func _on_LoopDialog_choice_made(signal_name):
 func _on_DiggosOwnerAnim_itemGiven():
 	$DiggoKinematic.setAnimation(GlobalUtils.AnimationEnum.Eat)
 	$DiggoKinematic.animationOverrided = true
+

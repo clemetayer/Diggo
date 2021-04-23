@@ -110,9 +110,9 @@ func loadPresetWithName(presetName):
 		if typeof(presetData) == TYPE_DICTIONARY:
 			commands = presetData
 		else:
-			printerr("Corrupted data!") # LOGGER
+			Logger.error("Corrupted data " + GlobalUtils.stack2String(get_stack()))
 	else:
-		printerr("No saved data!") # LOGGER
+		Logger.error("No saved data " + GlobalUtils.stack2String(get_stack()))
 
 # saves the current parameters at PARAMETERS_SAVE_PATH
 func saveParameters():
@@ -131,9 +131,9 @@ func loadParameters():
 		if typeof(parametersData) == TYPE_DICTIONARY:
 			parameters = parametersData
 		else:
-			printerr("Corrupted data!") # LOGGER
+			Logger.error("Corrupted data " + GlobalUtils.stack2String(get_stack()))
 	else: 
-		print("No saved data, creating parameter file ...")
+		Logger.info("No saved data, creating parameter file ..." + GlobalUtils.stack2String(get_stack()))
 		saveParameters()
 
 # returns the array of presets names

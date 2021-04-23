@@ -2,6 +2,21 @@ extends Node
 
 ####### Global script where some functions not needing to be in a specific class are stored #######
 
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	##### Logger parameters (using https://gitlab.com/godot-stuff/gs-logger) #####
+	Logger.set_logger_level(Logger.LOG_LEVEL_ALL)
+	Logger.set_logger_format(Logger.LOG_FORMAT_FULL)
+
+##### Logger utils #####
+# stack trace to string
+func stack2String(stack : Array) -> String:
+	var ret = "\n"
+	if(stack.size() > 0):
+		for i in range(0,stack.size()):
+			ret += stack[i].source + ":" + stack[0].function + ",l" + str(stack[0].line) + "\n"
+	return ret
+	
 
 ##### Enums #####
 # mouse input custom enum (because can't get global mouse enum as string)

@@ -142,7 +142,10 @@ func playBGM():
 		addBGMWithFilter(BGMQueue[0].fade.fadeIn.time)
 	$LoopTimer.stop()
 	setStreamLoop()
-	BGMQueue[0].instance.play()
+	if(BGMQueue[0].loop.enabled and BGMQueue[0].loop.values.start != null):
+		BGMQueue[0].instance.play(BGMQueue[0].loop.values.start)
+	else:
+		BGMQueue[0].instance.play(0)
 
 # adds the audio stream (should be in Music bus), then plays it with filter entrance
 # bgm as a string to the scene, time in seconds, start/finalFilterVal in Hz

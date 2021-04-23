@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://Scenes/Levels/Mountains1/DiggosTutorialScene.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Buildings/MountainHouse1.tscn" type="PackedScene" id=2]
@@ -9,8 +9,6 @@
 [ext_resource path="res://Sprites/Tilemaps/DestructibleSnowTilemap.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/Menus/PauseMenu.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Parallax/DayMountains.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Sprites/Parallaxes/MountainDay/SkyUp.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Sprites/Parallaxes/MountainDay/GroundMountain.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Sprites/Maps/FirstMountainStuff/IceBlockFull.png" type="Texture" id=12]
 [ext_resource path="res://Scenes/Interactibles/Items/BallOfDestiny.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Scenes/Characters/DiggosOwner/DiggosOwnerAnim.tscn" type="PackedScene" id=14]
@@ -399,13 +397,6 @@ disabled = true
 position = Vector2( 890, 510 )
 scale = Vector2( 0.4, 0.4 )
 
-[node name="diggosOwnerDialogBox" parent="DiggosOwnerAnim" instance=ExtResource( 15 )]
-margin_left = -190.563
-margin_top = -514.993
-margin_right = 9.43689
-margin_bottom = -364.993
-rect_scale = Vector2( 2, 2 )
-
 [node name="InteractShape" parent="DiggosOwnerAnim" instance=ExtResource( 17 )]
 BUTTONS = [ "res://Scenes/UI/Menus/CircleButtons/DiggosOwnerButton.tscn" ]
 
@@ -491,36 +482,36 @@ __meta__ = {
 DIALOGS = [ {
 "choices": false,
 "dialog": "Alright Diggo, are you ready ?",
-"targets": [ NodePath("../../../DiggosOwnerAnim/diggosOwnerDialogBox") ]
+"targets": [ NodePath("../../../diggosOwnerDialogBox") ]
 }, {
 "choices": false,
 "dialog": "Catch !",
-"targets": [ NodePath("../../../DiggosOwnerAnim/diggosOwnerDialogBox") ]
+"targets": [ NodePath("../../../diggosOwnerDialogBox") ]
 } ]
 
 [node name="SecondDialog" parent="Dialogs/DiggosOwner" instance=ExtResource( 16 )]
 DIALOGS = [ {
 "choices": false,
 "dialog": "Good ! Here is a grape !",
-"targets": [ NodePath("../../../DiggosOwnerAnim/diggosOwnerDialogBox") ]
+"targets": [ NodePath("../../../diggosOwnerDialogBox") ]
 } ]
 
 [node name="ThirdDialog" parent="Dialogs/DiggosOwner" instance=ExtResource( 16 )]
 DIALOGS = [ {
 "choices": false,
 "dialog": "Ready for another one ?",
-"targets": [ NodePath("../../../DiggosOwnerAnim/diggosOwnerDialogBox") ]
+"targets": [ NodePath("../../../diggosOwnerDialogBox") ]
 }, {
 "choices": false,
 "dialog": "I will throw a bit harder this time !",
-"targets": [ NodePath("../../../DiggosOwnerAnim/diggosOwnerDialogBox") ]
+"targets": [ NodePath("../../../diggosOwnerDialogBox") ]
 } ]
 
 [node name="FourthDialog" parent="Dialogs/DiggosOwner" instance=ExtResource( 16 )]
 DIALOGS = [ {
 "choices": false,
 "dialog": "Catch !",
-"targets": [ NodePath("../../../DiggosOwnerAnim/diggosOwnerDialogBox") ]
+"targets": [ NodePath("../../../diggosOwnerDialogBox") ]
 } ]
 
 [node name="LoopDialog" parent="Dialogs/DiggosOwner" instance=ExtResource( 16 )]
@@ -533,7 +524,7 @@ DIALOGS = [ {
 "signalName": "notGoHome"
 } ],
 "dialog": "Do you want to go home now ?",
-"targets": [ NodePath("../../../DiggosOwnerAnim/diggosOwnerDialogBox") ]
+"targets": [ NodePath("../../../diggosOwnerDialogBox") ]
 }, {
 "choices": [ {
 "label": "Yes",
@@ -543,29 +534,29 @@ DIALOGS = [ {
 "signalName": "endDialog"
 } ],
 "dialog": "Maybe another throw then ?",
-"targets": [ NodePath("../../../DiggosOwnerAnim/diggosOwnerDialogBox") ]
+"targets": [ NodePath("../../../diggosOwnerDialogBox") ]
 } ]
 
 [node name="CatchBallDialog" parent="Dialogs/DiggosOwner" instance=ExtResource( 16 )]
 DIALOGS = [ {
 "choices": false,
 "dialog": "Come on ! Go catch the ball !",
-"targets": [ NodePath("../../../DiggosOwnerAnim/diggosOwnerDialogBox") ]
+"targets": [ NodePath("../../../diggosOwnerDialogBox") ]
 } ]
 
 [node name="BallDroppedDialog" parent="Dialogs/DiggosOwner" instance=ExtResource( 16 )]
 DIALOGS = [ {
 "choices": false,
 "dialog": "Oh...",
-"targets": [ NodePath("../../../DiggosOwnerAnim/diggosOwnerDialogBox") ]
+"targets": [ NodePath("../../../diggosOwnerDialogBox") ]
 }, {
 "choices": false,
 "dialog": "You have lost the ball, didn't you ?",
-"targets": [ NodePath("../../../DiggosOwnerAnim/diggosOwnerDialogBox") ]
+"targets": [ NodePath("../../../diggosOwnerDialogBox") ]
 }, {
 "choices": false,
 "dialog": "That's fine, i'm going to find it !",
-"targets": [ NodePath("../../../DiggosOwnerAnim/diggosOwnerDialogBox") ]
+"targets": [ NodePath("../../../diggosOwnerDialogBox") ]
 } ]
 
 [node name="Tutorial" type="Control" parent="Dialogs"]
@@ -638,6 +629,13 @@ __meta__ = {
 wait_time = 0.5
 autostart = true
 
+[node name="diggosOwnerDialogBox" parent="." instance=ExtResource( 15 )]
+margin_left = 811.328
+margin_top = 304.0
+margin_right = 1011.33
+margin_bottom = 454.0
+rect_scale = Vector2( 0.8, 0.8 )
+
 [node name="tutorialDialogBox" parent="." instance=ExtResource( 18 )]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -658,12 +656,9 @@ visible = false
 [node name="Background" type="CanvasLayer" parent="."]
 
 [node name="DayMountains" parent="Background" instance=ExtResource( 9 )]
-
-[node name="SkyUp" parent="Background" instance=ExtResource( 10 )]
 layer = -101
-
-[node name="GroundMountain" parent="Background" instance=ExtResource( 11 )]
-layer = -101
+offset = Vector2( 0, -150 )
+transform = Transform2D( 1, 0, 0, 1, 0, -150 )
 [connection signal="body_entered" from="InteractTutorialCheckArea" to="." method="_on_InteractTutorialCheckArea_body_entered"]
 [connection signal="body_entered" from="JumpTutorialCheckArea" to="." method="_on_JumpTutorialCheckArea_body_entered"]
 [connection signal="body_entered" from="DigTutorialCheckArea" to="." method="_on_DigTutorialCheckArea_body_entered"]

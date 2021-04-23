@@ -7,7 +7,7 @@ func _ready():
 	BUTTONS = PathFindingItems.getButtons()
 	get_tree().paused = false
 	if(SignalManager.connect("path_finding_item_chosen",self,"hideMenu") != OK):
-		printerr("Error in PathFindMenu -> _ready -> SignalManager -> connect (path_finding_item_chosen)") # LOGGER
+		Logger.error("Error connecting signal \"path_finding_item_chosen\" to method \"hideMenu\"" + GlobalUtils.stack2String(get_stack()))
 	hide()
 
 func _input(event):

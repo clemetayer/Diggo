@@ -5,16 +5,18 @@ extends Node2D
 
 var hasBall = false
 var stopJumpAnim = false
+var isPlayingEat = false
 
 func _ready():
 	if(SignalManager.connect("catch_ball",self,"catchBall") != OK):
-		printerr("Error in DiggosAnimations -> _ready -> SignalManager -> connect (catch_ball)") # LOGGER
+		Logger.error("Error connecting signal \"catch_ball\" to method \"catchBall\"" + GlobalUtils.stack2String(get_stack())) 
 	if(SignalManager.connect("give_ball",self,"giveBall") != OK):
-		printerr("Error in DiggosAnimations -> _ready -> SignalManager -> connect (give_ball)") # LOGGER
+		Logger.error("Error connecting signal \"give_ball\" to method \"giveBall\"" + GlobalUtils.stack2String(get_stack())) 
 
 # plays diggo's idle animation
 func playIdleAnimation(speed=1):
 	stopJumpAnim = false
+	isPlayingEat = false
 	if(hasBall):
 		$AnimationPlayer.play("IdleWithBall")
 	else:
@@ -49,7 +51,8 @@ func playEatAnimation(speed=1):
 	stopJumpAnim = false
 	$AnimationPlayer.play("Eat")
 	$AnimationPlayer.playback_speed = speed
-	if($Timers/EatTimer.is_stopped()):
+	if(not isPlayingEat):
+		isPlayingEat = true
 		$Timers/EatTimer.start()
 
 # plays diggo jump animation
@@ -79,8 +82,9 @@ func giveBall():
 func _on_EatTimer_timeout(): 
 	SignalManager.emit_diggo_anim_info("EatAnimDone")
 
-
 func _on_AnimationPlayer_animation_finished(anim_name):
 	match(anim_name):
 		"Jump":
+			stopJumpAnim = true
+		"JumpWithBall":
 			stopJumpAnim = true

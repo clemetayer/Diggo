@@ -44,7 +44,7 @@ func _process(_time):
 			# update_progress()
 			pass # no update progess
 		else: # Error during loading.
-			printerr("Error during loading, loader.poll() returned an error (SwitchSceneWithParam:_process)") # LOGGER
+			Logger.error("Error during loading, loader.poll() returned an error" + GlobalUtils.stack2String(get_stack()))
 			loader = null
 			break
 
@@ -80,7 +80,7 @@ func goto_scene(path, params=null): # Game requests to switch to this scene.
 	_params = params
 	loader = ResourceLoader.load_interactive(path)
 	if loader == null: # Check for errors.
-		printerr("Error during scene load, loader == null (SwitchSceneWithParam:goto_scene)") # LOGGER
+		Logger.error("Error during scene load, loader == null" + GlobalUtils.stack2String(get_stack()))
 		return
 	set_process(true)
 	get_node("/root").remove_child(current_scene)
@@ -94,7 +94,7 @@ func goto_scene(path, params=null): # Game requests to switch to this scene.
 func change_scene(next_scene, params=null):
 	_params = params
 	if(get_tree().change_scene(next_scene) != OK):
-		printerr("Error in SwitchSceneWithParam::change_scene") # LOGGER
+		Logger.error("Error switching scene " + GlobalUtils.stack2String(get_stack()))
 
 # In the newly opened scene, you can get the parameters by name
 func get_param(name):

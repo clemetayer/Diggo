@@ -1,7 +1,5 @@
 extends Node2D
 
-# FIXME -NOW : Clicking on main menu crashes the game
-
 export(bool) var IS_SAVE_MENU = false # True if this is a save menu
 export (bool) var IS_FROM_PAUSE = false # True if this scene was triggered from a game scene
 

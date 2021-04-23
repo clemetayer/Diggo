@@ -5,12 +5,11 @@ export(NodePath) var TARGET_END # end target item
 export(NodePath) var PATH_LINE # Line to show when pressing the button of path finding (should be Line2D)
 
 # FIXME -NOW : if ball out of the map (no respawn) and trying to find it + Cases if diggo has the ball (or his owner)
-# FIXME -NOW : mega throw dialog playing twice for some reason
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if(SignalManager.connect("path_finding_item_chosen",self,"updateTargetEnd") != OK): # LOGGER 
-		printerr("Error in PathFinder -> _ready -> SignalManager -> connect (path_finding_item_chosen)")
+	if(SignalManager.connect("path_finding_item_chosen",self,"updateTargetEnd") != OK): 
+		Logger.error("Error connecting signal \"path_finding_item_chosen\" to method \"updateTargetEnd\"" + GlobalUtils.stack2String(get_stack())) 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -33,7 +32,7 @@ func getPath():
 			3)
 		$LineOpacityAnimate.start()
 	else: 
-		printerr("Error : Path line node not present or wrong type") # LOGGER
+		Logger.warn("Error : Path line node not present or wrong type" + GlobalUtils.stack2String(get_stack()))
 
 # updates the end target when an path finding item was chosen
 func updateTargetEnd():

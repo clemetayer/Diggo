@@ -92,6 +92,6 @@ func loadSaves():
 				saveDataInstance.data = saveData.saves[saveDataIndex]
 				saves.push_front(saveDataInstance)
 		else:
-			printerr("Corrupted data!") # LOGGER
+			Logger.warn("Corrupted data " + GlobalUtils.stack2String(get_stack()))
 	else:
-		printerr("No saved data!") # LOGGER
+		Logger.info("No saved data" + GlobalUtils.stack2String(get_stack()))
