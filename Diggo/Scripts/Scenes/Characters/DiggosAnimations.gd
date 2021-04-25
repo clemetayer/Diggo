@@ -1,6 +1,6 @@
 extends Node2D
 
-# TODO : maybe use an animation tree to avoid having things like "jump_with_item,etc."
+# ARCHITECTURE : maybe use an animation tree to avoid having things like "jump_with_item,etc."
 # OPTIMIZATION : there is definitely a better architecture possible here
 
 var hasBall = false

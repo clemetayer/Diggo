@@ -1,10 +1,5 @@
 extends Node2D
 
-# TODO -NOW : add a disable feature for interact buttons
-# TODO -NOW : make the parallax in the background looking a bit better
-# TODO -NOW : redraw diggo's owner leg a bit
-# FIXME -NOW : mega throw -> loose ball -> talk to owner crashes the game
-
 export(bool) var ADDITIONAL_LOADS = true # tells the scene switcher that there are additionnal resources to load on ready
 export(String,FILE) var GAME_OVER_SCENE = "res://Scenes/Menus/GameOverScreen.tscn" # Game over scene
 export(String,FILE) var HOME_SCENE = "res://Scenes/Menus/MainMenu.tscn" # TODO : replace here with next scene
@@ -23,6 +18,7 @@ var gameOverLoading # to avoid trying to load the game over scene multiple times
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SoundManager.addBGMToQueue(SoundManager.createParameters(DIGGOS_MASTER_HOUSE_BGM,true,2,true,2,true,32))
+	SignalManager.emit_enable_interactions(true)
 	setTutorialDialogs()
 	setSaveData()
 	setPathFind()
@@ -30,6 +26,7 @@ func _ready():
 	showSigns()
 	$BallOfDestiny.hide()
 	$BallOfDestiny.sleeping = true
+	$BallOfDestiny.disableInteract()
 	$DiggosOwnerAnim.scale.x = -abs($DiggosOwnerAnim.scale.x)
 	cinematicPlaying = true
 	gameOverLoading = false
@@ -117,6 +114,7 @@ func setTutorialDialogs():
 	$Dialogs/Tutorial/JumpTutorial.DIALOGS[0].dialog = jumpDialog
 	$Dialogs/Tutorial/DigTutorial.DIALOGS[0].dialog = digDialog
 
+# ARCHITECTURE : move this in global bbcode script ?
 # formats the command to show in the rich text label
 func formatKey(key):
 	if(key is InputEventKey):
@@ -129,12 +127,14 @@ func _on_DestructibleTilemap_destructible_loaded():
 	$DiggosOwnerAnim.playIdleAnimation()
 	$DiggoKinematic.enableMovement(false)
 	$Dialogs/DiggosOwner/FirstDialog.startDialog()
+	SignalManager.emit_enable_interactions(false)
 
 func _on_FirstDialog_dialogs_done():
 	$DiggoKinematic.enableMovement(true)
 	$DiggosOwnerAnim.scale.x = abs($DiggosOwnerAnim.scale.x)
 	$DiggosOwnerAnim.playThrowBallAnimation()
 	$Dialogs/Tutorial/MoveTutorial.startDialog()
+	SignalManager.emit_enable_interactions(true)
 	ballTaken = false
 	nbOfBallThrows += 1
 
@@ -147,39 +147,47 @@ func _on_SecondDialog_dialogs_done():
 	$DiggosOwnerAnim.playGiveItem()
 
 func _on_ThirdDialog_dialogs_done():
+	cinematicPlaying = false
 	$DiggoKinematic.enableMovement(false)
 	$DiggosOwnerAnim.scale.x = abs($DiggosOwnerAnim.scale.x)
 	$DiggosOwnerAnim.playMegaThrowAnimation()
 	$BallOfDestiny/TerraformArea.throwFeedback()
 	ballTaken = false
 	nbOfBallThrows += 1
+	SignalManager.emit_enable_interactions(false)
 
 func _on_FourthDialog_dialogs_done():
 	$DiggoKinematic.enableMovement(true)
 	$Dialogs/Tutorial/FindTutorial.startDialog()
+	SignalManager.emit_enable_interactions(true)
 
 func _on_LoopDialog_dialogs_done():
 	$DiggoKinematic.enableMovement(true)
 	cinematicPlaying = false
+	SignalManager.emit_enable_interactions(true)
+
+func _on_CatchBallDialog_dialogs_done():
+	SignalManager.emit_enable_interactions(true)
 
 func _on_BallDroppedDialog_dialogs_done():
 	TransitionManager.standardFadeIn()
 	yield(SignalManager,"fade_in_done")
-	add_child(load("res://Scenes/Interactibles/Items/BallOfDestiny.tscn").instance())
-	$BallOfDestiny.sleeping = true
-	$BallOfDestiny.hide()
 	$DiggoKinematic.position = Vector2(1015,557)
 	$DiggosOwnerAnim.scale.x = abs($DiggosOwnerAnim.scale.x)
 	TransitionManager.standardFadeOut()
 	yield(SignalManager,"fade_out_done")
+	SignalManager.emit_enable_interactions(true)
 	if(nbOfBallThrows == 1):
 		nbOfBallThrows = 0 # resets the number of throws
 		$Dialogs/DiggosOwner/FirstDialog.startDialog()
+		SignalManager.emit_enable_interactions(false)
 	elif(nbOfBallThrows == 2):
 		nbOfBallThrows = 1 # resets the number of throws
 		$Dialogs/DiggosOwner/ThirdDialog.startDialog()
+		SignalManager.emit_enable_interactions(false)
 	else:
 		$Dialogs/DiggosOwner/LoopDialog.startDialog()
+		SignalManager.emit_enable_interactions(false)
 
 func _on_DiggosOwnerAnim_throwDone(_position):
 	var throwPow = 400
@@ -187,18 +195,25 @@ func _on_DiggosOwnerAnim_throwDone(_position):
 	$BallOfDestiny.show()
 	$BallOfDestiny.sleeping = false
 	$BallOfDestiny.position = $DiggosOwnerAnim.position + Vector2(60,-50)
+	$BallOfDestiny.enableInteract()
 	$BallOfDestiny.apply_central_impulse(Vector2(cos(angle) * throwPow, -sin(angle) * throwPow))
 	$DiggosOwnerAnim.playIdleAnimation()
 	cinematicPlaying = false
+	PathFindingItems.setNodePath("ballOfReality",$BallOfDestiny.get_path())
 
 func _on_DiggosOwnerAnim_megaThrowDone():
 	$Dialogs/DiggosOwner/FourthDialog.startDialog()
+	$BallOfDestiny.enableInteract()
+	SignalManager.emit_enable_interactions(false)
+	PathFindingItems.setNodePath("ballOfReality",$BallOfDestiny.get_path())
 
 # signal function when catch ball signal received
 func catchBall():
 	$BallOfDestiny.sleeping = true
 	$BallOfDestiny.hide()
+	$BallOfDestiny.disableInteract()
 	ballTaken = true
+	PathFindingItems.setNodePath("ballOfReality",$DiggoKinematic.get_path())
 
 # FIXME : when pressing space, it counts as pressing the button
 # function when diggo_owner_interact signal received
@@ -206,6 +221,7 @@ func diggoOwnerInteract():
 	if(ballTaken):
 		SignalManager.emit_give_ball()
 		ballTaken = false
+		PathFindingItems.setNodePath("ballOfReality",$DiggosOwnerAnim.get_path())
 		$DiggoKinematic.enableMovement(false)
 		if(nbOfBallThrows == 1): 
 			$Dialogs/DiggosOwner/SecondDialog.startDialog()
@@ -218,7 +234,9 @@ func diggoOwnerInteract():
 		ballLost = false
 	else:
 		$Dialogs/DiggosOwner/CatchBallDialog.startDialog()
+	SignalManager.emit_enable_interactions(false)
 
+# FIXME : not resetting the camera to default parameters
 # shakes the screen
 func screenShake(duration,frequency,amplitude,priority):
 	GlobalUtils.shakeScreen($DiggoKinematic/DiggoCamera,duration,frequency,amplitude,priority)
@@ -229,13 +247,20 @@ func diggoAnimInfo(info):
 		"EatAnimDone":
 			cinematicPlaying = true
 			$Dialogs/DiggosOwner/ThirdDialog.startDialog()
+			SignalManager.emit_enable_interactions(false)
 			$DiggoKinematic.animationOverrided = false
 
-# Checks if the ball is dropped out of the scene
+# Checks if something went out of the scene
 func _on_CheckSceneItems_timeout():
-	if(get_node_or_null("BallOfDestiny") != null and not $SceneSizeRect.get_rect().has_point($BallOfDestiny.position)): # ball out of the map
-		$BallOfDestiny.queue_free()
+	# Check the ball
+	if(not $SceneSizeRect.get_rect().has_point($BallOfDestiny.position)): # ball out of the map
+		$BallOfDestiny.position = Vector2(0,0)
+		$BallOfDestiny.sleeping = true
+		$BallOfDestiny.hide()
+		$BallOfDestiny.disableInteract()
+		PathFindingItems.setNodePath("ballOfReality",$DiggoKinematic.get_path())
 		ballLost = true
+	# check diggo
 	if(not $SceneSizeRect.get_rect().has_point($DiggoKinematic.position) and not gameOverLoading): # diggo out of the map
 		gameOverLoading = true
 		TransitionManager.standardFadeIn()
@@ -301,10 +326,12 @@ func _on_LoopDialog_choice_made(signal_name):
 		"throwBall":
 			$Dialogs/DiggosOwner/LoopDialog.endDialog()
 			$Dialogs/DiggosOwner/FirstDialog.startDialog()
+			SignalManager.emit_enable_interactions(false)
 		"endDialog":
 			$Dialogs/DiggosOwner/LoopDialog.endDialog()
 			$DiggoKinematic.enableMovement(true)
 			ballTaken = true
+			SignalManager.emit_enable_interactions(true)
 
 # sets diggo eat animation
 func _on_DiggosOwnerAnim_itemGiven():

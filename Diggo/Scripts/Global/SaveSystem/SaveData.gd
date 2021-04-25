@@ -61,12 +61,14 @@ func setLocation(newLoc):
 	data.location = newLoc
 
 # gets a specific scene parameter if exists, or returns null
-func getSceneParameter(sceneName): # TODO : Add a printerr
+func getSceneParameter(sceneName):
 	if(data.sceneParameters.has(sceneName)):
 		return data.sceneParameters.get(sceneName)
+	Logger.warn("Scene " + sceneName + " does not exists." + GlobalUtils.stack2String(get_stack()))
 	return null
 
 # sets the scene parameter if exists
-func setSceneParameter(sceneName, newSceneParam): # TODO : Add a printerr
+func setSceneParameter(sceneName, newSceneParam):
 	if(data.sceneParameters.has(sceneName)):
 		data.sceneParameters.sceneName = newSceneParam
+	Logger.warn("Scene " + sceneName + " does not exists." + GlobalUtils.stack2String(get_stack()))

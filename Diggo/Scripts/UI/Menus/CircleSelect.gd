@@ -8,6 +8,8 @@ export(float) var START_ANGLE = -PI/2 - PI/15 # start angle position for the fir
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if(SignalManager.connect("enable_interactions",self,"showCircleMenu") != OK):
+		Logger.error("Error connecting signal \"enable_interactions\" to method \"showCircleMenu\"" + GlobalUtils.stack2String(get_stack()))
 	addButtonChildren()
 
 # removes a button from the circle menu
@@ -31,3 +33,6 @@ func refreshButtons():
 	removeChildren()
 	addButtonChildren()
 	
+# shows or hides the circle menu
+func showCircleMenu(value):
+	visible = value

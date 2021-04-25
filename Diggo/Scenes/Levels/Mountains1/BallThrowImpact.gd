@@ -1,6 +1,6 @@
 extends Area2D
 
-# TODO : find a better way to do this ?
+# ARCHITECTURE : find a better way to do this ?
 
 # necessary so that the digging mechanic can work
 

@@ -6,3 +6,8 @@
 script = ExtResource( 1 )
 
 [node name="LineOpacityAnimate" type="Tween" parent="."]
+
+[node name="UpdateItemInfo" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+[connection signal="timeout" from="UpdateItemInfo" to="." method="_on_UpdateItemInfo_timeout"]

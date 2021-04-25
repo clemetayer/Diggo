@@ -12,9 +12,12 @@ func _ready():
 
 func _input(event):
 	if(event.is_action_pressed("find menu")):
-		get_tree().paused = true
-		set_buttons()
-		show()
+		if(visible): # should resume game
+			hideMenu()
+		else: # should be paused
+			get_tree().paused = true
+			set_buttons()
+			show()
 
 # sets the buttons in the grid
 func set_buttons():
@@ -35,3 +38,7 @@ func refreshButtons():
 func hideMenu():
 	hide()
 	get_tree().paused = false
+
+# hides the path find menu
+func _on_CancelButton_pressed():
+	hideMenu()

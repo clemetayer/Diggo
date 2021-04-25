@@ -4,8 +4,6 @@ export(NodePath) var TARGET_START # start target item
 export(NodePath) var TARGET_END # end target item
 export(NodePath) var PATH_LINE # Line to show when pressing the button of path finding (should be Line2D)
 
-# FIXME -NOW : if ball out of the map (no respawn) and trying to find it + Cases if diggo has the ball (or his owner)
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if(SignalManager.connect("path_finding_item_chosen",self,"updateTargetEnd") != OK): 
@@ -36,4 +34,8 @@ func getPath():
 
 # updates the end target when an path finding item was chosen
 func updateTargetEnd():
+	TARGET_END = PathFindingItems.getCurrentPath()
+
+# updates the item info (node path changed, etc.)
+func _on_UpdateItemInfo_timeout():
 	TARGET_END = PathFindingItems.getCurrentPath()

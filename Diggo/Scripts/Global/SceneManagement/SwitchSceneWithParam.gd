@@ -13,7 +13,7 @@ var time_max = 100 # msec
 var current_scene
 
 # FIXME : find a way to not block loading animation while loading destructible sprites
-# TODO : add comments here and there
+# ARCHITECTURE : add comments here and there
 # TODO : add a fade in/out to make loading less ... brutal
 
 func _ready():

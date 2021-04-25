@@ -5,6 +5,8 @@ export(String,FILE) var MAIN_MENU = "res://Scenes/Menus/MainMenu.tscn"
 
 var isPaused
 
+# FIXME : Force pause menu to appear alone if other menus already showing (example : Path find menu)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	visible = false

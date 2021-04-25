@@ -7,7 +7,7 @@ func _ready():
 	$TerraformCollision.disabled = true
 	get_node(EXPLOSION_COLLISION).disabled = true
 
-# TODO : find a better way to do this ?
+# ARCHITECTURE : find a better way to do this ?
 # necessary so that the digging mechanic can work
 # returns the collision radius
 func getCollisionRadius():

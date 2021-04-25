@@ -1,7 +1,6 @@
 extends Node
 
 # Autoload node to send global signal easily
-# TODO : fill some global signals here
 # NOTE : functions are exceptionally written this way to avoid a mix between capitals and underscores
 
 signal catch_ball()
@@ -13,6 +12,7 @@ signal path_finding_item_chosen()
 signal screen_shake(duration,frequency,amplitude,priority)
 signal fade_in_done()
 signal fade_out_done()
+signal enable_interactions(value)
 
 func emit_catch_ball():
 	emit_signal("catch_ball")
@@ -43,3 +43,6 @@ func emit_fade_out_done():
 
 func emit_show_save_menu():
 	emit_signal("show_save_menu")
+
+func emit_enable_interactions(value):
+	emit_signal("enable_interactions",value)
