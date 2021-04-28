@@ -98,6 +98,8 @@ func computeDialogPages():
 # shows another character
 func _on_RTLCharTimer_timeout():
 	RTL.set_visible_characters(RTL.get_visible_characters()+1)
+	if(dialogStarted and RTL.get_visible_characters() <= RTL.get_total_character_count()):
+		$DialogOSound.play()
 
 # emits the choice made by the player
 func choiceMade(choice):

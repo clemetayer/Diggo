@@ -34,7 +34,7 @@ font_data = ExtResource( 11 )
 [sub_resource type="Theme" id=6]
 default_font = SubResource( 5 )
 
-[sub_resource type="Theme" id=19]
+[sub_resource type="Theme" id=7]
 default_font = ExtResource( 6 )
 
 [sub_resource type="Theme" id=8]
@@ -441,7 +441,7 @@ margin_top = 20.0
 margin_right = 1004.0
 margin_bottom = 580.0
 rect_min_size = Vector2( 300, 120 )
-theme = SubResource( 19 )
+theme = SubResource( 7 )
 window_title = "Quit ?"
 dialog_text = "Are you sure you want to quit ? (All changes since last save will be lost !)"
 

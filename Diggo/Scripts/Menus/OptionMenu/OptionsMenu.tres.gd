@@ -1,10 +1,17 @@
 extends Node2D
 
-# TODO -NOW : organise buttons by groups 
-
 export (String,FILE) var KEY_COMMAND = "res://Scenes/Menus/KeyCommand.tscn"
 export (String,FILE) var MAIN_MENU = "res://Scenes/Menus/MainMenu.tscn"
 export (bool) var IS_FROM_PAUSE = false
+
+var specialButtonIndexes = { # sets a default index for some keys to keep these grouped
+	"left":0,
+	"right":1,
+	"jump":2,
+	"dig":3,
+	"find menu":4,
+	"find path":5
+}
 
 var keyCommandLoad # instance of key command scene
 
@@ -65,6 +72,8 @@ func addKey(command,key):
 	keyCommandInstance.KEY = key
 	keyCommandInstance.connect("change_key",self,"changeKey")
 	$MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/KeysMargin/KeysScroll/KeysContainer.add_child(keyCommandInstance)
+	if(command in specialButtonIndexes): # sets at specific index if needed
+		$MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/KeysMargin/KeysScroll/KeysContainer.move_child(keyCommandInstance,specialButtonIndexes[command])
 
 # shows the popup to change the key
 func changeKey(keyInstance):
