@@ -758,6 +758,7 @@ visible = false
 layer = -101
 offset = Vector2( 0, -150 )
 transform = Transform2D( 1, 0, 0, 1, 0, -150 )
+
 [connection signal="body_entered" from="InteractTutorialCheckArea" to="." method="_on_InteractTutorialCheckArea_body_entered"]
 [connection signal="body_entered" from="JumpTutorialCheckArea" to="." method="_on_JumpTutorialCheckArea_body_entered"]
 [connection signal="body_entered" from="DigTutorialCheckArea" to="." method="_on_DigTutorialCheckArea_body_entered"]

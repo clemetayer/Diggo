@@ -85,4 +85,5 @@ position = Vector2( -26, 0 )
 rotation = 1.5708
 scale = Vector2( 0.488614, 0.562162 )
 shape = SubResource( 4 )
+
 [connection signal="timeout" from="CheckDigTimer" to="." method="_on_CheckDigTimer_timeout"]

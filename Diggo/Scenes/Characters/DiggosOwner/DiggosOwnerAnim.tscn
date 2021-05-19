@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Sprites/Characters/DiggosMaster/DiggoMaster.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Characters/DiggosMaster/DiggoMasterPieces.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Sprites/Maps/FirstMountainStuff/Raisin.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/Sound/FX/Misc/LaserBeam.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Sound/FX/Misc/BigExplosion.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Sound/FX/Misc/LaserBeamBuildup.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Animation" id=1]
 resource_name = "GiveItem"
@@ -1233,6 +1234,18 @@ tracks/34/keys = {
 "update": 1,
 "values": [ false, true, false ]
 }
+tracks/35/type = "value"
+tracks/35/path = NodePath("ParticleAndEffects/Sounds/LaserBeamBuildup:playing")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=4]
 length = 0.2
@@ -1975,6 +1988,7 @@ wait_time = 5.0
 one_shot = true
 
 [node name="DiggosOwnerCharging" type="Particles2D" parent="ParticleAndEffects"]
+emitting = false
 amount = 400
 process_material = ExtResource( 6 )
 
@@ -1986,6 +2000,8 @@ bus = "SideChainCompressorToBGM"
 [node name="BigExplosion" parent="ParticleAndEffects/Sounds" instance=ExtResource( 11 )]
 position = Vector2( 486.49, -200.818 )
 volume_db = 3.0
+
+[node name="LaserBeamBuildup" parent="ParticleAndEffects/Sounds" instance=ExtResource( 12 )]
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 margin_left = -200.0
@@ -2078,8 +2094,7 @@ polygons = [ PoolIntArray( 0, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25
 bones = [ NodePath("Body"), PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ), NodePath("Body/Head"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/LeftArm"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/LeftArm/LeftForeArm"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/LeftArm/LeftForeArm/LeftHand"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/RightArm"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/RightArm/RightForearm"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/RightArm/RightForearm/RightHand"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/RightLeg"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/RightLeg/RightLeg2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/RightLeg/RightLeg2/RightFoot"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/LeftLeg"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/LeftLeg/LeftLeg2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body/LeftLeg/LeftLeg2/LeftFoot"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ) ]
 
 [node name="Book" type="Sprite" parent="ViewportContainer/Viewport/Polygons"]
-visible = false
-position = Vector2( 67.4645, -49.2094 )
+position = Vector2( 115, -15 )
 texture = ExtResource( 4 )
 
 [node name="Raisin" type="Sprite" parent="ViewportContainer/Viewport/Polygons"]
@@ -2090,7 +2105,8 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 9 )
 
 [node name="BallOfDestiny" type="Sprite" parent="ViewportContainer/Viewport/Polygons"]
-position = Vector2( 0, 50 )
+visible = false
+position = Vector2( 180, -90 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 5 )
 
@@ -2108,23 +2124,23 @@ bones = [ NodePath("Body"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 position = Vector2( 200, 200 )
 
 [node name="Body" type="Bone2D" parent="ViewportContainer/Viewport/Skeleton2D"]
-position = Vector2( -9.5, 58.0556 )
-rotation = 0.230624
+position = Vector2( 37.2194, 20.6801 )
+rotation = 0.174533
 rest = Transform2D( 1, 0, 0, 1, -9.5, -12.5 )
 
 [node name="Head" type="Bone2D" parent="ViewportContainer/Viewport/Skeleton2D/Body"]
 position = Vector2( 3.53552, -111.723 )
-rotation = 0.454681
+rotation = 0.5663
 rest = Transform2D( 1, 0, 0, 1, 3.53552, -111.723 )
 
 [node name="LeftArm" type="Bone2D" parent="ViewportContainer/Viewport/Skeleton2D/Body"]
 position = Vector2( -11, -93 )
-rotation = 0.684365
+rotation = -0.305344
 rest = Transform2D( 1, 0, 0, 1, -11, -93 )
 
 [node name="LeftForeArm" type="Bone2D" parent="ViewportContainer/Viewport/Skeleton2D/Body/LeftArm"]
 position = Vector2( 0.841827, 53.8782 )
-rotation = -0.93931
+rotation = -0.713049
 rest = Transform2D( 1, 0, 0, 1, 0.841827, 53.8782 )
 
 [node name="LeftHand" type="Bone2D" parent="ViewportContainer/Viewport/Skeleton2D/Body/LeftArm/LeftForeArm"]
@@ -2133,12 +2149,12 @@ rest = Transform2D( 1, 0, 0, 1, 17.1175, 57.8068 )
 
 [node name="RightArm" type="Bone2D" parent="ViewportContainer/Viewport/Skeleton2D/Body"]
 position = Vector2( -2.37842, -91.8662 )
-rotation = 0.510828
+rotation = -0.376485
 rest = Transform2D( 1, 0, 0, 1, -2.37842, -91.8662 )
 
 [node name="RightForearm" type="Bone2D" parent="ViewportContainer/Viewport/Skeleton2D/Body/RightArm"]
 position = Vector2( -0.891907, 55.5954 )
-rotation = -1.16492
+rotation = -0.760478
 rest = Transform2D( 1, 0, 0, 1, -0.891907, 55.5954 )
 
 [node name="RightHand" type="Bone2D" parent="ViewportContainer/Viewport/Skeleton2D/Body/RightArm/RightForearm"]
@@ -2146,33 +2162,33 @@ position = Vector2( 13.3786, 44.0007 )
 rest = Transform2D( 1, 0, 0, 1, 13.3786, 44.0007 )
 
 [node name="RightLeg" type="Bone2D" parent="ViewportContainer/Viewport/Skeleton2D/Body"]
-position = Vector2( 0, 14.1421 )
-rotation = 0.423207
+position = Vector2( 10, 5 )
+rotation = -1.6189
 rest = Transform2D( 1, 0, 0, 1, 0, 14.1421 )
 
 [node name="RightLeg2" type="Bone2D" parent="ViewportContainer/Viewport/Skeleton2D/Body/RightLeg"]
 position = Vector2( -9.89949, 87.6812 )
-rotation = 0.612738
+rotation = 1.68485
 rest = Transform2D( 1, 0, 0, 1, -9.89949, 87.6812 )
 
 [node name="RightFoot" type="Bone2D" parent="ViewportContainer/Viewport/Skeleton2D/Body/RightLeg/RightLeg2"]
 position = Vector2( 3.18199, 74.9533 )
-rotation = -1.14708
+rotation = -0.261799
 rest = Transform2D( 1, 0, 0, 1, 3.18199, 74.9533 )
 
 [node name="LeftLeg" type="Bone2D" parent="ViewportContainer/Viewport/Skeleton2D/Body"]
 position = Vector2( 3.18199, 12.0208 )
-rotation = -1.09591
+rotation = -1.57254
 rest = Transform2D( 1, 0, 0, 1, 3.18199, 12.0208 )
 
 [node name="LeftLeg2" type="Bone2D" parent="ViewportContainer/Viewport/Skeleton2D/Body/LeftLeg"]
 position = Vector2( -2.47488, 81.3173 )
-rotation = 1.87633
+rotation = 1.55231
 rest = Transform2D( 1, 0, 0, 1, -2.47488, 81.3173 )
 
 [node name="LeftFoot" type="Bone2D" parent="ViewportContainer/Viewport/Skeleton2D/Body/LeftLeg/LeftLeg2"]
 position = Vector2( -1.41422, 73.5391 )
-rotation = -0.886027
+rotation = -0.261799
 rest = Transform2D( 1, 0, 0, 1, -1.41422, 73.5391 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -2190,6 +2206,7 @@ blend_times = [ "GiveItem", "Idle", 1.0, "MegaThrow", "Idle", 1.0, "ThrowBall", 
 visible = false
 modulate = Color( 1, 1, 1, 0.521569 )
 texture = ExtResource( 1 )
+
 [connection signal="timeout" from="ParticleAndEffects/DuplicateSprite/FadeOutDelay" to="." method="_on_FadeOutDelay_timeout"]
 [connection signal="timeout" from="ParticleAndEffects/LazerBeamThrow/StartLazer" to="." method="_on_StartLazer_timeout"]
 [connection signal="animation_changed" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_changed"]

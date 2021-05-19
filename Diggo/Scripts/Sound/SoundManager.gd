@@ -1,9 +1,6 @@
 extends Node
 
-# TODO -NOW : loop chains are not perfectly accurate
-# TODO -NOW : HouseTheme - some elements are waaay too loud (like chorus for instance)
-# TODO -NOW : HouseTheme - re-export it as a loop
-# TODO -NOW : add sound FX
+# TODO -NOW : replace this with godot mixing tool
 # TODO : if song is shorter than the loop end value, then set loop end at the end of the track
 
 var filterBGMIndex = 0 # index of the filter in the BGM bus
@@ -20,6 +17,7 @@ func setAudioServerVolume():
 	AudioServer.set_bus_volume_db(0, linear2db(GlobalParameters.getSoundMaster()/100.0))
 	AudioServer.set_bus_volume_db(1, linear2db(GlobalParameters.getSoundMusic()/100.0))
 	AudioServer.set_bus_volume_db(2, linear2db(GlobalParameters.getSoundFX()/100.0))
+	AudioServer.set_bus_volume_db(3, linear2db(GlobalParameters.getSoundFX()/100.0))
 
 # handles the song queue
 func handleQueue():

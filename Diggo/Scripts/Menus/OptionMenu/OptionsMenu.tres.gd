@@ -4,13 +4,9 @@ export (String,FILE) var KEY_COMMAND = "res://Scenes/Menus/KeyCommand.tscn"
 export (String,FILE) var MAIN_MENU = "res://Scenes/Menus/MainMenu.tscn"
 export (bool) var IS_FROM_PAUSE = false
 
-var specialButtonIndexes = { # sets a default index for some keys to keep these grouped
-	"left":0,
-	"right":1,
-	"jump":2,
-	"dig":3,
-	"find menu":4,
-	"find path":5
+var specialButtonIndexes = { # sets a default index for some keys to keep these groupe
+	"movement":["left","right","jump"],
+	"actions":["dig","find menu","find path","action"]
 }
 
 var keyCommandLoad # instance of key command scene
@@ -60,6 +56,7 @@ func addKeys():
 	var commands = GlobalParameters.getCommands()
 	for command in commands.keys():
 		addKey(command,commands[command])
+	orderKeys()
 
 # removes all the keys
 func resetKeys():
@@ -72,8 +69,16 @@ func addKey(command,key):
 	keyCommandInstance.KEY = key
 	keyCommandInstance.connect("change_key",self,"changeKey")
 	$MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/KeysMargin/KeysScroll/KeysContainer.add_child(keyCommandInstance)
-	if(command in specialButtonIndexes): # sets at specific index if needed
-		$MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/KeysMargin/KeysScroll/KeysContainer.move_child(keyCommandInstance,specialButtonIndexes[command])
+
+# orders the keys by group (specialButtonIndexes) in grid container
+func orderKeys():
+	var index = 0
+	for group in specialButtonIndexes.keys():
+		for key in specialButtonIndexes[group]:
+			for children in $MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/KeysMargin/KeysScroll/KeysContainer.get_children():
+				if(children.COMMAND == key):
+					$MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/KeysMargin/KeysScroll/KeysContainer.move_child(children,index)
+					index += 1
 
 # shows the popup to change the key
 func changeKey(keyInstance):

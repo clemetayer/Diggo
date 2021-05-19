@@ -1,9 +1,11 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Sprites/Characters/Diggo/DiggoStandardPieces.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Characters/Diggo/DiggoStandard.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Scenes/Characters/DiggosAnimations.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/Maps/HouseInside1/BallOfReality.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Sound/FX/CharacterSounds/Diggo/DiggoFootSteps.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Sound/FX/CharacterSounds/Diggo/Dig.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Dig"
@@ -764,6 +766,18 @@ tracks/62/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/63/type = "value"
+tracks/63/path = NodePath("Sounds/Dig:playing")
+tracks/63/interp = 1
+tracks/63/loop_wrap = true
+tracks/63/imported = false
+tracks/63/enabled = true
+tracks/63/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -1537,6 +1551,18 @@ tracks/63/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/64/type = "value"
+tracks/64/path = NodePath("Sounds/Dig:playing")
+tracks/64/interp = 1
+tracks/64/loop_wrap = true
+tracks/64/imported = false
+tracks/64/enabled = true
+tracks/64/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -6119,6 +6145,18 @@ tracks/62/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/63/type = "value"
+tracks/63/path = NodePath("Sounds/DiggoFootSteps:playing")
+tracks/63/interp = 1
+tracks/63/loop_wrap = true
+tracks/63/imported = false
+tracks/63/enabled = true
+tracks/63/keys = {
+"times": PoolRealArray( 0, 0.4, 1.1 ),
+"transitions": PoolRealArray( 1, 0.233258, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
 
 [sub_resource type="Animation" id=9]
 length = 1.3
@@ -6854,6 +6892,18 @@ tracks/60/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/61/type = "value"
+tracks/61/path = NodePath("Sounds/DiggoFootSteps:playing")
+tracks/61/interp = 1
+tracks/61/loop_wrap = true
+tracks/61/imported = false
+tracks/61/enabled = true
+tracks/61/keys = {
+"times": PoolRealArray( 0, 0.4, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -8378,6 +8428,16 @@ tracks/62/keys = {
 [node name="DiggosAnimations" type="Node2D"]
 script = ExtResource( 3 )
 
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="DiggoFootSteps" parent="Sounds" instance=ExtResource( 5 )]
+volume_db = 6.0
+pitch_scale = 0.9
+bus = "FX"
+
+[node name="Dig" parent="Sounds" instance=ExtResource( 6 )]
+pitch_scale = 0.58
+
 [node name="Timers" type="Node2D" parent="."]
 
 [node name="EatTimer" type="Timer" parent="Timers"]
@@ -8390,7 +8450,6 @@ __meta__ = {
 }
 
 [node name="BallOfDestiny" type="Sprite" parent="Polygons"]
-visible = false
 position = Vector2( 90, -10 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 4 )
@@ -8432,7 +8491,6 @@ polygons = [ PoolIntArray( 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19
 bones = [ NodePath("Body1"), PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 ), NodePath("Body1/Body2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/Body4"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/Body4/BottomMouth"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/Body4/BottomMouth/Tongue1"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/Body4/BottomMouth/Tongue1/Tongue2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/Body4/BottomMouth/Tongue1/Tongue2/Tongue3"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/Body4/UpMouth"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/Body4/UpMouth/Ear1"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/Body4/UpMouth/Ear1/Ear2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/Body4/UpMouth/Ear1/Ear2/Ear3"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/FRLeg1"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/FRLeg1/FRLeg2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/FRLeg1/FRLeg2/FRLeg3"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/FLLeg1"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/FLLeg1/FLLeg2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/FLLeg1/FLLeg2/FLLeg3"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/BRLeg1"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/BRLeg1/BRLeg2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/BRLeg1/BRLeg2/BRLeg3"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/BLLeg1"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/BLLeg1/BLLeg2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/BLLeg1/BLLeg2/BLLeg3"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Tail1"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Tail1/Tail2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Tail1/Tail2/Tail3"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ) ]
 
 [node name="TopHead" type="Polygon2D" parent="Polygons"]
-visible = false
 position = Vector2( -189.462, -56.6883 )
 rotation = -0.156158
 texture = ExtResource( 1 )
@@ -8443,6 +8501,7 @@ polygons = [ PoolIntArray( 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 21, 20, 19, 18, 17,
 bones = [ NodePath("Body1"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/Body4"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/Body4/BottomMouth"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/Body4/BottomMouth/Tongue1"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/Body4/BottomMouth/Tongue1/Tongue2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/Body4/BottomMouth/Tongue1/Tongue2/Tongue3"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/Body4/UpMouth"), PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ), NodePath("Body1/Body2/Body3/Body4/UpMouth/Ear1"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/Body4/UpMouth/Ear1/Ear2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/Body3/Body4/UpMouth/Ear1/Ear2/Ear3"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/FLLeg1"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/FLLeg1/FLLeg2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/FLLeg1/FLLeg2/FLLeg3"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/FLLeg1/FLLeg2/FLLeg3/FLLeg4"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/FRLeg1"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/FRLeg1/FRLeg2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/FRLeg1/FRLeg2/FRLeg3"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Body2/FRLeg1/FRLeg2/FRLeg3/FRLeg4"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/BRLeg1"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/BRLeg1/BRLeg2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/BRLeg1/BRLeg2/BRLeg3"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/BRLeg1/BRLeg2/BRLeg3/BRLeg4"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/BLLeg1"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/BLLeg1/BLLeg2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/BLLeg1/BLLeg2/BLLeg3"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/BLLeg1/BLLeg2/BLLeg3/BLLeg4"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Tail1"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Tail1/Tail2"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Tail1/Tail2/Tail3"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ), NodePath("Body1/Tail1/Tail2/Tail3/Tail4"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ) ]
 
 [node name="ClosedMouthHead" type="Polygon2D" parent="Polygons"]
+visible = false
 position = Vector2( -178.915, -182.533 )
 texture = ExtResource( 1 )
 skeleton = NodePath("../../Skeleton2D")
@@ -8479,7 +8538,6 @@ uv = PoolVector2Array( 201.333, 47.6667, 207.667, 41.5, 213.5, 48.3333, 211.667,
 polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ) ]
 
 [node name="BottomHead" type="Polygon2D" parent="Polygons"]
-visible = false
 position = Vector2( -179.406, -137.28 )
 rotation = 0.0844841
 texture = ExtResource( 1 )
@@ -8538,29 +8596,28 @@ bones = [ NodePath("Body1"), PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 rotation = -0.176865
 
 [node name="Body1" type="Bone2D" parent="Skeleton2D"]
-position = Vector2( -84.5603, -22.9859 )
-rotation = 0.103214
+position = Vector2( -76.9084, -51.1335 )
 rest = Transform2D( 1, 0, 0, 1, -76.9084, -51.1335 )
 
 [node name="Body2" type="Bone2D" parent="Skeleton2D/Body1"]
-position = Vector2( 48.1524, 6.30606 )
-rotation = 0.220868
+position = Vector2( 48.6095, 9.43874 )
+rotation = 0.332051
 rest = Transform2D( 1, 0, 0, 1, 48.6095, 9.43874 )
 
 [node name="Body3" type="Bone2D" parent="Skeleton2D/Body1/Body2"]
-position = Vector2( 43.8902, -3.06759 )
-rotation = 0.323907
+position = Vector2( 52.0186, 4.08645 )
+rotation = 0.103052
 scale = Vector2( 0.999999, 0.999999 )
 rest = Transform2D( 0.973153, 0.230157, -0.230157, 0.973153, 52.0186, 4.08645 )
 
 [node name="Body4" type="Bone2D" parent="Skeleton2D/Body1/Body2/Body3"]
 position = Vector2( 38.2269, -18.8775 )
-rotation = -0.818893
+rotation = -0.346029
 rest = Transform2D( 0.829858, -0.557974, 0.557974, 0.829858, 38.2269, -18.8775 )
 
 [node name="BottomMouth" type="Bone2D" parent="Skeleton2D/Body1/Body2/Body3/Body4"]
 position = Vector2( 18.3466, 10.7344 )
-rotation = 1.27074
+rotation = 1.34052
 rest = Transform2D( 0.228245, 0.973604, -0.973604, 0.228245, 18.3466, 10.7344 )
 default_length = 32.0
 
@@ -8570,12 +8627,13 @@ rotation = -0.522414
 rest = Transform2D( 0.866617, -0.498973, 0.498973, 0.866617, 16.7583, -5.19052 )
 
 [node name="Tongue2" type="Bone2D" parent="Skeleton2D/Body1/Body2/Body3/Body4/BottomMouth/Tongue1"]
-position = Vector2( 9.17713, -0.65551 )
+position = Vector2( 11.2705, 0.34469 )
+rotation = 0.0407166
 rest = Transform2D( 1, 0, 0, 1, 10.5207, -0.12766 )
 
 [node name="Tongue3" type="Bone2D" parent="Skeleton2D/Body1/Body2/Body3/Body4/BottomMouth/Tongue1/Tongue2"]
-position = Vector2( 9.27077, 3.74577 )
-rotation = 0.586474
+position = Vector2( 10.7775, 5.66139 )
+rotation = 0.676989
 rest = Transform2D( 0.832897, 0.553428, -0.553428, 0.832897, 10.6998, 4.88587 )
 default_length = 13.0
 
@@ -8591,17 +8649,17 @@ rotation = 0.0196734
 rest = Transform2D( 0.999806, 0.0196721, -0.0196721, 0.999806, -18.456, -21.6044 )
 
 [node name="Ear2" type="Bone2D" parent="Skeleton2D/Body1/Body2/Body3/Body4/UpMouth/Ear1"]
-position = Vector2( -7.07907, 17.2257 )
+position = Vector2( -8.5471, 15.5309 )
 rest = Transform2D( 1, 0, 0, 1, -8.5471, 15.5309 )
 
 [node name="Ear3" type="Bone2D" parent="Skeleton2D/Body1/Body2/Body3/Body4/UpMouth/Ear1/Ear2"]
-position = Vector2( -0.235962, 20.5293 )
+position = Vector2( -2.50491, 19.789 )
 rotation = 1.47498
 rest = Transform2D( 0.0956703, 0.995413, -0.995413, 0.0956703, -2.50491, 19.789 )
 
 [node name="FRLeg1" type="Bone2D" parent="Skeleton2D/Body1/Body2/Body3"]
-position = Vector2( 30.5458, 3.98114 )
-rotation = -1.82195
+position = Vector2( 4.91571, 41.3163 )
+rotation = -1.24523
 rest = Transform2D( 1, 0, 0, 1, 8.81348, 56.2934 )
 
 [node name="FRLeg2" type="Bone2D" parent="Skeleton2D/Body1/Body2/Body3/FRLeg1"]
@@ -8613,59 +8671,65 @@ position = Vector2( 3.30356, 27.1364 )
 rest = Transform2D( 1, 0, 0, 1, 3.30356, 27.1364 )
 
 [node name="FLLeg1" type="Bone2D" parent="Skeleton2D/Body1/Body2/Body3"]
-position = Vector2( 31.8271, -4.08419 )
-rotation = -1.83165
+position = Vector2( 10.8975, 35.0961 )
+rotation = -1.2642
 rest = Transform2D( 1, 0, 0, 1, 26.6912, 53.3248 )
 
 [node name="FLLeg2" type="Bone2D" parent="Skeleton2D/Body1/Body2/Body3/FLLeg1"]
 position = Vector2( -0.943878, 34.9234 )
+rotation = 1.8534
 rest = Transform2D( 1, 0, 0, 1, -0.943878, 34.9234 )
 
 [node name="FLLeg3" type="Bone2D" parent="Skeleton2D/Body1/Body2/Body3/FLLeg1/FLLeg2"]
 position = Vector2( 4.24742, 24.5407 )
+rotation = 1.27464
 rest = Transform2D( 1, 0, 0, 1, 4.24742, 24.5407 )
 
 [node name="BRLeg1" type="Bone2D" parent="Skeleton2D/Body1"]
-position = Vector2( -2.85434, 26.674 )
-rotation = -0.0977156
+position = Vector2( -8.33471, 33.1339 )
+rotation = -0.844153
 rest = Transform2D( 0.985075, 0.172128, -0.172128, 0.985075, -8.33471, 33.1339 )
 
 [node name="BRLeg2" type="Bone2D" parent="Skeleton2D/Body1/BRLeg1"]
-position = Vector2( 15.2633, -4.40598 )
+position = Vector2( -8.16395, 42.8629 )
+rotation = 1.90983
 rest = Transform2D( 1, 0, 0, 1, -8.16395, 42.8629 )
 
 [node name="BRLeg3" type="Bone2D" parent="Skeleton2D/Body1/BRLeg1/BRLeg2"]
-position = Vector2( -0.861907, 26.7898 )
-rotation = 0.144055
+position = Vector2( -6.77946, 37.9507 )
+rotation = -0.307815
 rest = Transform2D( 0.989642, 0.143557, -0.143557, 0.989642, -6.77946, 37.9507 )
 default_length = 20.0
 
 [node name="BLLeg1" type="Bone2D" parent="Skeleton2D/Body1"]
-position = Vector2( 16.8784, 19.6932 )
+position = Vector2( 11.1931, 36.6974 )
+rotation = -0.943399
 rest = Transform2D( 0.992313, 0.123754, -0.123754, 0.992313, 11.1931, 36.6974 )
 
 [node name="BLLeg2" type="Bone2D" parent="Skeleton2D/Body1/BLLeg1"]
-position = Vector2( 12.6917, -5.26613 )
+position = Vector2( -10.071, 42.4994 )
+rotation = 1.91388
 rest = Transform2D( 1, 0, 0, 1, -10.071, 42.4994 )
 
 [node name="BLLeg3" type="Bone2D" parent="Skeleton2D/Body1/BLLeg1/BLLeg2"]
-position = Vector2( -0.428972, 27.9392 )
-rotation = -0.0166201
+position = Vector2( -6.24914, 33.0009 )
+rotation = -0.55222
 rest = Transform2D( 0.978091, 0.208177, -0.208177, 0.978091, -6.24914, 33.0009 )
 default_length = 20.0
 
 [node name="Tail1" type="Bone2D" parent="Skeleton2D/Body1"]
-position = Vector2( -16.524, 3.23876 )
+position = Vector2( -16.9482, -2.29734 )
+rotation = 0.16833
 rest = Transform2D( 0.985866, 0.167536, -0.167536, 0.985866, -16.9482, -2.29734 )
 
 [node name="Tail2" type="Bone2D" parent="Skeleton2D/Body1/Tail1"]
-position = Vector2( -23.8379, 22.063 )
-rotation = -0.0770511
+position = Vector2( -23.511, 15.1741 )
+rotation = 0.129848
 rest = Transform2D( 0.991582, 0.129483, -0.129483, 0.991582, -23.511, 15.1741 )
 
 [node name="Tail3" type="Bone2D" parent="Skeleton2D/Body1/Tail1/Tail2"]
-position = Vector2( -36.1994, 7.01539 )
-rotation = -2.8822
+position = Vector2( -35.4174, 4.22757 )
+rotation = -2.84099
 rest = Transform2D( -0.955157, -0.296099, 0.296099, -0.955157, -35.4174, 4.22757 )
 default_length = 24.0
 
@@ -8695,5 +8759,6 @@ next/Eat = "Idle"
 next/Run = "Idle"
 next/RunWithBall = "IdleWithBall"
 blend_times = [ "Dig", "Idle", 0.25, "DigWithBall", "IdleWithBall", 0.25, "Eat", "Idle", 0.25, "Run", "Idle", 0.25, "RunWithBall", "JumpWithBall", 0.25 ]
+
 [connection signal="timeout" from="Timers/EatTimer" to="." method="_on_EatTimer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

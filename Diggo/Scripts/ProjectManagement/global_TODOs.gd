@@ -11,6 +11,9 @@ extends Node
 # TODO : refactor a bit the dialog box system
 # TODO : choose ball of destiny or ball of reality
 
+# optimizations
+# OPTIMIZATION : for destructible sprite,  only spawn the collision shapes in the border
+
 ## General necessary Todos 
 # TODO : put a script on main menu button/go back (possibly at the same time as changing theme of menu(s))
 # TODO : create a loading screen

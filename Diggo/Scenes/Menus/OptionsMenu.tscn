@@ -557,6 +557,7 @@ margin_left = 138.0
 margin_right = 227.0
 margin_bottom = 37.0
 rect_scale = Vector2( 1, 1 )
+
 [connection signal="item_selected" from="MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/PresetsButton" to="." method="_on_PresetsButton_item_selected"]
 [connection signal="pressed" from="MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/PresetsCenter/PresetsHBox/SavePresetButton" to="." method="_on_SavePresetButton_pressed"]
 [connection signal="pressed" from="MarginContainer/TabContainer/Controls/ControlsMargin/ControlsOptions/SelectPresetContainer/SelectPresetButton" to="." method="_on_SelectPresetButton_pressed"]

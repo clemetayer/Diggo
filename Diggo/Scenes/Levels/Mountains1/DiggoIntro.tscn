@@ -93,7 +93,7 @@ rotation = 3.14159
 scale = Vector2( 1, -1 )
 
 [node name="DiggosMasterAnim" parent="." instance=ExtResource( 10 )]
-position = Vector2( 680.068, 209.924 )
+position = Vector2( 628.195, 168.347 )
 
 [node name="diggosOwnerDialogBox" parent="DiggosMasterAnim" instance=ExtResource( 7 )]
 margin_left = -92.4999
@@ -135,5 +135,6 @@ DIALOGS = [ {
 "dialog": "Alright let's go then !",
 "targets": [ NodePath("../DiggosMasterAnim/diggosOwnerDialogBox") ]
 } ]
+
 [connection signal="dialogs_done" from="FirstDialog" to="." method="_on_FirstDialog_dialogs_done"]
 [connection signal="dialogs_done" from="SecondDialog" to="." method="_on_SecondDialog_dialogs_done"]
